@@ -7,6 +7,7 @@ target 'TIMII3' do
 
   # Pods for TIMII3
   pod 'Firebase/Core'
+  pod 'Firebase/Firestore'
 
   target 'TIMII3Tests' do
     inherit! :search_paths
