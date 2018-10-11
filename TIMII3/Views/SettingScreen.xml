@@ -1,0 +1,29 @@
+<!--
+ Setting Screen
+ 
+ TODO: 10.10.18 [DONE 10.10.18] - Migrated code from TIMII to TIMII3
+ -->
+
+<SettingScreen view.backgroundColor="white">
+    
+    <UIView
+        width="100%"
+        height="100%">
+        
+        <!-- Logout Button -->
+        <UIButton
+        touchUpInside="settingHandleLogout"
+        title="Logout"
+        backgroundColor="UIColor.mintGreen"
+        top="50% - height/2"
+        left="50% - width/2"
+        width="100% - 120"
+        height="66"
+        layer.cornerRadius="33"
+        />
+        
+    </UIView>
+    
+</SettingScreen>
+
+

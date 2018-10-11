@@ -1,0 +1,106 @@
+<!--
+ Create Account Screen
+ 
+ TODO: 8.7.18 [DONE 8.7.18] - Add hide screen for password to be unreadable
+ TODO: 10.10.18 [DONE 10.10.18] - Migrated code from TIMII to TIMII3
+
+ -->
+
+<UIView
+    backgroundColor="UIColor.lightTan">
+    
+    <!-- TIMII Logo -->
+    <UIImageView
+        image="//timer.png"
+        top="isKeyboardVisible ? 7% - height/2 : 22% - height/2"
+        left="50% - width/2"
+        width="60"
+        height="60"
+    />
+    <UILabel
+        text="TIMII"
+        top="previous.bottom + 10"
+        textAlignment="center"
+        width="100%"
+        textColor="UIColor.black"
+        font="Avenir Next ultraLight 45"
+    />
+    
+    <!-- error -->
+    <UILabel
+        outlet="errorLabel"
+        text="{error}"
+        top="previous.bottom + 10"
+        left="50% - width/2"
+        textAlignment="center"
+        width="65%"
+        textColor="UIColor.red"
+        numberOfLines="4"
+        font="Avenir Next 16"
+    />
+    
+    <!-- email -->
+    <UITextField
+        outlet = "emailTextField"
+        placeholder="email"
+        top="previous.bottom + 20"
+        left="50% - width/2"
+        width="100% - 40"
+        height="44"
+        layer.cornerRadius="22"
+        backgroundColor="UIColor.cararra"
+        textAlignment="center"
+    />
+    
+    <!-- password -->
+    <UITextField
+        outlet = "passwordTextField"
+        placeholder="password"
+        isSecureTextEntry="true"
+        top="previous.bottom + 15"
+        left="50% - width/2"
+        width="100% - 40"
+        height="44"
+        layer.cornerRadius="22"
+        backgroundColor="UIColor.cararra"
+        textAlignment="center"
+    />
+    <UITextField
+        placeholder="verify password"
+        isSecureTextEntry="true"
+        top="previous.bottom + 15"
+        left="50% - width/2"
+        width="100% - 40"
+        height="44"
+        layer.cornerRadius="22"
+        backgroundColor="UIColor.cararra"
+        textAlignment="center"
+    />
+    
+    <!-- Create Button -->
+    <UIButton
+        touchUpInside="handleCreateAccount"
+        title="Create Account"
+        top="previous.bottom + 30"
+        left="50% - width/2"
+        width="100% - 120"
+        height="66"
+        layer.cornerRadius="33"
+        backgroundColor="UIColor.camo"
+    />
+    
+    <!-- Sign in -->
+    <UIButton
+        touchUpInside="loginScreen"
+        title="Or sign in"
+        top="previous.bottom + 15"
+        left="50% - width/2"
+        width="100% - 40"
+        height="auto"
+        titleColor="UIColor.white"
+    />
+    
+</UIView>
+
+
+

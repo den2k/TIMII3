@@ -1,0 +1,23 @@
+<!--
+ Main - the main container for the app
+ It is just a tab view so different View Controllers can be presented
+ 
+ TODO: 10.10.18 [DONE 10.10.18] - Migrated code from TIMII to TIMII3
+ 
+ -->
+
+<UITabBarController>
+    
+    <UITabBar
+        tintColor="camo"
+        isTranslucent="false"
+        alpha="//0.95"
+    />
+    
+    <UIViewController
+        xml="SettingScreen.xml"
+        title="Profile"
+    />
+    
+</UITabBarController>
+

@@ -8,6 +8,10 @@ target 'TIMII3' do
   # Pods for TIMII3
   pod 'Firebase/Core'
   pod 'Firebase/Firestore'
+  pod 'Firebase/Auth'
+
+  # Pod for Swift Layout Framework
+  pod 'Layout'
 
   target 'TIMII3Tests' do
     inherit! :search_paths

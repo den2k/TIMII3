@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		137F1B957EBBD7E6DEC3CDA7 /* Pods_TIMII3Tests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 62003BEE0B871C0DD255D3B4 /* Pods_TIMII3Tests.framework */; };
+		953094BB216EEBA500384DF8 /* Login.swift in Sources */ = {isa = PBXBuildFile; fileRef = 953094BA216EEBA500384DF8 /* Login.swift */; };
 		957CD69E216D995B000CE343 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 957CD69D216D995B000CE343 /* AppDelegate.swift */; };
 		957CD6A5216D995C000CE343 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 957CD6A4216D995C000CE343 /* Assets.xcassets */; };
 		957CD6B3216D995C000CE343 /* TIMII3Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 957CD6B2216D995C000CE343 /* TIMII3Tests.swift */; };
@@ -16,6 +17,16 @@
 		957CD6CD216D9CD9000CE343 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 957CD6CB216D9CD9000CE343 /* GoogleService-Info.plist */; };
 		957CD6CE216D9CD9000CE343 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 957CD6CB216D9CD9000CE343 /* GoogleService-Info.plist */; };
 		957CD6D2216DA10D000CE343 /* Main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 957CD6D1216DA10D000CE343 /* Main.swift */; };
+		95B0AA92216E42E100E73F36 /* FirestoreableTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95B0AA91216E42E100E73F36 /* FirestoreableTests.swift */; };
+		95EC6A07216EF2D200643F19 /* LoginScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95EC6A06216EF2D200643F19 /* LoginScreen.swift */; };
+		95EC6A09216EF42900643F19 /* CreateAccountScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95EC6A08216EF42900643F19 /* CreateAccountScreen.swift */; };
+		95EC6A0C216F0CE500643F19 /* LoginScreen.xml in Resources */ = {isa = PBXBuildFile; fileRef = 95EC6A0B216F0CE500643F19 /* LoginScreen.xml */; };
+		95EC6A0E216F0D2A00643F19 /* CreateAccountScreen.xml in Resources */ = {isa = PBXBuildFile; fileRef = 95EC6A0D216F0D2A00643F19 /* CreateAccountScreen.xml */; };
+		95EC6A10216F103200643F19 /* Main.xml in Resources */ = {isa = PBXBuildFile; fileRef = 95EC6A0F216F103200643F19 /* Main.xml */; };
+		95EC6A13216F139C00643F19 /* SettingScreen.xml in Resources */ = {isa = PBXBuildFile; fileRef = 95EC6A12216F139C00643F19 /* SettingScreen.xml */; };
+		95EC6A15216F13F900643F19 /* SettingScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95EC6A14216F13F900643F19 /* SettingScreen.swift */; };
+		95EC6A17216F152600643F19 /* Colors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95EC6A16216F152600643F19 /* Colors.swift */; };
+		95EC6A19216F8A8A00643F19 /* Launch Screen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 95EC6A18216F8A8A00643F19 /* Launch Screen.storyboard */; };
 		AC9368CD879471FF007D3B11 /* Pods_TIMII3.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A6FEA52EC11DEB5CA6E837DB /* Pods_TIMII3.framework */; };
 		C39C09D93A7EF0ACD0E38FDD /* Pods_TIMII3UITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 06B23BA55C61789A76275FA4 /* Pods_TIMII3UITests.framework */; };
 /* End PBXBuildFile section */
@@ -43,6 +54,7 @@
 		5C6E2750660F39C3A454D323 /* Pods-TIMII3UITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TIMII3UITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-TIMII3UITests/Pods-TIMII3UITests.release.xcconfig"; sourceTree = "<group>"; };
 		62003BEE0B871C0DD255D3B4 /* Pods_TIMII3Tests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_TIMII3Tests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		6F190E17B9C78B61B2D5E588 /* Pods-TIMII3.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TIMII3.debug.xcconfig"; path = "Pods/Target Support Files/Pods-TIMII3/Pods-TIMII3.debug.xcconfig"; sourceTree = "<group>"; };
+		953094BA216EEBA500384DF8 /* Login.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Login.swift; sourceTree = "<group>"; };
 		95712A9A5AEB0D218884A9F5 /* Pods-TIMII3Tests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TIMII3Tests.release.xcconfig"; path = "Pods/Target Support Files/Pods-TIMII3Tests/Pods-TIMII3Tests.release.xcconfig"; sourceTree = "<group>"; };
 		957CD69A216D995B000CE343 /* TIMII3.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TIMII3.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		957CD69D216D995B000CE343 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -56,6 +68,16 @@
 		957CD6BF216D995C000CE343 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		957CD6CB216D9CD9000CE343 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		957CD6D1216DA10D000CE343 /* Main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Main.swift; sourceTree = "<group>"; };
+		95B0AA91216E42E100E73F36 /* FirestoreableTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirestoreableTests.swift; sourceTree = "<group>"; };
+		95EC6A06216EF2D200643F19 /* LoginScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginScreen.swift; sourceTree = "<group>"; };
+		95EC6A08216EF42900643F19 /* CreateAccountScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateAccountScreen.swift; sourceTree = "<group>"; };
+		95EC6A0B216F0CE500643F19 /* LoginScreen.xml */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = LoginScreen.xml; sourceTree = "<group>"; };
+		95EC6A0D216F0D2A00643F19 /* CreateAccountScreen.xml */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = CreateAccountScreen.xml; sourceTree = "<group>"; };
+		95EC6A0F216F103200643F19 /* Main.xml */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = Main.xml; sourceTree = "<group>"; };
+		95EC6A12216F139C00643F19 /* SettingScreen.xml */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = SettingScreen.xml; sourceTree = "<group>"; };
+		95EC6A14216F13F900643F19 /* SettingScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingScreen.swift; sourceTree = "<group>"; };
+		95EC6A16216F152600643F19 /* Colors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Colors.swift; sourceTree = "<group>"; };
+		95EC6A18216F8A8A00643F19 /* Launch Screen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = "Launch Screen.storyboard"; sourceTree = "<group>"; };
 		A6FEA52EC11DEB5CA6E837DB /* Pods_TIMII3.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_TIMII3.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		CA5FE0379ECC65832EEBAD4A /* Pods-TIMII3UITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TIMII3UITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-TIMII3UITests/Pods-TIMII3UITests.debug.xcconfig"; sourceTree = "<group>"; };
 		ED886FF05C322156D098D5AB /* Pods-TIMII3Tests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TIMII3Tests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-TIMII3Tests/Pods-TIMII3Tests.debug.xcconfig"; sourceTree = "<group>"; };
@@ -114,11 +136,13 @@
 		957CD69C216D995B000CE343 /* TIMII3 */ = {
 			isa = PBXGroup;
 			children = (
-				957CD6D1216DA10D000CE343 /* Main.swift */,
+				95EC6A11216F11FF00643F19 /* Protocols */,
+				95EC6A0A216F0C9F00643F19 /* Views */,
 				957CD6A4216D995C000CE343 /* Assets.xcassets */,
 				957CD6A9216D995C000CE343 /* Info.plist */,
 				957CD69D216D995B000CE343 /* AppDelegate.swift */,
 				957CD6CB216D9CD9000CE343 /* GoogleService-Info.plist */,
+				95EC6A18216F8A8A00643F19 /* Launch Screen.storyboard */,
 			);
 			path = TIMII3;
 			sourceTree = "<group>";
@@ -126,6 +150,7 @@
 		957CD6B1216D995C000CE343 /* TIMII3Tests */ = {
 			isa = PBXGroup;
 			children = (
+				95B0AA91216E42E100E73F36 /* FirestoreableTests.swift */,
 				957CD6B2216D995C000CE343 /* TIMII3Tests.swift */,
 				957CD6B4216D995C000CE343 /* Info.plist */,
 			);
@@ -139,6 +164,38 @@
 				957CD6BF216D995C000CE343 /* Info.plist */,
 			);
 			path = TIMII3UITests;
+			sourceTree = "<group>";
+		};
+		95EC6A0A216F0C9F00643F19 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				95EC6A1A216F9DF100643F19 /* Login */,
+				957CD6D1216DA10D000CE343 /* Main.swift */,
+				95EC6A0F216F103200643F19 /* Main.xml */,
+				95EC6A12216F139C00643F19 /* SettingScreen.xml */,
+				95EC6A14216F13F900643F19 /* SettingScreen.swift */,
+				95EC6A16216F152600643F19 /* Colors.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		95EC6A11216F11FF00643F19 /* Protocols */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Protocols;
+			sourceTree = "<group>";
+		};
+		95EC6A1A216F9DF100643F19 /* Login */ = {
+			isa = PBXGroup;
+			children = (
+				953094BA216EEBA500384DF8 /* Login.swift */,
+				95EC6A0B216F0CE500643F19 /* LoginScreen.xml */,
+				95EC6A06216EF2D200643F19 /* LoginScreen.swift */,
+				95EC6A0D216F0D2A00643F19 /* CreateAccountScreen.xml */,
+				95EC6A08216EF42900643F19 /* CreateAccountScreen.swift */,
+			);
+			path = Login;
 			sourceTree = "<group>";
 		};
 		A71EE59D41257048088AA2F8 /* Frameworks */ = {
@@ -272,8 +329,13 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				95EC6A13216F139C00643F19 /* SettingScreen.xml in Resources */,
+				95EC6A0C216F0CE500643F19 /* LoginScreen.xml in Resources */,
 				957CD6A5216D995C000CE343 /* Assets.xcassets in Resources */,
+				95EC6A10216F103200643F19 /* Main.xml in Resources */,
 				957CD6CC216D9CD9000CE343 /* GoogleService-Info.plist in Resources */,
+				95EC6A0E216F0D2A00643F19 /* CreateAccountScreen.xml in Resources */,
+				95EC6A19216F8A8A00643F19 /* Launch Screen.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -304,7 +366,9 @@
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-TIMII3/Pods-TIMII3-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/BoringSSL/openssl.framework",
+				"${BUILT_PRODUCTS_DIR}/GTMSessionFetcher/GTMSessionFetcher.framework",
 				"${BUILT_PRODUCTS_DIR}/GoogleUtilities/GoogleUtilities.framework",
+				"${BUILT_PRODUCTS_DIR}/Layout/Layout.framework",
 				"${BUILT_PRODUCTS_DIR}/Protobuf/Protobuf.framework",
 				"${BUILT_PRODUCTS_DIR}/gRPC/GRPCClient.framework",
 				"${BUILT_PRODUCTS_DIR}/gRPC-C++/grpcpp.framework",
@@ -317,7 +381,9 @@
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/openssl.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GTMSessionFetcher.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleUtilities.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Layout.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Protobuf.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GRPCClient.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/grpcpp.framework",
@@ -394,7 +460,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				957CD6D2216DA10D000CE343 /* Main.swift in Sources */,
+				95EC6A17216F152600643F19 /* Colors.swift in Sources */,
+				953094BB216EEBA500384DF8 /* Login.swift in Sources */,
+				95EC6A09216EF42900643F19 /* CreateAccountScreen.swift in Sources */,
+				95EC6A15216F13F900643F19 /* SettingScreen.swift in Sources */,
 				957CD69E216D995B000CE343 /* AppDelegate.swift in Sources */,
+				95EC6A07216EF2D200643F19 /* LoginScreen.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -403,6 +474,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				957CD6B3216D995C000CE343 /* TIMII3Tests.swift in Sources */,
+				95B0AA92216E42E100E73F36 /* FirestoreableTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -554,6 +626,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = P7ZV69TNUT;
 				INFOPLIST_FILE = TIMII3/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -573,6 +646,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = P7ZV69TNUT;
 				INFOPLIST_FILE = TIMII3/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
