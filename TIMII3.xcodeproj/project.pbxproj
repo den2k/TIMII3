@@ -9,6 +9,9 @@
 /* Begin PBXBuildFile section */
 		137F1B957EBBD7E6DEC3CDA7 /* Pods_TIMII3Tests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 62003BEE0B871C0DD255D3B4 /* Pods_TIMII3Tests.framework */; };
 		953094BB216EEBA500384DF8 /* Login.swift in Sources */ = {isa = PBXBuildFile; fileRef = 953094BA216EEBA500384DF8 /* Login.swift */; };
+		95533F6F21705AA2004391AF /* Firestoreable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95533F6E21705AA2004391AF /* Firestoreable.swift */; };
+		95533F712170E298004391AF /* Member.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95533F702170E298004391AF /* Member.swift */; };
+		9563D5E82172AD7100708913 /* AuthenticationMethod.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9563D5E72172AD7100708913 /* AuthenticationMethod.swift */; };
 		957CD69E216D995B000CE343 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 957CD69D216D995B000CE343 /* AppDelegate.swift */; };
 		957CD6A5216D995C000CE343 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 957CD6A4216D995C000CE343 /* Assets.xcassets */; };
 		957CD6B3216D995C000CE343 /* TIMII3Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 957CD6B2216D995C000CE343 /* TIMII3Tests.swift */; };
@@ -27,6 +30,7 @@
 		95EC6A15216F13F900643F19 /* SettingScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95EC6A14216F13F900643F19 /* SettingScreen.swift */; };
 		95EC6A17216F152600643F19 /* Colors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95EC6A16216F152600643F19 /* Colors.swift */; };
 		95EC6A19216F8A8A00643F19 /* Launch Screen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 95EC6A18216F8A8A00643F19 /* Launch Screen.storyboard */; };
+		95EC6A1C21701D0E00643F19 /* Nameable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95EC6A1B21701D0E00643F19 /* Nameable.swift */; };
 		AC9368CD879471FF007D3B11 /* Pods_TIMII3.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A6FEA52EC11DEB5CA6E837DB /* Pods_TIMII3.framework */; };
 		C39C09D93A7EF0ACD0E38FDD /* Pods_TIMII3UITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 06B23BA55C61789A76275FA4 /* Pods_TIMII3UITests.framework */; };
 /* End PBXBuildFile section */
@@ -55,6 +59,9 @@
 		62003BEE0B871C0DD255D3B4 /* Pods_TIMII3Tests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_TIMII3Tests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		6F190E17B9C78B61B2D5E588 /* Pods-TIMII3.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TIMII3.debug.xcconfig"; path = "Pods/Target Support Files/Pods-TIMII3/Pods-TIMII3.debug.xcconfig"; sourceTree = "<group>"; };
 		953094BA216EEBA500384DF8 /* Login.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Login.swift; sourceTree = "<group>"; };
+		95533F6E21705AA2004391AF /* Firestoreable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Firestoreable.swift; sourceTree = "<group>"; };
+		95533F702170E298004391AF /* Member.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Member.swift; sourceTree = "<group>"; };
+		9563D5E72172AD7100708913 /* AuthenticationMethod.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticationMethod.swift; sourceTree = "<group>"; };
 		95712A9A5AEB0D218884A9F5 /* Pods-TIMII3Tests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TIMII3Tests.release.xcconfig"; path = "Pods/Target Support Files/Pods-TIMII3Tests/Pods-TIMII3Tests.release.xcconfig"; sourceTree = "<group>"; };
 		957CD69A216D995B000CE343 /* TIMII3.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TIMII3.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		957CD69D216D995B000CE343 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -78,6 +85,7 @@
 		95EC6A14216F13F900643F19 /* SettingScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingScreen.swift; sourceTree = "<group>"; };
 		95EC6A16216F152600643F19 /* Colors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Colors.swift; sourceTree = "<group>"; };
 		95EC6A18216F8A8A00643F19 /* Launch Screen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = "Launch Screen.storyboard"; sourceTree = "<group>"; };
+		95EC6A1B21701D0E00643F19 /* Nameable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Nameable.swift; sourceTree = "<group>"; };
 		A6FEA52EC11DEB5CA6E837DB /* Pods_TIMII3.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_TIMII3.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		CA5FE0379ECC65832EEBAD4A /* Pods-TIMII3UITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TIMII3UITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-TIMII3UITests/Pods-TIMII3UITests.debug.xcconfig"; sourceTree = "<group>"; };
 		ED886FF05C322156D098D5AB /* Pods-TIMII3Tests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TIMII3Tests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-TIMII3Tests/Pods-TIMII3Tests.debug.xcconfig"; sourceTree = "<group>"; };
@@ -136,7 +144,7 @@
 		957CD69C216D995B000CE343 /* TIMII3 */ = {
 			isa = PBXGroup;
 			children = (
-				95EC6A11216F11FF00643F19 /* Protocols */,
+				95EC6A11216F11FF00643F19 /* Models */,
 				95EC6A0A216F0C9F00643F19 /* Views */,
 				957CD6A4216D995C000CE343 /* Assets.xcassets */,
 				957CD6A9216D995C000CE343 /* Info.plist */,
@@ -170,8 +178,8 @@
 			isa = PBXGroup;
 			children = (
 				95EC6A1A216F9DF100643F19 /* Login */,
-				957CD6D1216DA10D000CE343 /* Main.swift */,
 				95EC6A0F216F103200643F19 /* Main.xml */,
+				957CD6D1216DA10D000CE343 /* Main.swift */,
 				95EC6A12216F139C00643F19 /* SettingScreen.xml */,
 				95EC6A14216F13F900643F19 /* SettingScreen.swift */,
 				95EC6A16216F152600643F19 /* Colors.swift */,
@@ -179,21 +187,25 @@
 			path = Views;
 			sourceTree = "<group>";
 		};
-		95EC6A11216F11FF00643F19 /* Protocols */ = {
+		95EC6A11216F11FF00643F19 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				95EC6A1B21701D0E00643F19 /* Nameable.swift */,
+				95533F6E21705AA2004391AF /* Firestoreable.swift */,
+				95533F702170E298004391AF /* Member.swift */,
+				9563D5E72172AD7100708913 /* AuthenticationMethod.swift */,
 			);
-			path = Protocols;
+			path = Models;
 			sourceTree = "<group>";
 		};
 		95EC6A1A216F9DF100643F19 /* Login */ = {
 			isa = PBXGroup;
 			children = (
 				953094BA216EEBA500384DF8 /* Login.swift */,
-				95EC6A0B216F0CE500643F19 /* LoginScreen.xml */,
 				95EC6A06216EF2D200643F19 /* LoginScreen.swift */,
-				95EC6A0D216F0D2A00643F19 /* CreateAccountScreen.xml */,
+				95EC6A0B216F0CE500643F19 /* LoginScreen.xml */,
 				95EC6A08216EF42900643F19 /* CreateAccountScreen.swift */,
+				95EC6A0D216F0D2A00643F19 /* CreateAccountScreen.xml */,
 			);
 			path = Login;
 			sourceTree = "<group>";
@@ -465,7 +477,11 @@
 				95EC6A09216EF42900643F19 /* CreateAccountScreen.swift in Sources */,
 				95EC6A15216F13F900643F19 /* SettingScreen.swift in Sources */,
 				957CD69E216D995B000CE343 /* AppDelegate.swift in Sources */,
+				95EC6A1C21701D0E00643F19 /* Nameable.swift in Sources */,
+				95533F6F21705AA2004391AF /* Firestoreable.swift in Sources */,
 				95EC6A07216EF2D200643F19 /* LoginScreen.swift in Sources */,
+				95533F712170E298004391AF /* Member.swift in Sources */,
+				9563D5E82172AD7100708913 /* AuthenticationMethod.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

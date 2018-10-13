@@ -60,6 +60,7 @@ class CreateAccountScreen: UIViewController, LayoutLoading
             return
         }
         
+        // This creates a new user using the Firestore Auth procedures
         Auth.auth().createUser(withEmail: email, password: password, completion:
             {(user, error) in
                 if error != nil
@@ -70,16 +71,16 @@ class CreateAccountScreen: UIViewController, LayoutLoading
                     return
                 }
                 
-                // 8.7.18 - Saving new member information to Firebase and increment Countable
-                // /Members/<membercount>/[values]
-                // /Countables/Members/<membercount>
-                
-
-//                let rootName = "Members"
-//                guard let uid = Auth.auth().currentUser?.uid else { return }
-//                let dictionary = ["email": email, "password": password]
-//                let db = DatabaseSystem()
-//                db.addUserComponentCountableDict(rootName, uid, dictionary)
+                /*
+                 10.12.18 - Given authorized members are already contained in the Auth section of Firestore
+                 why do I need to save this info?  I shouldn't create my own member Collection that stores this
+                 information. There is probably a bunch of security/hacking related issues that are involved
+                 in storing user data so I don't need this? ==>> My decision is NOT to store user authorization
+                 data like email/passwords inside Member.
+                 */
+                let newMember = Member()
+                newMember.saveMemberEmail(email: email)
+                print(newMember)
                 
                 // Dismiss both present CreateAccount VC and Login VC to arrive at Main
                 self.presentingViewController?.presentingViewController?.dismiss(animated: true, completion: nil)
