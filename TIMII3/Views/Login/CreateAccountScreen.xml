@@ -3,6 +3,9 @@
  
  TODO: 8.7.18 [DONE 8.7.18] - Add hide screen for password to be unreadable
  TODO: 10.10.18 [DONE 10.10.18] - Migrated code from TIMII to TIMII3
+ 
+ TODO: 10.14.18 - Add UserName/Alias in Created Account so it shows up under Profile Picture. Use verify password field.
+ TODO: 10.14.18 - Add Email validation checking during signup through Firebase provided templates
 
  -->
 
@@ -66,6 +69,7 @@
         textAlignment="center"
     />
     <UITextField
+        isHidden="true    // 10.14.18 - use this section for username/alias"
         placeholder="verify password"
         isSecureTextEntry="true"
         top="previous.bottom + 15"

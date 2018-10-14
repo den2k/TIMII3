@@ -6,14 +6,11 @@
 //  Copyright © 2018 Autonomii. All rights reserved.
 //
 
-/*
- 
- TODO: 8.7.18 - Add if/then check for Countables related to SetupSystem
- TODO: 8.7.18 - Show Timeline Screen always even in logout/login
- TODO: 8.23.18 - prefersStatusBarHidden for iPhone X does not work. setneedstatusbar, hiding navbar also related to this 'fix' This code was added to deal with X but its not working.
- TODO: 10.10.18 [DONE 10.10.18] - Migrated code from TIMII to TIMII3
- 
- */
+// MARK: ----- TODO -----
+// TODO: 10.14.18 - Show Dashboard Screen always even in logout/login
+// TODO: 8.23.18 [DONE 10.11.18] - prefersStatusBarHidden for iPhone X does not work. setneedstatusbar, hiding navbar also related to this 'fix' This code was added to deal with X but its not working. This was 'fixed' by adding a standard Lauch Screen.storyboard
+// TODO: 10.10.18 [DONE 10.10.18] - Migrated code from TIMII to TIMII3
+
 
 import UIKit
 import Layout
@@ -38,6 +35,7 @@ class Main: UIViewController, LayoutLoading, UITabBarControllerDelegate
             named: "Main.xml"
         )
         
+        // 10.14.18 - Borrowed from TIMII/Firebase implementation. Is this needed?
         // 8.7.18 - Add this to MainVC and just do this once after reseting the database to Zero Node
         // then comment out. These setup the Countable Global variables.
         // SetupSystem().GlobalServiceSetup()

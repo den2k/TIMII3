@@ -178,8 +178,8 @@
 			isa = PBXGroup;
 			children = (
 				95EC6A1A216F9DF100643F19 /* Login */,
-				95EC6A0F216F103200643F19 /* Main.xml */,
 				957CD6D1216DA10D000CE343 /* Main.swift */,
+				95EC6A0F216F103200643F19 /* Main.xml */,
 				95EC6A12216F139C00643F19 /* SettingScreen.xml */,
 				95EC6A14216F13F900643F19 /* SettingScreen.swift */,
 				95EC6A16216F152600643F19 /* Colors.swift */,
