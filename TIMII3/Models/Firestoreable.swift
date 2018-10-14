@@ -10,19 +10,25 @@ import Firebase
 
 protocol Firestoreable
 {
-    var FSCollectionName: String    { get } // ‘category’ name
+    var FSCollectionName: CollectionName    { get }     // Members or ...
+}
+
+enum CollectionName: String
+{
+    case Members = "Members"
+    case Timers = "Timers"
 }
 
 struct FS: Firestoreable
 {
-    var FSCollectionName: String
+    var FSCollectionName: CollectionName
     
-    init(collectionName: String)
+    init(collectionName: CollectionName)
     {
         self.FSCollectionName = collectionName
     }
     
-    func FSSave(collectionName: String, dictionary: Dictionary<String,Any>)
+    func FSSave(collectionName: CollectionName, dictionary: Dictionary<String,Any>)
     {
         /*
          This function uses Firestore to store information.
@@ -48,7 +54,7 @@ struct FS: Firestoreable
         settings.areTimestampsInSnapshotsEnabled = true
         db.settings = settings
         
-        let rootRef = db.collection(collectionName)
+        let rootRef = db.collection(collectionName.rawValue)
         
         // Get logged in Member ID
         guard let UID = Auth.auth().currentUser?.uid else { return }
