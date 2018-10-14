@@ -8,7 +8,7 @@
 
 struct Member: Firestoreable, AuthMethod
 {
-    var FSCollectionName: CollectionName { return .Members }
+    var FSCollectionName: FSCollectionName { return .Members }
 
     func saveMemberEmail(email: String)
     {

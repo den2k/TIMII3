@@ -10,18 +10,19 @@ import Firebase
 
 protocol Firestoreable
 {
-    var FSCollectionName: CollectionName    { get }     // Members or ...
+    var FSCollectionName: FSCollectionName    { get }     // Members or ...
 }
 
-enum CollectionName: String
+enum FSCollectionName: String
 {
+    // rawValue would give us this String label definition by default but making this explicit
     case Members = "Members"
     case Timers = "Timers"
 }
 
 struct FS
 {
-    func FSSave(collectionName: CollectionName, dictionary: Dictionary<String,Any>)
+    func FSSave(collectionName: FSCollectionName, dictionary: Dictionary<String,Any>)
     {
         /*
          This function uses Firestore to store information.

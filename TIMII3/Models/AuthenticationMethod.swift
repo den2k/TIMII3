@@ -18,6 +18,7 @@ extension AuthMethod
 
 enum AuthenticationMethod: String
 {
+    // rawValue would give us this String label definition by default but making this explicit
     case email      = "email"
     case facebook   = "facebook"
     case phone      = "phone"
