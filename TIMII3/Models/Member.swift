@@ -13,7 +13,7 @@ struct Member: Firestoreable, AuthMethod
     func saveMemberEmail(email: String)
     {
         print("Saving member email.")
-        let db = FS(collectionName: self.FSCollectionName)
+        let db = FS()
         let dict = [
             "email": email,
             "authMethod": authMethod.rawValue]

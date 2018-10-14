@@ -19,15 +19,8 @@ enum CollectionName: String
     case Timers = "Timers"
 }
 
-struct FS: Firestoreable
+struct FS
 {
-    var FSCollectionName: CollectionName
-    
-    init(collectionName: CollectionName)
-    {
-        self.FSCollectionName = collectionName
-    }
-    
     func FSSave(collectionName: CollectionName, dictionary: Dictionary<String,Any>)
     {
         /*
@@ -63,8 +56,8 @@ struct FS: Firestoreable
          10.13.17
          
          - /Counts/Members/325346
-         - /Members/<UID>/
-            - name: email
+         - /Members/<UID>/[dictionary]
+            - email: a@aol.com
             - description: enter a description
             - ...
          */
