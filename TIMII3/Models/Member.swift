@@ -6,17 +6,37 @@
 //  Copyright © 2018 Autonomii. All rights reserved.
 //
 
-struct Member: Firestoreable, AuthMethod
+import Firebase
+
+struct Member: Firestoreable, AuthMethod, Owner
 {
     var FSCollectionName: FSCollectionName { return .Members }
+    var email: String
 
-    func saveMemberEmail(email: String)
+    func FSSave()
     {
-        print("Saving member email.")
+        print("Saving member info.")
         let db = FS()
         let dict = [
-            "email": email,
+            "email": self.email,
             "authMethod": authMethod.rawValue]
-        db.FSSave(collectionName: self.FSCollectionName, dictionary: dict)
+        
+        // save /Members/<UID>/[dictionary]
+        db.FSSaveMemberCollectionDict(collectionName: self.FSCollectionName, dictionary: dict)
+    }
+}
+
+protocol Owner
+{
+    var memberID: String { get }
+}
+
+extension Owner
+{
+    var memberID: String
+    {
+        // Get Member ID
+        let UID = Auth.auth().currentUser?.uid ?? "No member ID."
+        return UID
     }
 }

@@ -21,6 +21,8 @@
 		957CD6CE216D9CD9000CE343 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 957CD6CB216D9CD9000CE343 /* GoogleService-Info.plist */; };
 		957CD6D2216DA10D000CE343 /* Main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 957CD6D1216DA10D000CE343 /* Main.swift */; };
 		95B0AA92216E42E100E73F36 /* FirestoreableTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95B0AA91216E42E100E73F36 /* FirestoreableTests.swift */; };
+		95D34F162173DA0500BB6547 /* TimiiHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95D34F152173DA0500BB6547 /* TimiiHelper.swift */; };
+		95D34F182173DA5900BB6547 /* Timii.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95D34F172173DA5900BB6547 /* Timii.swift */; };
 		95EC6A07216EF2D200643F19 /* LoginScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95EC6A06216EF2D200643F19 /* LoginScreen.swift */; };
 		95EC6A09216EF42900643F19 /* CreateAccountScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95EC6A08216EF42900643F19 /* CreateAccountScreen.swift */; };
 		95EC6A0C216F0CE500643F19 /* LoginScreen.xml in Resources */ = {isa = PBXBuildFile; fileRef = 95EC6A0B216F0CE500643F19 /* LoginScreen.xml */; };
@@ -76,6 +78,8 @@
 		957CD6CB216D9CD9000CE343 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		957CD6D1216DA10D000CE343 /* Main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Main.swift; sourceTree = "<group>"; };
 		95B0AA91216E42E100E73F36 /* FirestoreableTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirestoreableTests.swift; sourceTree = "<group>"; };
+		95D34F152173DA0500BB6547 /* TimiiHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimiiHelper.swift; sourceTree = "<group>"; };
+		95D34F172173DA5900BB6547 /* Timii.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Timii.swift; sourceTree = "<group>"; };
 		95EC6A06216EF2D200643F19 /* LoginScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginScreen.swift; sourceTree = "<group>"; };
 		95EC6A08216EF42900643F19 /* CreateAccountScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateAccountScreen.swift; sourceTree = "<group>"; };
 		95EC6A0B216F0CE500643F19 /* LoginScreen.xml */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = LoginScreen.xml; sourceTree = "<group>"; };
@@ -190,9 +194,11 @@
 		95EC6A11216F11FF00643F19 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				95533F702170E298004391AF /* Member.swift */,
+				95D34F172173DA5900BB6547 /* Timii.swift */,
+				95D34F152173DA0500BB6547 /* TimiiHelper.swift */,
 				95EC6A1B21701D0E00643F19 /* Nameable.swift */,
 				95533F6E21705AA2004391AF /* Firestoreable.swift */,
-				95533F702170E298004391AF /* Member.swift */,
 				9563D5E72172AD7100708913 /* AuthenticationMethod.swift */,
 			);
 			path = Models;
@@ -244,7 +250,7 @@
 				957CD696216D995B000CE343 /* Sources */,
 				957CD697216D995B000CE343 /* Frameworks */,
 				957CD698216D995B000CE343 /* Resources */,
-				A14908CF905127A4FC7B9263 /* [CP] Embed Pods Frameworks */,
+				BD7632240F514DA1A4E032ED /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -370,7 +376,25 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		A14908CF905127A4FC7B9263 /* [CP] Embed Pods Frameworks */ = {
+		B11EDFE2E3545AED6D3C1D16 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-TIMII3Tests-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		BD7632240F514DA1A4E032ED /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -408,24 +432,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-TIMII3/Pods-TIMII3-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		B11EDFE2E3545AED6D3C1D16 /* [CP] Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
-				"${PODS_ROOT}/Manifest.lock",
-			);
-			name = "[CP] Check Pods Manifest.lock";
-			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-TIMII3Tests-checkManifestLockResult.txt",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
 		DDE2587E0E5CC3E11C1E3AF0 /* [CP] Check Pods Manifest.lock */ = {
@@ -478,7 +484,9 @@
 				95EC6A15216F13F900643F19 /* SettingScreen.swift in Sources */,
 				957CD69E216D995B000CE343 /* AppDelegate.swift in Sources */,
 				95EC6A1C21701D0E00643F19 /* Nameable.swift in Sources */,
+				95D34F182173DA5900BB6547 /* Timii.swift in Sources */,
 				95533F6F21705AA2004391AF /* Firestoreable.swift in Sources */,
+				95D34F162173DA0500BB6547 /* TimiiHelper.swift in Sources */,
 				95EC6A07216EF2D200643F19 /* LoginScreen.swift in Sources */,
 				95533F712170E298004391AF /* Member.swift in Sources */,
 				9563D5E82172AD7100708913 /* AuthenticationMethod.swift in Sources */,

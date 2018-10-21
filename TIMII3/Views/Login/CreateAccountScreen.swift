@@ -16,6 +16,7 @@
  TODO: 8.7.18: Add Verify Password matches error handler
  TODO: 8.16.18: Refactor FB code and move Auth portion to new AuthenticationSystem and use Firestore in DatabaseSystem to store Members info.
  TODO: 10.10.18 [DONE 10.10.18] - Migrated code from TIMII to TIMII3
+ TODO: 10.21.18 [DONE 10.21.18] - Use Firestoreable FSSave to save Member information within the Member Collection
  TODO: 10.10.18 - Redo Counting in FS. Need to implement Firestoreable / addUserComponentCountableDict so it saves Firestore and not Firebase. This is so counting of added Members works again.
  
  */
@@ -77,9 +78,12 @@ class CreateAccountScreen: UIViewController, LayoutLoading
                  information. There is probably a bunch of security/hacking related issues that are involved
                  in storing user data so I don't need this? ==>> My decision is NOT to store user authorization
                  data like email/passwords inside Member.
+                 
+                 10.21.18 - Will save email information but not passwords. In case I need to migrate users from FS.
+                 May also need to save passwords if that is the case....For now just save email.
                  */
-                let newMember = Member()
-                newMember.saveMemberEmail(email: email)
+                let newMember = Member(email: email)
+                newMember.FSSave()
                 print(newMember)
                 
                 // Dismiss both present CreateAccount VC and Login VC to arrive at Main

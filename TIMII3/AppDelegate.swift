@@ -21,9 +21,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Firebase forced calls for date and timestamp changes
         FirebaseApp.configure()
         let db = Firestore.firestore()
-        let settings = db.settings
-        settings.areTimestampsInSnapshotsEnabled = true
-        db.settings = settings
+        print(db)  // silence warning
+//        let settings = db.settings
+//        settings.areTimestampsInSnapshotsEnabled = true
+//        db.settings = settings
         
         // Programmatic method to display View Controllers
         window = UIWindow(frame: UIScreen.main.bounds)
