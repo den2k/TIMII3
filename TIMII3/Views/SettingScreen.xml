@@ -2,28 +2,43 @@
  Setting Screen
  
  TODO: 10.10.18 [DONE 10.10.18] - Migrated code from TIMII to TIMII3
+ TODO: 10.21.18 - Add the member ID/name on the Profile page before Logout
+ 
  -->
 
-<SettingScreen view.backgroundColor="white">
+<SettingScreen
+    outlet="SettingScreenNode"
+    view.backgroundColor="white">
     
     <UIView
         width="100%"
         height="100%">
-        
+
+        <!-- Displays the day of the month -->
+        <UILabel
+            text="{mEmailLabel}"
+            width="100%"
+            height="auto"
+            top="60"
+            left="50% - width/2"
+            textAlignment="center"
+            textColor="blue"
+            backgroundColor=""
+            font="Avenir Next 21"
+        />
+            
         <!-- Logout Button -->
         <UIButton
-        touchUpInside="settingHandleLogout"
-        title="Logout"
-        backgroundColor="UIColor.mintGreen"
-        top="50% - height/2"
-        left="50% - width/2"
-        width="100% - 120"
-        height="66"
-        layer.cornerRadius="33"
+            touchUpInside="settingHandleLogout"
+            title="Logout"
+            backgroundColor="UIColor.mintGreen"
+            top="50% - height/2"
+            left="50% - width/2"
+            width="100% - 120"
+            height="66"
+            layer.cornerRadius="33"
         />
         
     </UIView>
     
 </SettingScreen>
-
-

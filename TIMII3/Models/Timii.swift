@@ -8,7 +8,7 @@
 
 import Foundation
 
-struct Timii: Firestoreable, Nameable, Owner
+struct Timii: Firestoreable, Nameable, Ownable
 {
     var FSCollectionName: FSCollectionName { return .Timers }
     var name: String

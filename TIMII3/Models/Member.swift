@@ -8,11 +8,21 @@
 
 import Firebase
 
-struct Member: Firestoreable, AuthMethod, Owner
+class Member: Firestoreable, AuthMethod, Ownable
 {
     var FSCollectionName: FSCollectionName { return .Members }
-    var email: String
-
+    var email: String = ""
+    var memberFields: [String:String] = [:]
+    
+    // default initializer
+    init() {}
+    
+    // initializer with email
+    init(email: String)
+    {
+        self.email = email
+    }
+    
     func FSSave()
     {
         print("Saving member info.")
@@ -23,20 +33,5 @@ struct Member: Firestoreable, AuthMethod, Owner
         
         // save /Members/<UID>/[dictionary]
         db.FSSaveMemberCollectionDict(collectionName: self.FSCollectionName, dictionary: dict)
-    }
-}
-
-protocol Owner
-{
-    var memberID: String { get }
-}
-
-extension Owner
-{
-    var memberID: String
-    {
-        // Get Member ID
-        let UID = Auth.auth().currentUser?.uid ?? "No member ID."
-        return UID
     }
 }

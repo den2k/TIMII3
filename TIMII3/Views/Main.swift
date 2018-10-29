@@ -30,7 +30,6 @@ class Main: UIViewController, LayoutLoading, UITabBarControllerDelegate
             perform(#selector(presentLogin), with: nil, afterDelay: 0)
         }
         
-        print("Show Main / Timeline screen.")
         self.loadLayout(
             named: "Main.xml"
         )
@@ -43,7 +42,6 @@ class Main: UIViewController, LayoutLoading, UITabBarControllerDelegate
     
     @objc func presentLogin()
     {
-        print("Show Login screen.")
         let login = LoginScreen()
         present(login, animated: false, completion: nil)
     }
