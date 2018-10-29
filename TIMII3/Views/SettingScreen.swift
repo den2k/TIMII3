@@ -12,7 +12,7 @@
  TODO: 8.21.18 - Login out and login back in drop user on to profile/Setting screen given the present call here. Remove the present LoginScreen from the HandleLogout func. This was tried but the present / dismiss / Layout with XML views seems to get in the way. I tried a few ways through main.swift to offload this into the LogInOutSystem.swift without too much luck. At least the Firebase calls from this class is no longer needed.
  TODO: 10.10.18 [DONE 10.10.18] - Migrated code from TIMII to TIMII3
  TODO: 10.21.18 [DONE 10.28.18] - Added Member info to be displayed on Profile screen
- TODO: 10.28.18 - Refresh screen info on a login/logout action.
+ TODO: 10.28.18 [DONE 10.28.18] - Refresh screen info on a login/logout action.
  TODO: 10.28.18 - Refactor fetchMemberEmail -> to Member.swift file
  
  */
@@ -23,17 +23,22 @@ import Firebase
 
 class SettingScreen: UIViewController, Ownable
 {
+    var listener: ListenerRegistration!
+
     @IBOutlet var SettingScreenNode: LayoutNode? {
         didSet {
-            // Initialize Firestore fields to "blank" so there is no errors waiting for the retrival of the data
+            // Set FS fields to "blank" so no errors show up waiting for data retrival
             SettingScreenNode?.setState(["mEmailLabel": ""])
-            fetchMemberEmail()
         }
     }
- 
-    // 10.28.18 - This function works and sets the state of the variables within the SettingScreenNode layout object
-    func fetchMemberEmail()
-    {
+    
+    /*
+     This viewWillAppear plus the addSnapshotListener seems to be updating the value
+     for memberEmail values all the time! Can now delete the fetchMemberEmail function.
+    */
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
         // Adding a whole code block just to retrive member info...
         // FS Boilerplate to remove warning.
         let db = Firestore.firestore()
@@ -42,7 +47,7 @@ class SettingScreen: UIViewController, Ownable
         db.settings = settings
         
         let memberRef = db.collection(FSCollectionName.Members.rawValue).document(memberID)
-        memberRef.getDocument { (document, error) in
+        listener = memberRef.addSnapshotListener { (document, error) in
             guard let doc = document, doc.exists else { return }
             if let err = error {
                 print("Error getting document: \(err)")
@@ -57,6 +62,11 @@ class SettingScreen: UIViewController, Ownable
                     ])
             }
         }
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        listener.remove()   // removes listener to present memory hog, network access and also no need for weak reference in definition
     }
     
     @objc func settingHandleLogout()
