@@ -22,8 +22,10 @@
 		957CD6CE216D9CD9000CE343 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 957CD6CB216D9CD9000CE343 /* GoogleService-Info.plist */; };
 		957CD6D2216DA10D000CE343 /* Main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 957CD6D1216DA10D000CE343 /* Main.swift */; };
 		95B0AA92216E42E100E73F36 /* FirestoreableTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95B0AA91216E42E100E73F36 /* FirestoreableTests.swift */; };
-		95C8F8AF2187DC7A003AED25 /* DashboardScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95C8F8AE2187DC7A003AED25 /* DashboardScreen.swift */; };
-		95C8F8B12187DC9E003AED25 /* DashboardScreen.xml in Resources */ = {isa = PBXBuildFile; fileRef = 95C8F8B02187DC9E003AED25 /* DashboardScreen.xml */; };
+		95C8F8AF2187DC7A003AED25 /* DashboardScreenViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95C8F8AE2187DC7A003AED25 /* DashboardScreenViewController.swift */; };
+		95C8F8B12187DC9E003AED25 /* DashboardScreenViewController.xml in Resources */ = {isa = PBXBuildFile; fileRef = 95C8F8B02187DC9E003AED25 /* DashboardScreenViewController.xml */; };
+		95C8F8B52188038B003AED25 /* TimiiActiveViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95C8F8B42188038B003AED25 /* TimiiActiveViewController.swift */; };
+		95C8F8B72188106C003AED25 /* TimiiActiveViewController.xml in Resources */ = {isa = PBXBuildFile; fileRef = 95C8F8B62188106C003AED25 /* TimiiActiveViewController.xml */; };
 		95D34F162173DA0500BB6547 /* TimiiHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95D34F152173DA0500BB6547 /* TimiiHelper.swift */; };
 		95D34F182173DA5900BB6547 /* Timii.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95D34F172173DA5900BB6547 /* Timii.swift */; };
 		95EC6A07216EF2D200643F19 /* LoginScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95EC6A06216EF2D200643F19 /* LoginScreen.swift */; };
@@ -31,8 +33,8 @@
 		95EC6A0C216F0CE500643F19 /* LoginScreen.xml in Resources */ = {isa = PBXBuildFile; fileRef = 95EC6A0B216F0CE500643F19 /* LoginScreen.xml */; };
 		95EC6A0E216F0D2A00643F19 /* CreateAccountScreen.xml in Resources */ = {isa = PBXBuildFile; fileRef = 95EC6A0D216F0D2A00643F19 /* CreateAccountScreen.xml */; };
 		95EC6A10216F103200643F19 /* Main.xml in Resources */ = {isa = PBXBuildFile; fileRef = 95EC6A0F216F103200643F19 /* Main.xml */; };
-		95EC6A13216F139C00643F19 /* SettingScreen.xml in Resources */ = {isa = PBXBuildFile; fileRef = 95EC6A12216F139C00643F19 /* SettingScreen.xml */; };
-		95EC6A15216F13F900643F19 /* SettingScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95EC6A14216F13F900643F19 /* SettingScreen.swift */; };
+		95EC6A13216F139C00643F19 /* SettingScreenViewController.xml in Resources */ = {isa = PBXBuildFile; fileRef = 95EC6A12216F139C00643F19 /* SettingScreenViewController.xml */; };
+		95EC6A15216F13F900643F19 /* SettingScreenViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95EC6A14216F13F900643F19 /* SettingScreenViewController.swift */; };
 		95EC6A17216F152600643F19 /* Colors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95EC6A16216F152600643F19 /* Colors.swift */; };
 		95EC6A19216F8A8A00643F19 /* Launch Screen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 95EC6A18216F8A8A00643F19 /* Launch Screen.storyboard */; };
 		95EC6A1C21701D0E00643F19 /* Nameable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95EC6A1B21701D0E00643F19 /* Nameable.swift */; };
@@ -82,8 +84,10 @@
 		957CD6CB216D9CD9000CE343 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		957CD6D1216DA10D000CE343 /* Main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Main.swift; sourceTree = "<group>"; };
 		95B0AA91216E42E100E73F36 /* FirestoreableTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirestoreableTests.swift; sourceTree = "<group>"; };
-		95C8F8AE2187DC7A003AED25 /* DashboardScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DashboardScreen.swift; sourceTree = "<group>"; };
-		95C8F8B02187DC9E003AED25 /* DashboardScreen.xml */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = DashboardScreen.xml; sourceTree = "<group>"; };
+		95C8F8AE2187DC7A003AED25 /* DashboardScreenViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DashboardScreenViewController.swift; sourceTree = "<group>"; };
+		95C8F8B02187DC9E003AED25 /* DashboardScreenViewController.xml */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = DashboardScreenViewController.xml; sourceTree = "<group>"; };
+		95C8F8B42188038B003AED25 /* TimiiActiveViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimiiActiveViewController.swift; sourceTree = "<group>"; };
+		95C8F8B62188106C003AED25 /* TimiiActiveViewController.xml */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = TimiiActiveViewController.xml; sourceTree = "<group>"; };
 		95D34F152173DA0500BB6547 /* TimiiHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimiiHelper.swift; sourceTree = "<group>"; };
 		95D34F172173DA5900BB6547 /* Timii.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Timii.swift; sourceTree = "<group>"; };
 		95EC6A06216EF2D200643F19 /* LoginScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginScreen.swift; sourceTree = "<group>"; };
@@ -91,8 +95,8 @@
 		95EC6A0B216F0CE500643F19 /* LoginScreen.xml */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = LoginScreen.xml; sourceTree = "<group>"; };
 		95EC6A0D216F0D2A00643F19 /* CreateAccountScreen.xml */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = CreateAccountScreen.xml; sourceTree = "<group>"; };
 		95EC6A0F216F103200643F19 /* Main.xml */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = Main.xml; sourceTree = "<group>"; };
-		95EC6A12216F139C00643F19 /* SettingScreen.xml */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = SettingScreen.xml; sourceTree = "<group>"; };
-		95EC6A14216F13F900643F19 /* SettingScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingScreen.swift; sourceTree = "<group>"; };
+		95EC6A12216F139C00643F19 /* SettingScreenViewController.xml */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = SettingScreenViewController.xml; sourceTree = "<group>"; };
+		95EC6A14216F13F900643F19 /* SettingScreenViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingScreenViewController.swift; sourceTree = "<group>"; };
 		95EC6A16216F152600643F19 /* Colors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Colors.swift; sourceTree = "<group>"; };
 		95EC6A18216F8A8A00643F19 /* Launch Screen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = "Launch Screen.storyboard"; sourceTree = "<group>"; };
 		95EC6A1B21701D0E00643F19 /* Nameable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Nameable.swift; sourceTree = "<group>"; };
@@ -190,10 +194,12 @@
 				95EC6A1A216F9DF100643F19 /* Login */,
 				957CD6D1216DA10D000CE343 /* Main.swift */,
 				95EC6A0F216F103200643F19 /* Main.xml */,
-				95C8F8AE2187DC7A003AED25 /* DashboardScreen.swift */,
-				95C8F8B02187DC9E003AED25 /* DashboardScreen.xml */,
-				95EC6A14216F13F900643F19 /* SettingScreen.swift */,
-				95EC6A12216F139C00643F19 /* SettingScreen.xml */,
+				95C8F8AE2187DC7A003AED25 /* DashboardScreenViewController.swift */,
+				95C8F8B02187DC9E003AED25 /* DashboardScreenViewController.xml */,
+				95EC6A14216F13F900643F19 /* SettingScreenViewController.swift */,
+				95EC6A12216F139C00643F19 /* SettingScreenViewController.xml */,
+				95C8F8B42188038B003AED25 /* TimiiActiveViewController.swift */,
+				95C8F8B62188106C003AED25 /* TimiiActiveViewController.xml */,
 				95EC6A16216F152600643F19 /* Colors.swift */,
 			);
 			path = Views;
@@ -356,11 +362,12 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				95EC6A13216F139C00643F19 /* SettingScreen.xml in Resources */,
+				95EC6A13216F139C00643F19 /* SettingScreenViewController.xml in Resources */,
 				95EC6A0C216F0CE500643F19 /* LoginScreen.xml in Resources */,
+				95C8F8B72188106C003AED25 /* TimiiActiveViewController.xml in Resources */,
 				957CD6A5216D995C000CE343 /* Assets.xcassets in Resources */,
 				95EC6A10216F103200643F19 /* Main.xml in Resources */,
-				95C8F8B12187DC9E003AED25 /* DashboardScreen.xml in Resources */,
+				95C8F8B12187DC9E003AED25 /* DashboardScreenViewController.xml in Resources */,
 				957CD6CC216D9CD9000CE343 /* GoogleService-Info.plist in Resources */,
 				95EC6A0E216F0D2A00643F19 /* CreateAccountScreen.xml in Resources */,
 				95EC6A19216F8A8A00643F19 /* Launch Screen.storyboard in Resources */,
@@ -490,11 +497,12 @@
 				957CD6D2216DA10D000CE343 /* Main.swift in Sources */,
 				95EC6A17216F152600643F19 /* Colors.swift in Sources */,
 				953094BB216EEBA500384DF8 /* Login.swift in Sources */,
+				95C8F8B52188038B003AED25 /* TimiiActiveViewController.swift in Sources */,
 				95EC6A09216EF42900643F19 /* CreateAccountScreen.swift in Sources */,
-				95EC6A15216F13F900643F19 /* SettingScreen.swift in Sources */,
+				95EC6A15216F13F900643F19 /* SettingScreenViewController.swift in Sources */,
 				957CD69E216D995B000CE343 /* AppDelegate.swift in Sources */,
 				95EC6A1C21701D0E00643F19 /* Nameable.swift in Sources */,
-				95C8F8AF2187DC7A003AED25 /* DashboardScreen.swift in Sources */,
+				95C8F8AF2187DC7A003AED25 /* DashboardScreenViewController.swift in Sources */,
 				95D34F182173DA5900BB6547 /* Timii.swift in Sources */,
 				95533F6F21705AA2004391AF /* Firestoreable.swift in Sources */,
 				95D34F162173DA0500BB6547 /* TimiiHelper.swift in Sources */,

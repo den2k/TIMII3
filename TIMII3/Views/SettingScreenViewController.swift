@@ -21,7 +21,7 @@ import UIKit
 import Layout
 import Firebase
 
-class SettingScreen: UIViewController, Ownable
+class SettingScreenViewController: UIViewController, Ownable
 {
     var listener: ListenerRegistration!
 

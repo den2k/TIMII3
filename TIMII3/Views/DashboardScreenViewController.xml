@@ -1,0 +1,57 @@
+<!-- Dashboard Screen
+TODO: 10.29.18 - Add timerbox into this view
+ -->
+<DashboardScreenViewController
+    view.backgroundColor="white">
+
+    <UIView
+        backgroundColor="gray   // whole background"
+        height="100%"
+        width="100%">
+
+        <!-- Member Header Section -->
+        <UIView
+            backgroundColor="blue   // Member Header Section"
+            top="safeAreaInsets.top"
+            left="0"
+            height="50"
+            width="100%">
+            <UILabel
+                text="Member Header Section"
+                top="50% - height / 2"
+                left="50% - width / 2"
+                height=""
+                width="100%"
+                backgroundColor=""
+                font="Avenir Next 12"
+                textAlignment="center"
+                textColor="black"
+            />
+        </UIView>
+        
+        <!-- Active Timer Section -->
+        <UIViewController xml="TimiiActiveViewController.xml"/>
+        
+        
+        <!-- Timer Dashboard -->
+        <UIView
+            backgroundColor="red    // Timer Dashboard Section"
+            top="previous.bottom"
+            left="0"
+            height="100% - safeAreaInsets.top - 50 - 200 - safeAreaInsets.bottom - 50"
+            width="100%">
+            <UIButton
+                title="History"
+                touchUpInside=""
+                top="50% - height / 2"
+                left="50% - width / 2"
+                height="100"
+                width="100"
+                backgroundColor="UIColor.mintGreen"
+                layer.cornerRadius="50"
+            />
+            
+        </UIView>
+        
+    </UIView>
+</DashboardScreenViewController>

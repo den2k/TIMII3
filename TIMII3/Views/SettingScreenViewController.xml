@@ -1,7 +1,7 @@
 <!-- Setting Screen
 TODO: 10.10.18 [DONE 10.10.18] - Migrated code from TIMII to TIMII3
 TODO: 10.21.18 - Add the member ID/name on the Profile page before Logout -->
-<SettingScreen
+<SettingScreenViewController
     outlet="SettingScreenNode"
     view.backgroundColor="white">
 
@@ -34,4 +34,4 @@ TODO: 10.21.18 - Add the member ID/name on the Profile page before Logout -->
             width="100%"
         />
     </UIView>
-</SettingScreen>
+</SettingScreenViewController>

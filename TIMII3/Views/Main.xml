@@ -16,7 +16,7 @@ TODO: 10.10.18 [DONE 10.10.18] - Migrated code from TIMII to TIMII3 -->
         tabBarItem.imageInsets.left="0"
         tabBarItem.imageInsets.bottom="-6"
         tabBarItem.imageInsets.right="0"
-        xml="DashboardScreen.xml"
+        xml="DashboardScreenViewController.xml"
     />
     <UIViewController
         tabBarItem.image="setting.png"
@@ -25,6 +25,6 @@ TODO: 10.10.18 [DONE 10.10.18] - Migrated code from TIMII to TIMII3 -->
         tabBarItem.imageInsets.left="0"
         tabBarItem.imageInsets.bottom="-6"
         tabBarItem.imageInsets.right="0"
-        xml="SettingScreen.xml"
+        xml="SettingScreenViewController.xml"
     />
 </UITabBarController>
