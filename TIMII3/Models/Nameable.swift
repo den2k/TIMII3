@@ -8,8 +8,8 @@
 
 protocol Nameable
 {
-    var name: String        { get }
-    var description: String { get }
+    var name: String        { get set }
+    var description: String { get set }
 }
 
 extension Nameable

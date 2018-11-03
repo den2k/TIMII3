@@ -16,9 +16,9 @@ class TimiiActiveViewController: UIViewController
     @IBOutlet var TimiiActiveNode: LayoutNode? {
         didSet {
             TimiiActiveNode?.setState([
-                "name"      : "History",
-                "minute"    : "00m",
-                "second"    : "00s",
+                "name"      : "",
+                "minute"    : "",
+                "second"    : "",
                 "isRunning" : "",
             ])
         }

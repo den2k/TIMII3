@@ -1,5 +1,6 @@
 <!-- Dashboard Screen
-TODO: 10.29.18 - Add timerbox into this view
+TODO: 10.29.18 [DONE 10.30.18] - Add timerbox into this view
+TODO: 10.31.18 - refactor Timer Panel into own XML file
  -->
 <DashboardScreenViewController
     view.backgroundColor="white">
@@ -30,25 +31,137 @@ TODO: 10.29.18 - Add timerbox into this view
         </UIView>
         
         <!-- Active Timer Section -->
-        <UIViewController xml="TimiiActiveViewController.xml"/>
+        <UIViewController xml="ActiveTimerViewController.xml"/>
         
+
+        <!-- Timer Panel Section -->
+        <macro name="row1" value="18% - height/2" />
+        <macro name="row2" value="48% - height/2" />
+        <macro name="row3" value="78% - height/2" />
+        <macro name="col1" value="20% - width/2" />
+        <macro name="col2" value="50% - width/2" />
+        <macro name="col3" value="80% - width/2" />
         
-        <!-- Timer Dashboard -->
         <UIView
             backgroundColor="red    // Timer Dashboard Section"
             top="previous.bottom"
             left="0"
             height="100% - safeAreaInsets.top - 50 - 200 - safeAreaInsets.bottom - 50"
             width="100%">
+            
+            <!-- Add new Timer -->
             <UIButton
-                title="History"
+                title="+"
                 touchUpInside=""
-                top="50% - height / 2"
-                left="50% - width / 2"
+                top="row1"
+                left="col1"
                 height="100"
                 width="100"
-                backgroundColor="UIColor.mintGreen"
+                backgroundColor="porcelainOpaque"
                 layer.cornerRadius="50"
+                titleLabel.font="Avenir Next 50"
+            />
+            <UILabel
+                text="New timer"
+                top="previous.bottom + 5"
+                left="col1"
+                height="auto"
+                width="auto"
+                backgroundColor=""
+                font="Avenir Next 18"
+                textColor="white"
+            />
+            
+            <!-- Add new Timer -->
+            <UIButton
+                title="+"
+                touchUpInside=""
+                top="row1"
+                left="col2"
+                height="100"
+                width="100"
+                backgroundColor="porcelainOpaque"
+                layer.cornerRadius="50"
+                titleLabel.font="Avenir Next 50"
+            />
+            <UILabel
+                text="New timer"
+                top="previous.bottom + 5"
+                left="col2"
+                height="auto"
+                width="auto"
+                backgroundColor=""
+                font="Avenir Next 18"
+                textColor="white"
+            />
+            
+            <!-- Add new Timer -->
+            <UIButton
+                title="+"
+                touchUpInside=""
+                top="row1"
+                left="col3"
+                height="100"
+                width="100"
+                backgroundColor="porcelainOpaque"
+                layer.cornerRadius="50"
+                titleLabel.font="Avenir Next 50"
+            />
+            <UILabel
+                text="New timer"
+                top="previous.bottom + 5"
+                left="col3"
+                height="auto"
+                width="auto"
+                backgroundColor=""
+                font="Avenir Next 18"
+                textColor="white"
+            />
+            
+            <!-- Add new Timer -->
+            <UIButton
+            title="+"
+            touchUpInside=""
+            top="row2"
+            left="col1"
+            height="100"
+            width="100"
+            backgroundColor="porcelainOpaque"
+            layer.cornerRadius="50"
+            titleLabel.font="Avenir Next 50"
+            />
+            <UILabel
+            text="New timer"
+            top="previous.bottom + 5"
+            left="col1"
+            height="auto"
+            width="auto"
+            backgroundColor=""
+            font="Avenir Next 18"
+            textColor="white"
+            />
+            
+            <!-- Add new Timer -->
+            <UIButton
+            title="+"
+            touchUpInside=""
+            top="row3"
+            left="col1"
+            height="100"
+            width="100"
+            backgroundColor="porcelainOpaque"
+            layer.cornerRadius="50"
+            titleLabel.font="Avenir Next 50"
+            />
+            <UILabel
+            text="New timer"
+            top="previous.bottom + 5"
+            left="col1"
+            height="auto"
+            width="auto"
+            backgroundColor=""
+            font="Avenir Next 18"
+            textColor="white"
             />
             
         </UIView>

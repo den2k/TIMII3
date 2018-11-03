@@ -5,32 +5,33 @@
 //  Created by Dennis Huang on 10/14/18.
 //  Copyright © 2018 Autonomii. All rights reserved.
 //
+/*
+
+ 11.3.18 - Changed Timii from struct to a class. I'm constantly changing the values within the Timii object and thus passing Timii around as a referencable object and not a value object is the correct definition.
+ */
 
 import Foundation
 
-struct Timii: Firestoreable, Nameable, Ownable
+class Timii: Firestoreable, Nameable, Ownable
 {
+    // Protocol properties
     var FSCollectionName: FSCollectionName { return .Timers }
     var name: String
     var description: String
     
-    func FSSave()
+    // Addtional struct properties
+    var hours: String       = "00"
+    var minutes: String     = "00"
+    var seconds: String     = "00"
+    var timerCount: Double  = 0
+    var timerAccuracy       = 0.1       // tenth of a second accuracy
+    var tempTimer           = Timer()   // temporary holder per Timii
+    var isTimerRunning      = false     // Timer is NOT running
+    
+    init(name: String, description: String)
     {
-        /*
-         Members : memberID
-            Timers : timerID
-                “name”: “History”
-                “description”: “AVHS HIS204”
-                “createdDate”: timeStamp
-        */
- 
-        print("Saving new Timii.")
-        let db = FS()
-        let dict = [
-            "name": self.name,
-            "description": self.description]
-        
-        db.FSSaveMemberCollectionDict(collectionName: self.FSCollectionName, dictionary: dict)
-//        print(dict)
+        self.name           = name
+        self.description    = description
     }
+    
 }
