@@ -5,6 +5,11 @@
 //  Created by Dennis Huang on 2/10/18.
 //  Copyright © 2018 Autonomii. All rights reserved.
 //
+/* ---------- Notes ----------
+ 
+ TODO: 11.3.18  Create a function to save aggregated time by day
+ 
+ */
 
 import Foundation
 
@@ -24,8 +29,13 @@ extension Timii
         print("Saving new Timii.")
         let db = FS()
         let dict = [
-            "name": self.name,
-            "description": self.description]
+            "name":             self.name,
+            "description":      self.description,
+            "hours":            self.hours,
+            "minutes":          self.minutes,
+            "seconds":          self.seconds,
+            "isTimerRunning":   self.isTimerRunning,
+            ] as [String : Any]
         
         db.FSSaveMemberCollectionDict(collectionName: self.FSCollectionName, dictionary: dict)
         //        print(dict)

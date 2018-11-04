@@ -6,6 +6,7 @@
 //  Copyright © 2018 Autonomii. All rights reserved.
 //
 // TODO: 11.3.18 - delete testing VC properties timer1
+// TODO: 11.3.18 [DONE - 11.3.18] - Save time results to Firestore
 
 import Foundation
 import Layout
@@ -39,6 +40,7 @@ class ActiveTimerViewController: UIViewController
     @IBAction func toggleTimerButton()
     {
         timer1.toggleTimer()
+        timer1.FSSave()
         updateView()
     }
     

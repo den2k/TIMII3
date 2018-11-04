@@ -1,0 +1,6 @@
+framework module Pods_TIMII3UITests {
+  umbrella header "Pods-TIMII3UITests-umbrella.h"
+
+  export *
+  module * { export * }
+}
