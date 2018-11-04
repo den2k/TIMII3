@@ -7,6 +7,7 @@
 //
 /* ---------- Notes ----------
  
+ TODO: 11.3.18 [DONE 11.4.18] Create new function to save Logs of timer activity
  TODO: 11.3.18  Create a function to save aggregated time by day
  
  */
@@ -31,14 +32,49 @@ extension Timii
         let dict = [
             "name":             self.name,
             "description":      self.description,
+            ]
+        
+        db.FSSaveMemberCollectionDict(collectionName: self.FSCollectionName, dictionary: dict)
+        //        print(dict)
+    }
+
+    // Protocol functions
+    func FSSaveTimerLog()
+    {
+        /*
+         Members : memberID
+         Timers : timerID
+         History : historyID
+         "name":             self.name,
+         "hours":            self.hours,
+         "minutes":          self.minutes,
+         "seconds":          self.seconds,
+         "isTimerRunning":   self.isTimerRunning,
+         */
+        
+        print("Saving new Timii history.")
+        
+        // Create Log ID with time stamp
+        let currentDateTime = Date()        // get the current date and time
+        let formatter = DateFormatter()     // initialize the date formatter and set the style
+        formatter.dateStyle = .medium       // "Oct 8, 2016"
+        formatter.timeStyle = .medium       // "10:52:30 PM"
+        let historyID = formatter.string(from: currentDateTime)  // "Oct 8, 2016, 10:52:30 PM"
+        
+        let uid = memberID  // from Ownable
+
+        let db = FS()
+        let dict = [
+            "name":             self.name,
             "hours":            self.hours,
             "minutes":          self.minutes,
             "seconds":          self.seconds,
             "isTimerRunning":   self.isTimerRunning,
             ] as [String : Any]
         
-        db.FSSaveMemberCollectionDict(collectionName: self.FSCollectionName, dictionary: dict)
-        //        print(dict)
+        // "Members/<UID>/Timers/<TimerID>/Logs/<LogID>/[dictionary+Timestamp]"
+        db.FSSaveMemberDocumentPathDict(documentPath: "Members/\(uid)/Timers/\(self.name)/Logs/\(historyID)", dictionary: dict)
+        // print(dict)
     }
 
     

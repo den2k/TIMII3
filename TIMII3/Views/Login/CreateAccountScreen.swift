@@ -19,6 +19,8 @@
  TODO: 10.21.18 [DONE 10.21.18] - Use Firestoreable FSSave to save Member information within the Member Collection
  TODO: 10.10.18 - Redo Counting in FS. Need to implement Firestoreable / addUserComponentCountableDict so it saves Firestore and not Firebase. This is so counting of added Members works again.
  
+ TODO: 11.4.18 [DONE 11.4.18] - Add full name, username to creation of a new member
+ 
  */
 
 import UIKit
@@ -31,6 +33,8 @@ class CreateAccountScreen: UIViewController, LayoutLoading
     
     // Create Account Properties
     @IBOutlet var emailTextField : UITextField?
+    @IBOutlet var fullNameTextField : UITextField?
+    @IBOutlet var userNameTextField : UITextField?
     @IBOutlet var passwordTextField : UITextField?
     @IBOutlet var errorLabel : UILabel?
     
@@ -55,7 +59,7 @@ class CreateAccountScreen: UIViewController, LayoutLoading
     
     @objc func handleCreateAccount()
     {
-        guard let email = emailTextField?.text, let password = passwordTextField?.text else
+        guard let email = emailTextField?.text, let password = passwordTextField?.text, let fullName = fullNameTextField?.text, let userName = userNameTextField?.text else
         {
             print("Form is not valid. Unable to create account.")
             return
@@ -82,7 +86,7 @@ class CreateAccountScreen: UIViewController, LayoutLoading
                  10.21.18 - Will save email information but not passwords. In case I need to migrate users from FS.
                  May also need to save passwords if that is the case....For now just save email.
                  */
-                let newMember = Member(email: email)
+                let newMember = Member(email: email, fullName: fullName, userName: userName)
                 newMember.FSSave()
                 print(newMember)
                 

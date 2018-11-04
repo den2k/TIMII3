@@ -45,7 +45,33 @@
     <!-- email -->
     <UITextField
         outlet = "emailTextField"
-        placeholder="email"
+        placeholder="Email"
+        top="previous.bottom + 20"
+        left="50% - width/2"
+        width="100% - 40"
+        height="44"
+        layer.cornerRadius="22"
+        backgroundColor="UIColor.cararra"
+        textAlignment="center"
+    />
+    
+    <!-- Full Name -->
+    <UITextField
+        outlet = "fullNameTextField"
+        placeholder="Full Name"
+        top="previous.bottom + 20"
+        left="50% - width/2"
+        width="100% - 40"
+        height="44"
+        layer.cornerRadius="22"
+        backgroundColor="UIColor.cararra"
+        textAlignment="center"
+    />
+    
+    <!-- Username -->
+    <UITextField
+        outlet = "userNameTextField"
+        placeholder="Username"
         top="previous.bottom + 20"
         left="50% - width/2"
         width="100% - 40"
@@ -58,7 +84,7 @@
     <!-- password -->
     <UITextField
         outlet = "passwordTextField"
-        placeholder="password"
+        placeholder="Password"
         isSecureTextEntry="true"
         top="previous.bottom + 15"
         left="50% - width/2"
@@ -68,6 +94,8 @@
         backgroundColor="UIColor.cararra"
         textAlignment="center"
     />
+    
+    <!--
     <UITextField
         isHidden="true    // 10.14.18 - use this section for username/alias"
         placeholder="verify password"
@@ -80,6 +108,7 @@
         backgroundColor="UIColor.cararra"
         textAlignment="center"
     />
+     -->
     
     <!-- Create Button -->
     <UIButton

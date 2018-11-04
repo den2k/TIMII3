@@ -23,6 +23,38 @@ enum FSCollectionName: String
 
 struct FS
 {
+    func FSSaveMemberDict(collectionName: FSCollectionName, dictionary: Dictionary<String,Any>)
+    {
+        /*
+         This function saves a newly created Member and the member's personal info
+         /Members/UID/[dictionary+Timestamp]
+         */
+        
+        // Firestore Initialization
+        let db = Firestore.firestore()
+        let settings = db.settings
+        settings.areTimestampsInSnapshotsEnabled = true
+        db.settings = settings
+        
+        // Create reference variable to save
+        guard let UID = Auth.auth().currentUser?.uid else { return }    // Auto-generated Firebase user ID
+        let ts = Timestamp().dateValue().description    // add Firebase Timestamp
+        let dictTS =    ["createdTime": ts]
+        var dict = dictionary  // cannot append to let dictionary thus created a temp dict1
+        dict.append(other: dictTS)
+        
+        // Members/UID/[CollectionName]/CollectionID/[dictionary+Timestamp]
+        let Ref = db.collection(FSCollectionName.Members.rawValue).document(UID)
+        Ref.setData(dict, merge: true)
+        { (error) in
+            if let error = error {
+                print("Oh no! \(error.localizedDescription)")
+            } else {
+                print("Member data saved! \(Ref.documentID)")
+            }
+        }
+    }
+
     func FSSaveMemberCollectionDict(collectionName: FSCollectionName, dictionary: Dictionary<String,Any>)
     {
         /*
@@ -80,6 +112,40 @@ struct FS
 //        }
     }
     
+    func FSSaveMemberDocumentPathDict(documentPath: String, dictionary: Dictionary<String,Any>)
+    {
+        /*
+         This function saves a subcollection tied to a member ID.
+         Collections and documents must always follow the pattern
+         of collection/document/collection/document.
+         
+         "Members/<UID>/Timers/<TimerID>/History/<HistoryID>/[dictionary+Timestamp]"
+         */
+        
+        // Firestore Initialization
+        let db = Firestore.firestore()
+        let settings = db.settings
+        settings.areTimestampsInSnapshotsEnabled = true
+        db.settings = settings
+        
+        // Adding FS timestamp to document
+        let ts = Timestamp().dateValue().description    // add Firebase Timestamp
+        let dictTS =    ["createdTime": ts]
+        var dict = dictionary  // cannot append to let dictionary thus created a temp dict1
+        dict.append(other: dictTS)
+        
+        // example "Members/<UID>/Timers/<TimerID>/History/<HistoryID>/[dictionary+Timestamp]"
+        let Ref = db.document(documentPath)
+        Ref.setData(dict, merge: true)
+        { (error) in
+            if let error = error {
+                print("Oh no! \(error.localizedDescription)")
+            } else {
+                print("Member data saved! \(Ref.documentID)")
+            }
+        }
+    }
+
     func FSCollectionGIDDictSave(collectionName: FSCollectionName, dictionary: Dictionary<String,Any>)
     {
         // This function saves a collection tied to an auto-generated ID
