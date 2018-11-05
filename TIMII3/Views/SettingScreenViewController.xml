@@ -9,29 +9,53 @@ TODO: 10.21.18 - Add the member ID/name on the Profile page before Logout -->
         height="100%"
         width="100%">
 
-        <!-- Logout Button -->
-        <UIButton
-            backgroundColor="UIColor.mintGreen"
-            height="66"
-            layer.cornerRadius="33"
-            left="50% - width / 2"
-            title="Logout"
-            top="50% - height / 2"
-            touchUpInside="settingHandleLogout"
-            width="100% - 120"
+        <!-- Full Name -->
+        <UILabel
+            text="Full Name: {fullName}"
+            top="20% - height / 2"
+            left="20"
+            height="auto"
+            width="100%"
+            backgroundColor=""
+            font="Avenir Next 20"
+            textColor="blue"
         />
 
-        <!-- Displays the day of the month -->
+        <!-- Username -->
         <UILabel
-            backgroundColor=""
-            font="Avenir Next 12"
+            text="Username: {userName}"
+            top="previous.bottom + 5"
+            left="20"
             height="auto"
-            left="50% - width / 2"
-            text="Email: {mEmailLabel}"
-            textAlignment="center"
-            textColor="blue"
-            top="previous.bottom + 15"
             width="100%"
+            backgroundColor=""
+            font="Avenir Next 20"
+            textColor="blue"
         />
+
+        <!-- Email -->
+        <UILabel
+            text="Email: {email}"
+            top="previous.bottom + 5"
+            left="20"
+            height="auto"
+            width="100%"
+            backgroundColor=""
+            font="Avenir Next 20"
+            textColor="blue"
+        />
+
+        <!-- Logout Button -->
+        <UIButton
+            title="Logout"
+            touchUpInside="settingHandleLogout"
+            top="80% - height / 2"
+            left="50% - width / 2"
+            height="66"
+            width="100% - 120"
+            backgroundColor="UIColor.mintGreen"
+            layer.cornerRadius="33"
+        />
+
     </UIView>
 </SettingScreenViewController>

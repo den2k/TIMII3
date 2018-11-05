@@ -28,7 +28,11 @@ class SettingScreenViewController: UIViewController, Ownable
     @IBOutlet var SettingScreenNode: LayoutNode? {
         didSet {
             // Set FS fields to "blank" so no errors show up waiting for data retrival
-            SettingScreenNode?.setState(["mEmailLabel": ""])
+            SettingScreenNode?.setState([
+                "email": "",
+                "userName": "",
+                "fullName": "",
+                ])
         }
     }
     
@@ -53,12 +57,17 @@ class SettingScreenViewController: UIViewController, Ownable
                 print("Error getting document: \(err)")
             } else {
                 let memberDoc = document?.data()
-                let memberEmail         = memberDoc!["email"] as? String ?? ""
+                let email           = memberDoc!["email"] as? String ?? ""
+                let userName        = memberDoc!["userName"] as? String ?? ""
+                let fullName        = memberDoc!["fullName"] as? String ?? ""
+                
                 // let memberID            = document?.documentID
                 // let memberAuthMethod    = memberDoc!["authMethod"] as? String ?? ""
                 
                 self.SettingScreenNode?.setState([
-                    "mEmailLabel": memberEmail as Any
+                    "email": email as Any,
+                    "userName": userName as Any,
+                    "fullName": fullName as Any,
                     ])
             }
         }
