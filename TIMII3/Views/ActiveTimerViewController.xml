@@ -4,7 +4,7 @@
  
  <ActiveTimerViewController
     outlet="ActiveTimerNode"
-    view.backgroundColor="black   // Active Timer Section"
+    view.backgroundColor="porcelainOpaque   // Active Timer Section"
     top="previous.bottom"
     left="0"
     height="200"
@@ -29,7 +29,7 @@
         height="auto"
         width="auto"
         backgroundColor=""
-        font="Avenir Next 18"
+        font="Avenir Next 16"
         textColor="white"
     />
     
@@ -65,6 +65,6 @@
         backgroundColor=""
         font="Avenir Next ultraLight 22"
         textAlignment="center"
-        textColor="gray"
+        textColor="white"
     />
 </ActiveTimerViewController>

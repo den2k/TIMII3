@@ -14,7 +14,7 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "E7CFD070CCED28F44BF6C45925FC5D33"
+               BlueprintIdentifier = "92AD0B87AC9A4EF93D9B73AD74154ECE"
                BuildableName = "ProtoRPC.framework"
                BlueprintName = "gRPC-ProtoRPC"
                ReferencedContainer = "container:Pods.xcodeproj">
@@ -45,7 +45,7 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "E7CFD070CCED28F44BF6C45925FC5D33"
+            BlueprintIdentifier = "92AD0B87AC9A4EF93D9B73AD74154ECE"
             BuildableName = "ProtoRPC.framework"
             BlueprintName = "gRPC-ProtoRPC"
             ReferencedContainer = "container:Pods.xcodeproj">

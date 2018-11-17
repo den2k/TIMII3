@@ -1,125 +1,129 @@
 <!-- Dashboard Screen
 TODO: 10.29.18 [DONE 10.30.18] - Add timerbox into this view
 TODO: 10.31.18 - refactor Timer Panel into own XML file
- -->
-<DashboardScreenViewController
-    view.backgroundColor="white">
 
+Note:
+The custom 'named' VC ('DashboardScreenViewController') are used so Layout can find the UIViewController file as we are not
+going from VC -> Layout, but Layout -> VC.
+ -->
+
+<DashboardScreenViewController
+    outlet="DashboardScreenNode"
+    view.backgroundColor="lightTan    // whole background"
+    height="100%"
+    width="100%">
+
+    <!-- Member Header Section -->
     <UIView
-        backgroundColor="gray   // whole background"
-        height="100%"
+        backgroundColor="// Member Header Section"
+        top="safeAreaInsets.top"
+        left="0"
+        height="50"
         width="100%">
 
-        <!-- Member Header Section -->
-        <UIView
-            backgroundColor="blue   // Member Header Section"
-            top="safeAreaInsets.top"
-            left="0"
-            height="50"
-            width="100%">
-            <UILabel
-                text="Member Header Section"
-                top="50% - height / 2"
-                left="50% - width / 2"
-                height=""
-                width="100%"
-                backgroundColor=""
-                font="Avenir Next 12"
-                textAlignment="center"
-                textColor="black"
-            />
-        </UIView>
-        
-        <!-- Active Timer Section -->
-        <UIViewController xml="ActiveTimerViewController.xml"/>
-        
+        <UILabel
+            text="{userName}"
+            top="50% - height / 2"
+            left="50% - width / 2"
+            height=""
+            width="100%"
+            backgroundColor=""
+            font="Avenir Next 16"
+            textAlignment="center"
+            textColor="white"
+        />
 
-        <!-- Timer Panel Section -->
-        <macro name="row1" value="18% - height/2" />
-        <macro name="row2" value="48% - height/2" />
-        <macro name="row3" value="78% - height/2" />
-        <macro name="col1" value="20% - width/2" />
-        <macro name="col2" value="50% - width/2" />
-        <macro name="col3" value="80% - width/2" />
+    </UIView>
+    
+    <!-- Active Timer Section -->
+    <ActiveTimerViewController xml="ActiveTimerViewController.xml"/>
+
+    <!-- Timer Panel Section -->
+    <macro name="row1" value="18% - height/2" />
+    <macro name="row2" value="48% - height/2" />
+    <macro name="row3" value="78% - height/2" />
+    <macro name="col1" value="20% - width/2" />
+    <macro name="col2" value="50% - width/2" />
+    <macro name="col3" value="80% - width/2" />
+    
+    <UIView
+        backgroundColor="// Timer Dashboard Section"
+        top="previous.bottom"
+        left="0"
+        height="100% - safeAreaInsets.top - 50 - 200 - safeAreaInsets.bottom - 50"
+        width="100%">
         
-        <UIView
-            backgroundColor="red    // Timer Dashboard Section"
-            top="previous.bottom"
-            left="0"
-            height="100% - safeAreaInsets.top - 50 - 200 - safeAreaInsets.bottom - 50"
-            width="100%">
-            
-            <!-- Add new Timer -->
-            <UIButton
-                title="+"
-                touchUpInside=""
-                top="row1"
-                left="col1"
-                height="100"
-                width="100"
-                backgroundColor="porcelainOpaque"
-                layer.cornerRadius="50"
-                titleLabel.font="Avenir Next 50"
-            />
-            <UILabel
-                text="New timer"
-                top="previous.bottom + 5"
-                left="col1"
-                height="auto"
-                width="auto"
-                backgroundColor=""
-                font="Avenir Next 18"
-                textColor="white"
-            />
-            
-            <!-- Add new Timer -->
-            <UIButton
-                title="+"
-                touchUpInside=""
-                top="row1"
-                left="col2"
-                height="100"
-                width="100"
-                backgroundColor="porcelainOpaque"
-                layer.cornerRadius="50"
-                titleLabel.font="Avenir Next 50"
-            />
-            <UILabel
-                text="New timer"
-                top="previous.bottom + 5"
-                left="col2"
-                height="auto"
-                width="auto"
-                backgroundColor=""
-                font="Avenir Next 18"
-                textColor="white"
-            />
-            
-            <!-- Add new Timer -->
-            <UIButton
-                title="+"
-                touchUpInside=""
-                top="row1"
-                left="col3"
-                height="100"
-                width="100"
-                backgroundColor="porcelainOpaque"
-                layer.cornerRadius="50"
-                titleLabel.font="Avenir Next 50"
-            />
-            <UILabel
-                text="New timer"
-                top="previous.bottom + 5"
-                left="col3"
-                height="auto"
-                width="auto"
-                backgroundColor=""
-                font="Avenir Next 18"
-                textColor="white"
-            />
-            
-            <!-- Add new Timer -->
-            <UIButton
+        <!-- Add new Timer -->
+        <UIButton
+            title="+"
+            touchUpInside=""
+            top="row1"
+            left="col1"
+            height="100"
+            width="100"
+            backgroundColor="porcelainOpaque"
+            layer.cornerRadius="50"
+            titleLabel.font="Avenir Next 50"
+        />
+        <UILabel
+            text="New timer"
+            top="previous.bottom + 5"
+            left="col1"
+            height="auto"
+            width="auto"
+            backgroundColor=""
+            font="Avenir Next 16"
+            textColor="white"
+        />
+        
+        <!-- Add new Timer -->
+        <UIButton
+            title="+"
+            touchUpInside=""
+            top="row1"
+            left="col2"
+            height="100"
+            width="100"
+            backgroundColor="porcelainOpaque"
+            layer.cornerRadius="50"
+            titleLabel.font="Avenir Next 50"
+        />
+        <UILabel
+            text="New timer"
+            top="previous.bottom + 5"
+            left="col2"
+            height="auto"
+            width="auto"
+            backgroundColor=""
+            font="Avenir Next 16"
+            textColor="white"
+        />
+        
+        <!-- Add new Timer -->
+        <UIButton
+            title="+"
+            touchUpInside=""
+            top="row1"
+            left="col3"
+            height="100"
+            width="100"
+            backgroundColor="porcelainOpaque"
+            layer.cornerRadius="50"
+            titleLabel.font="Avenir Next 50"
+        />
+        <UILabel
+            text="New timer"
+            top="previous.bottom + 5"
+            left="col3"
+            height="auto"
+            width="auto"
+            backgroundColor=""
+            font="Avenir Next 16"
+            textColor="white"
+        />
+        
+        <!-- Add new Timer -->
+        <UIButton
             title="+"
             touchUpInside=""
             top="row2"
@@ -129,20 +133,20 @@ TODO: 10.31.18 - refactor Timer Panel into own XML file
             backgroundColor="porcelainOpaque"
             layer.cornerRadius="50"
             titleLabel.font="Avenir Next 50"
-            />
-            <UILabel
+        />
+        <UILabel
             text="New timer"
             top="previous.bottom + 5"
             left="col1"
             height="auto"
             width="auto"
             backgroundColor=""
-            font="Avenir Next 18"
+            font="Avenir Next 16"
             textColor="white"
-            />
-            
-            <!-- Add new Timer -->
-            <UIButton
+        />
+        
+        <!-- Add new Timer -->
+        <UIButton
             title="+"
             touchUpInside=""
             top="row3"
@@ -151,20 +155,19 @@ TODO: 10.31.18 - refactor Timer Panel into own XML file
             width="100"
             backgroundColor="porcelainOpaque"
             layer.cornerRadius="50"
-            titleLabel.font="Avenir Next 50"
-            />
-            <UILabel
+        titleLabel.font="Avenir Next 50"
+        />
+        <UILabel
             text="New timer"
             top="previous.bottom + 5"
             left="col1"
             height="auto"
             width="auto"
             backgroundColor=""
-            font="Avenir Next 18"
+            font="Avenir Next 16"
             textColor="white"
-            />
-            
-        </UIView>
+        />
         
     </UIView>
+
 </DashboardScreenViewController>
