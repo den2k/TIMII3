@@ -129,10 +129,10 @@ struct FS
         db.settings = settings
         
         // Adding FS timestamp to document
-        let ts = Timestamp().dateValue().description    // add Firebase Timestamp
-        let dictTS =    ["createdTime": ts]
+//        let ts = Timestamp().dateValue().description    // add Firebase Timestamp
+//        let dictTS =    ["createdTime": ts]
         var dict = dictionary  // cannot append to let dictionary thus created a temp dict1
-        dict.append(other: dictTS)
+//        dict.append(other: dictTS)
         
         // example "Members/<UID>/Timers/<TimerID>/History/<HistoryID>/[dictionary+Timestamp]"
         let Ref = db.document(documentPath)

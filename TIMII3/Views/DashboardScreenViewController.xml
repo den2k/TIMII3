@@ -76,7 +76,8 @@ going from VC -> Layout, but Layout -> VC.
             textColor="white"
         />
         
-        <!-- Add new Timer -->
+<!-- Add new timer section for more rows and columns
+
         <UIButton
             title="+"
             touchUpInside=""
@@ -99,7 +100,6 @@ going from VC -> Layout, but Layout -> VC.
             textColor="white"
         />
         
-        <!-- Add new Timer -->
         <UIButton
             title="+"
             touchUpInside=""
@@ -122,7 +122,6 @@ going from VC -> Layout, but Layout -> VC.
             textColor="white"
         />
         
-        <!-- Add new Timer -->
         <UIButton
             title="+"
             touchUpInside=""
@@ -145,7 +144,6 @@ going from VC -> Layout, but Layout -> VC.
             textColor="white"
         />
         
-        <!-- Add new Timer -->
         <UIButton
             title="+"
             touchUpInside=""
@@ -167,7 +165,8 @@ going from VC -> Layout, but Layout -> VC.
             font="Avenir Next 16"
             textColor="white"
         />
-        
+-->
+
     </UIView>
 
 </DashboardScreenViewController>

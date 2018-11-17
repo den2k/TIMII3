@@ -28,6 +28,9 @@ class Timii: Firestoreable, Nameable, Ownable
     var tempTimer           = Timer()   // temporary holder per Timii
     var isTimerRunning      = false     // Timer is NOT running
     
+    var startTime: Date                 = Date()            // holds the start time of a timed session
+    var endTimeInterval: DateInterval   = DateInterval()    // holds the end time of a timed session
+    
     init(name: String, description: String)
     {
         self.name           = name

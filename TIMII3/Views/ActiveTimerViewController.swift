@@ -40,7 +40,7 @@ class ActiveTimerViewController: UIViewController
     @IBAction func toggleTimerButton()
     {
         timer1.toggleTimer()
-        timer1.FSSaveTimerLog()
+//        timer1.FSSaveTimerLog()
         updateView()
     }
     

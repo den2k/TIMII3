@@ -8,7 +8,7 @@
 /* ---------- Notes ----------
  
  TODO: 11.3.18 [DONE 11.4.18] Create new function to save Logs of timer activity
- TODO: 11.3.18  Create a function to save aggregated time by day
+ TODO: 11.3.18 [DONE 11.17.18] Finished adding startTime and endTimeInterval to Logs collection. Create a function to save aggregated time by day
  
  */
 
@@ -65,11 +65,13 @@ extension Timii
 
         let db = FS()
         let dict = [
-            "name":             self.name,
-            "hours":            self.hours,
-            "minutes":          self.minutes,
-            "seconds":          self.seconds,
-            "isTimerRunning":   self.isTimerRunning,
+//            "name":             self.name,
+//            "hours":            self.hours,
+//            "minutes":          self.minutes,
+//            "seconds":          self.seconds,
+            "startTime":            self.startTime.description,
+            "endTimeInterval":      self.endTimeInterval.duration,
+//            "isTimerRunning":   self.isTimerRunning,
             ] as [String : Any]
         
         // "Members/<UID>/Timers/<TimerID>/Logs/<LogID>/[dictionary+Timestamp]"
@@ -93,6 +95,7 @@ extension Timii
         print("Starting timer.")
         self.tempTimer = Timer.scheduledTimer(timeInterval: timerAccuracy, target: self, selector: (#selector(self.updateTimer)), userInfo: nil, repeats: true)
         self.isTimerRunning = true
+        self.startTime = Date()
     }
     
     private func stopTimer()
@@ -100,8 +103,8 @@ extension Timii
         print("Pausing timer.")
         tempTimer.invalidate()
         self.isTimerRunning = false
-//        updateView()
-//        saveTimers()
+        self.endTimeInterval = DateInterval(start: self.startTime, end: Date())
+        FSSaveTimerLog()
     }
     
     func resetTimer()
@@ -111,7 +114,6 @@ extension Timii
         self.hours      = Timii.hours(self.timerCount)
         self.minutes    = Timii.minutes(self.timerCount)
         self.seconds    = Timii.seconds(self.timerCount)
-//        updateView()
     }
     
 
@@ -121,7 +123,6 @@ extension Timii
         self.hours      = Timii.hours(self.timerCount)
         self.minutes    = Timii.minutes(self.timerCount)
         self.seconds    = Timii.seconds(self.timerCount)
-//        updateView()
     }
 
     // Returns a formatted string value for time
