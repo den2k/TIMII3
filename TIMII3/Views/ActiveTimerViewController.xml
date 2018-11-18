@@ -67,4 +67,20 @@
         textAlignment="center"
         textColor="white"
     />
+
+    <UILabel
+        text="Total: {loggedTotal} Sessions: {numOfSessions}"
+        top="160"
+        left="65% - width/2"
+        height="auto"
+        width="auto"
+        backgroundColor=""
+        font="Avenir Next 16"
+        textAlignment=""
+        textColor="isTimerRunning ? halfTransparent : white"
+        transform.scale="//isTimerRunning ? 1.0 : 1.5"
+        transform.rotation="//isTimerRunning ? pi / 2 : 0"
+    />
+    
+
 </ActiveTimerViewController>

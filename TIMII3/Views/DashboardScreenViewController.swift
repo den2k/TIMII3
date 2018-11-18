@@ -22,8 +22,10 @@ class DashboardScreenViewController: UIViewController, Ownable, LayoutLoading
  
     // For a view or controller whose layout is loaded by another class (like BoxesViewController) you can override the layoutNode property and add your own didSet handler.
 
-    @IBOutlet var DashboardScreenNode: LayoutNode? {
-        didSet {
+    @IBOutlet var DashboardScreenNode: LayoutNode?
+    {
+        didSet
+        {
             // Set FS fields to "blank" so no errors show up waiting for data retrival
             // 11.4.18 - added isTimerRunning..... should not need to.
             DashboardScreenNode?.setState([
@@ -39,9 +41,9 @@ class DashboardScreenViewController: UIViewController, Ownable, LayoutLoading
      This viewWillAppear plus the addSnapshotListener seems to be updating the value
      for member values all the time!
      */
-    override func viewDidLoad() {
+    override func viewDidLoad()
+    {
         super.viewDidLoad()
-
         
         // FS Boilerplate to remove warning.
         let db = Firestore.firestore()
