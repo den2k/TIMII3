@@ -5,7 +5,10 @@
 //  Created by Dennis Huang on 10/12/18.
 //  Copyright © 2018 Autonomii. All rights reserved.
 //
-// 11.4.18 - Add username, fullname so I can use this for later...
+/*
+ TODO: 11.4.18 [DONE 11.?.18] - Add username, fullname so I can use this for later...
+ TODO: 11.21.18 [DONE 11.21.18] - Added member ID to Member fields and refactored the saving a member function
+ */
 
 import Firebase
 
@@ -31,24 +34,9 @@ class Member: Firestoreable, AuthMethod, Ownable
         self.userName = userName
     }
     
-//    func FSSave()
-//    {
-//        print("Saving member info.")
-//        let db = FS()
-//        let dict = [
-//            "email": self.email,
-//            "authMethod": authMethod.rawValue]
-//
-//        // save /Members/<UID>/[dictionary]
-//        db.FSSaveMemberCollectionDict(collectionName: self.FSCollectionName, dictionary: dict)
-//    }
-    
-    
     // Protocol functions
     func FSSave()
     {
-        // Members/<uid>/[dict]
-        print("Saving member information")
         let db = FS()
         let dict = [
             "email":            self.email,
@@ -57,9 +45,7 @@ class Member: Firestoreable, AuthMethod, Ownable
             "authMethod":       authMethod.rawValue,
             ]
         
-        // save /Members/<UID>/[dictionary]
-        db.FSSaveMemberDict(collectionName: self.FSCollectionName, dictionary: dict)
-        //        print(dict)
+        db.FSSaveMember(userName: self.userName, dictionary: dict)
     }
     
 }

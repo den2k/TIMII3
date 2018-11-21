@@ -23,11 +23,10 @@ enum FSCollectionName: String
 
 struct FS
 {
-    func FSSaveMemberDict(collectionName: FSCollectionName, dictionary: Dictionary<String,Any>)
+    func FSSaveMember(userName: String, dictionary: Dictionary<String,Any>)
     {
         /*
          This function saves a newly created Member and the member's personal info
-         /Members/UID/[dictionary+Timestamp]
          */
         
         // Firestore Initialization
@@ -38,19 +37,23 @@ struct FS
         
         // Create reference variable to save
         guard let UID = Auth.auth().currentUser?.uid else { return }    // Auto-generated Firebase user ID
+        let dictUID = ["uid": UID]
         let ts = Timestamp().dateValue().description    // add Firebase Timestamp
         let dictTS =    ["createdTime": ts]
-        var dict = dictionary  // cannot append to let dictionary thus created a temp dict1
+
+        // cannot append to let dictionary thus created a temp dict1
+        var dict = dictionary
         dict.append(other: dictTS)
+        dict.append(other: dictUID)
         
-        // Members/UID/[CollectionName]/CollectionID/[dictionary+Timestamp]
-        let Ref = db.collection(FSCollectionName.Members.rawValue).document(UID)
+        // Members/[userName] - [user info + Timestamp + UID]/
+        let Ref = db.collection(FSCollectionName.Members.rawValue).document(userName)
         Ref.setData(dict, merge: true)
         { (error) in
             if let error = error {
                 print("Oh no! \(error.localizedDescription)")
             } else {
-                print("Member data saved! \(Ref.documentID)")
+                print("Member saved! \(Ref.documentID)")
             }
         }
     }
