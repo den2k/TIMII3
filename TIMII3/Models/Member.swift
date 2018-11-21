@@ -37,7 +37,6 @@ class Member: Firestoreable, AuthMethod, Ownable
     // Protocol functions
     func FSSave()
     {
-        let db = FS()
         let dict = [
             "email":            self.email,
             "fullName":         self.fullName,
@@ -45,7 +44,7 @@ class Member: Firestoreable, AuthMethod, Ownable
             "authMethod":       authMethod.rawValue,
             ]
         
-        db.FSSaveMember(userName: self.userName, dictionary: dict)
+        FS().FSSaveMember(userName: self.userName, dictionary: dict)
     }
     
 }
