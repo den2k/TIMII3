@@ -33,8 +33,10 @@ class Timii: Firestoreable, Nameable, Ownable
     
     init(name: String, description: String)
     {
+        print("Initializing new Timii.")
         self.name           = name
         self.description    = description
+        FSSave()        // Creates a new Timer for the first time.
     }
     
 }

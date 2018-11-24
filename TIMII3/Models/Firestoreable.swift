@@ -39,15 +39,15 @@ struct FS
         guard let UID = Auth.auth().currentUser?.uid else { return }    // Auto-generated Firebase user ID
         let dictUID = ["uid": UID]
         let ts = Timestamp().dateValue().description    // add Firebase Timestamp
-        let dictTS =    ["createdTime": ts]
+        let dictTS = ["createdTime": ts]
 
-        // cannot append to let dictionary thus created a temp dict1
+        // cannot append to let dictionary thus created a temp dict
         var dict = dictionary
         dict.append(other: dictTS)
         dict.append(other: dictUID)
         
-        // Members/[userName] - [user info + Timestamp + UID]/
-        let Ref = db.collection(FSCollectionName.Members.rawValue).document(userName)
+        // Members/[UID] - [user info + Timestamp + UID]/
+        let Ref = db.collection(FSCollectionName.Members.rawValue).document(UID)
         Ref.setData(dict, merge: true)
         { (error) in
             if let error = error {
@@ -58,15 +58,52 @@ struct FS
         }
     }
 
+    func FSSaveNewCollection(collectionName: FSCollectionName, docName: String, dictionary: Dictionary<String,Any>)
+    {
+        /*
+         This function saves a collection tied to a member ID.
+         
+         /Members/[UID]/[CollectionName]/DocumentName - [dictionary+Timestamp]/
+         */
+        
+        // Firestore Initialization
+        let db = Firestore.firestore()
+        let settings = db.settings
+        settings.areTimestampsInSnapshotsEnabled = true
+        db.settings = settings
+        
+        // Retrieve Member documentation
+        guard let UID = Auth.auth().currentUser?.uid else { return } // Auto-generated Firebase user ID
+        let ts = Timestamp().dateValue().description    // add Firebase Timestamp
+        let dictTS =    ["createdTime": ts]
+        var dict = dictionary  // cannot append to let dictionary thus created a temp dict1
+        dict.append(other: dictTS)
+        
+        print(dict) // delete
+        
+        let Ref = db.collection(FSCollectionName.Members.rawValue).document(UID)
+                    .collection(collectionName.rawValue).document(docName)
+        
+        print("ref \(Ref.documentID)")  // delete
+        print("dN \(docName)")          // delete
+        
+        Ref.setData(dict)
+        { (error) in
+            if let error = error {
+                print("Oh no! \(error.localizedDescription)")
+            } else {
+                print("Member new collection document! \(Ref.documentID)")
+            }
+        }
+    }
+    
+
     func FSSaveMemberCollectionDict(collectionName: FSCollectionName, dictionary: Dictionary<String,Any>)
     {
         /*
          This function saves a collection tied to a member ID.
-         Collections and documents must always follow the pattern
-         of collection/document/collection/document.
         
-         /Members/UID/[CollectionName]/CollectionID/[dictionary+Timestamp]
-         
+         /Members/[UID]/[CollectionName]/CollectionID/[dictionary+Timestamp]
          */
         
         // Firestore Initialization
@@ -75,8 +112,8 @@ struct FS
         settings.areTimestampsInSnapshotsEnabled = true
         db.settings = settings
 
-        // Create reference variable to save
-        guard let UID = Auth.auth().currentUser?.uid else { return }    // Auto-generated Firebase user ID
+        // Retrieve Member documentation
+        guard let UID = Auth.auth().currentUser?.uid else { return } // Auto-generated Firebase user ID
         let ts = Timestamp().dateValue().description    // add Firebase Timestamp
         let dictTS =    ["createdTime": ts]
         var dict = dictionary  // cannot append to let dictionary thus created a temp dict1
@@ -93,26 +130,6 @@ struct FS
                 print("Member data saved! \(Ref.documentID)")
             }
         }
-        
-//        let ref = db.collection(collectionName.rawValue).document(UID)
-//        ref.setData(dict, merge: true)  // if exists then update, else merge
-//        { (error) in
-//            if let error = error {
-//                print("Oh no! \(error.localizedDescription)")
-//            } else {
-//                print("Member data saved! \(ref.documentID)")
-//            }
-//        }
-        
-//        var ref: DocumentReference? = nil
-//        ref = db.collection(collectionName.rawValue).addDocument(data: dict)
-//        { (error) in
-//            if let error = error {
-//                print("Oh no! \(error.localizedDescription)")
-//            } else {
-//                print("Member data saved! \(ref!.documentID)")
-//            }
-//        }
     }
     
     func FSSaveMemberDocumentPathDict(documentPath: String, dictionary: Dictionary<String,Any>)

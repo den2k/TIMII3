@@ -12,6 +12,7 @@
  TODO: 11.17.18 - Save time spent on the same Task for the present day. Need to take total time and calculate per day time spent.
  TODO: 11.17.18 [DONE 11.18.18] - Save the number of sessions for Task
  TODO: 11.18.18 [DONE 11.18.18] - Save total time spent on a task
+ TODO: 11.19.18 - Make Firestore display of values more responsive (real-time).
  
  */
 
@@ -24,36 +25,38 @@ extension Timii
     func FSSave()
     {
         /*
-         Members : memberID
-         Timers : timerID
-         “name”: “History”
-         “description”: “AVHS HIS204”
-         “createdDate”: timeStamp
+         Creates a new Timer for the first time with a time stamp
+         
+         Members / [UID]
+            Timers / [name]
+                “name”: “History”
+                “description”: “AVHS HIS204”
          */
         
         print("Saving new Timii.")
-        let db = FS()
+        
         let dict = [
             "name":             self.name,
             "description":      self.description,
             ]
         
-        db.FSSaveMemberCollectionDict(collectionName: self.FSCollectionName, dictionary: dict)
-        //        print(dict)
+        FS().FSSaveNewCollection(collectionName: self.FSCollectionName, docName: self.name, dictionary: dict)
     }
 
-    // Protocol functions
     func FSSaveTimerLog()
     {
         /*
+         
+         Saves a timer log session
+         
          Members : memberID
-           - Timers : 'timer name'
-               - Logs :
-         "startTime":            self.startTime.description,
-         "endTimeInterval":      self.endTimeInterval.duration,
+            [Collection Name] : 'timer name'
+            Logs :
+                "startTime":            self.startTime.description,
+                "endTimeInterval":      self.endTimeInterval.duration,
          */
         
-        print("Saving new Timii history.")
+        print("Saving new Timii session information.")
         
         // Create Log ID with time stamp
         let currentDateTime = Date()        // get the current date and time
@@ -64,82 +67,15 @@ extension Timii
         
         let uid = memberID  // from Ownable
 
-        let db = FS()
         let dict = [
-//            "name":             self.name,
-//            "hours":            self.hours,
-//            "minutes":          self.minutes,
-//            "seconds":          self.seconds,
             "startTime":            self.startTime.description,
             "endTimeInterval":      self.endTimeInterval.duration,
-//            "isTimerRunning":   self.isTimerRunning,
             ] as [String : Any]
         
         // "Members/<UID>/Timers/<TimerID>/Logs/<LogID>/[dictionary+Timestamp]"
-        db.FSSaveMemberDocumentPathDict(documentPath: "Members/\(uid)/Timers/\(self.name)/Logs/\(historyID)", dictionary: dict)
-        // print(dict)
+        FS().FSSaveMemberDocumentPathDict(documentPath: "Members/\(uid)/Timers/\(self.name)/Logs/\(historyID)", dictionary: dict)
     }
 
-    func FSSaveTimerTransaction()
-    {
-        // This function saves multiple collections simultaneously to maintain data consistency using Firestore Transactions
-        
-        // Firestore Initialization
-        let db = Firestore.firestore()
-        let settings = db.settings
-        settings.areTimestampsInSnapshotsEnabled = true
-        db.settings = settings
-        
-        let timerRef: DocumentReference = db.collection("Members").document("\(memberID)/Timers/\(self.name)")
-        let logRef: DocumentReference = timerRef.collection("Logs").document()
-        
-        // https://firebase.google.com/docs/firestore/solutions/aggregation
-        db.runTransaction({ (transaction, errorPointer) -> Any? in
-            do {
-                let timerDocument = try transaction.getDocument(timerRef).data()
-                guard var timerData = timerDocument else { return nil }
-                
-                // Compute new number of sessions
-                let numOfSessions = timerData["numOfSessions"] as? Int ?? 0
-                let newNumOfSessions = numOfSessions + 1
-                
-                // Compute new time spent on Task today
-                let logTotal = timerData["loggedTotal"] as? Double ?? 0
-                let newLogTotal = logTotal + self.endTimeInterval.duration
-                
-                // Compute new Log session
-                let dict = [
-                    "startTime":            self.startTime.description,
-                    "endTimeInterval":      self.endTimeInterval.duration,
-                    ] as [String : Any]
-                
-                // Create Log ID with time stamp
-//                let currentDateTime = Date()        // get the current date and time
-//                let formatter = DateFormatter()     // initialize the date formatter and set the style
-//                formatter.dateStyle = .medium       // "Oct 8, 2016"
-//                formatter.timeStyle = .medium       // "10:52:30 PM"
-//                let historyID = formatter.string(from: currentDateTime)  // "Oct 8, 2016, 10:52:30 PM"
-                
-                // Set new info
-                timerData["numOfSessions"] = newNumOfSessions
-                timerData["loggedTotal"] = newLogTotal
-                
-                // Commit to Firestore
-                transaction.setData(timerData, forDocument: timerRef, merge: true)
-                transaction.setData(dict, forDocument: logRef, merge: true)
-            } catch {
-                // Error getting timer data
-            }
-            return nil
-        }) { (object, error) in
-            if let error = error {
-                print("Oh no! \(error.localizedDescription)")
-            } else {
-                print("Member data saved! \(timerRef.documentID)")
-            }
-        }
-    }
-        
     @objc func toggleTimer()
     {
         if isTimerRunning {
@@ -164,8 +100,14 @@ extension Timii
         tempTimer.invalidate()
         self.isTimerRunning = false
         self.endTimeInterval = DateInterval(start: self.startTime, end: Date())
-//        FSSaveTimerLog()    // Just saves the Log session
-        FSSaveTimerTransaction()    // Saves Log session, and aggregate stats for the Timer, ie; number of sessions, logged time Today
+        
+        /*
+         11.23.18
+         I may need to move both of these 'saves' to Firebase given how slow
+         Firestore is for writes.
+         */
+        FSSaveTimerLog()            // Just saves the Log session
+        FSUpdateTimerStats()        // Update aggregate stats for the Timer
     }
     
     func resetTimer()
@@ -210,4 +152,58 @@ extension Timii
         let tenthSecs = Int(time) % 10
         return String(format: "%01i", tenthSecs)
     }
+    
+    func FSUpdateTimerStats()
+    {
+        print("Saving calculated Timer statistics.")
+        
+        /*
+         11.23.18
+         Writes to Firestore are slow... So using Firebase RT maybe necessary?!
+         Write Transactions sometimes fail....Originally this function was a combo timer stats + log save and working
+         but I've reduce it to just saving the timer stats. This function can save multiple collections simultaneously
+         though one transaction call but these FS transactions feel super slow... 1++ seconds.
+         */
+        
+        // Firestore Initialization
+        let db = Firestore.firestore()
+        let settings = db.settings
+        settings.areTimestampsInSnapshotsEnabled = true
+        db.settings = settings
+        
+        let timerRef: DocumentReference = db.collection("Members").document("\(memberID)/Timers/\(self.name)")
+        
+        // https://firebase.google.com/docs/firestore/solutions/aggregation
+        db.runTransaction({ (transaction, errorPointer) -> Any? in
+            do {
+                let timerDocument = try transaction.getDocument(timerRef).data()
+                guard var timerData = timerDocument else { return nil }
+                
+                // Compute new number of sessions
+                let numOfSessions = timerData["numOfSessions"] as? Int ?? 0
+                let newNumOfSessions = numOfSessions + 1
+                
+                // Compute new time spent on Task today
+                let logTotal = timerData["loggedTotal"] as? Double ?? 0
+                let newLogTotal = logTotal + self.endTimeInterval.duration
+                
+                // Set new info --- what is this for?
+                timerData["numOfSessions"] = newNumOfSessions
+                timerData["loggedTotal"] = newLogTotal
+                
+                // Commit to Firestore - Merge updates existing documents, but doesn't create..
+                transaction.setData(timerData, forDocument: timerRef, merge: true)
+            } catch {
+                // Error getting timer data
+            }
+            return nil
+        }) { (object, error) in
+            if let error = error {
+                print("Oh no! \(error.localizedDescription)")
+            } else {
+                print("Member data saved! \(timerRef.documentID)")
+            }
+        }
+    }
+
 }

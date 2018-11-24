@@ -19,8 +19,8 @@ class ActiveTimerViewController: UIViewController, Ownable
 {
     
     // ViewController properties
-//    var timer1 = Timii(name: "History", description: "History 101 for Ellie")
-    var timer1 = Timii(name: "English", description: "English 201 for Eaton")
+    var timer1 = Timii(name: "History", description: "History 101 for Ellie")
+    var timer2 = Timii(name: "English", description: "English 201 for Eaton")
 
     var listenerDash: ListenerRegistration!
 
@@ -36,8 +36,8 @@ class ActiveTimerViewController: UIViewController, Ownable
                 "minute"            : timer1.minutes,
                 "second"            : timer1.seconds,
                 "isTimerRunning"    : timer1.isTimerRunning,
-                "numOfSessions"     : 0,
-                "loggedTotal"       : "0",
+                "numOfSessions"     : "loading",
+                "loggedTotal"       : "loading",
             ])
         }
     }

@@ -63,13 +63,13 @@
         height="auto"
         width="auto"
         backgroundColor=""
-        font="Avenir Next ultraLight 22"
+        font="Avenir Next ultraLight 32"
         textAlignment="center"
         textColor="white"
     />
 
     <UILabel
-        text="Total: {loggedTotal} Sessions: {numOfSessions}"
+    text="# {loggedTotal}   # {numOfSessions}"
         top="160"
         left="65% - width/2"
         height="auto"
