@@ -6,9 +6,11 @@
 //  Copyright © 2018 Autonomii. All rights reserved.
 //
 /*
+ 
  TODO: 11.3.18 - delete testing VC properties timer1
  TODO: 11.3.18 [DONE - 11.3.18] - Save time results to Firestore
  TODO: 11.18.18 - Refactor getTimerStats to somwhere else so we can remove Firebase code from this VC.
+ 
  */
 
 import Foundation
@@ -65,18 +67,12 @@ class ActiveTimerViewController: UIViewController, Ownable
         ])
     }
     
-    /*
-     This viewWillAppear plus the addSnapshotListener seems to be updating the value
-     for member values all the time!
-     */
     
-    // viewDidLoad is called purely to trigger an updateView of this VC every second  --> tenth of a second
-    
-    
-    override func viewDidLoad()
+    // viewWillAppear is called everything time VC is presented.
+    override func viewDidAppear(_ animated: Bool)
     {
-        Timer.scheduledTimer(timeInterval: 0.5, target: self, selector: (#selector(updateView)), userInfo: nil, repeats: true)
         getTimerStats()
+        Timer.scheduledTimer(timeInterval: 0.5, target: self, selector: (#selector(updateView)), userInfo: nil, repeats: true)
     }
 
     func getTimerStats()

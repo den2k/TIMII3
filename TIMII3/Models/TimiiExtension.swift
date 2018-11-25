@@ -13,6 +13,7 @@
  TODO: 11.17.18 [DONE 11.18.18] - Save the number of sessions for Task
  TODO: 11.18.18 [DONE 11.18.18] - Save total time spent on a task
  TODO: 11.19.18 - Make Firestore display of values more responsive (real-time).
+ TODO: 11.24.18 [DONE 11.25.18] - Add background / foreground timer support.
  
  */
 
@@ -82,16 +83,18 @@ extension Timii
             stopTimer()
             resetTimer()
         } else {
-            startTimer()
+            startTimer(dateInterval: 0)
         }
     }
     
-    private func startTimer()
+    private func startTimer(dateInterval: Double)
     {
         print("Starting timer.")
         self.tempTimer = Timer.scheduledTimer(timeInterval: timerAccuracy, target: self, selector: (#selector(self.updateTimer)), userInfo: nil, repeats: true)
         self.isTimerRunning = true
-        self.startTime = Date()
+        
+        // Added -dateInterval because resume from background needs to 'add' back time duration in background
+        self.startTime = Date(timeIntervalSinceNow: -dateInterval)
     }
     
     private func stopTimer()
@@ -205,5 +208,120 @@ extension Timii
             }
         }
     }
+
+    // MARK: ---------- START / PAUSE APP TO BACKGROUND ----------
+    // This section controls suspend functions when the APP goes to the background
+    
+    @objc func onDidEnterBackground()
+    {
+        self.pauseTimerDate = Date()
+        
+        // stops and removes running timer. This is necessary because resuming from background double counts timers...
+        self.tempTimer.invalidate()
+        
+        print("App moved to background! \(Date()) \(self.pauseTimerDate) counter: \(self.timerCount/10)")
+        
+        // Save temporary timer values to Firebase
+        //timer1.FBSaveTimerBackground()
+    }
+    
+    @objc func onWillEnterForeground()
+    {
+        if self.isTimerRunning == true
+        {
+            let dateDifference = self.pauseTimerDate.timeIntervalSince(Date())
+            
+            self.timerCount -= dateDifference * 10      // time intervals in tenth of a second. timeIntervalSince returns negative so it needs to be negatively added
+            
+            // startTimer needs to be called again when we invalidate the timer before entering the background
+            // startTimer needs to be called and not toggleTimer
+            self.startTimer(dateInterval: self.timerCount/10)
+            
+            print("App moved to foreground! \(Date()) \(dateDifference) counter: \(self.timerCount/10)")
+        }
+        else
+        {
+            print("App moved to foreground without timer running.")
+        }
+        
+    }
+
+//    func newFSUpdateTimerStats??()
+//    {
+//        print("Saving calculated Timer statistics.")
+//        
+//        /*
+//         11.23.18
+//         Writes to Firestore are slow... So using Firebase RT maybe necessary?!
+//         Write Transactions sometimes fail....Originally this function was a combo timer stats + log save and working
+//         but I've reduce it to just saving the timer stats. This function can save multiple collections simultaneously
+//         though one transaction call but these FS transactions feel super slow... 1++ seconds.
+//         */
+//        
+//        // Firestore Initialization
+//        let db = Firestore.firestore()
+//        let settings = db.settings
+//        settings.areTimestampsInSnapshotsEnabled = true
+//        db.settings = settings
+//        
+//        let timerRef: DocumentReference = db.collection("Members").document("\(memberID)/Timers/\(self.name)")
+//        
+//        // https://firebase.google.com/docs/firestore/solutions/aggregation
+//        // https://firebase.google.com/docs/firestore/manage-data/transactions
+//        db.runTransaction({ (transaction, errorPointer) -> Any? in
+//            let timerDocument: DocumentSnapshot
+//            do {
+//                try timerDocument = transaction.getDocument(timerRef)
+//            } catch let fetchError as NSError {
+//                errorPointer?.pointee = fetchError
+//                return nil
+//            }
+//            
+//            // Safely retrieve record from Firestore
+//            guard let oldNumOfSessions = timerDocument.data()?["numOfSessions"] as? Int else {
+//                let error = NSError(
+//                    domain: "AppErrorDomain",
+//                    code: -1,
+//                    userInfo: [
+//                        NSLocalizedDescriptionKey: "Unable to retrieve from snapshot \(timerDocument)"
+//                    ]
+//                )
+//                errorPointer?.pointee = error
+//                return nil
+//            }
+//            
+//            // Safely retrieve record from Firestore
+//            guard let oldLogTotal = timerDocument.data()?["loggedTotal"] as? Double else {
+//                let error = NSError(
+//                    domain: "AppErrorDomain",
+//                    code: -2,
+//                    userInfo: [
+//                        NSLocalizedDescriptionKey: "Unable to retrieve from snapshot \(timerDocument)"
+//                    ]
+//                )
+//                errorPointer?.pointee = error
+//                return nil
+//            }
+//            
+//            // Compute new number of sessions
+//            let newNumOfSessions = oldNumOfSessions + 1
+//            let newLogTotal = oldLogTotal + self.endTimeInterval.duration
+//            
+//            // Set new info
+//            guard var timerData = timerDocument.data() else { return nil }
+//            timerData["numOfSessions"] = newNumOfSessions
+//            timerData["loggedTotal"] = newLogTotal
+//            
+//            // Commit to Firestore - Merge updates existing documents, but doesn't create..
+//            transaction.setData(timerData, forDocument: timerRef, merge: true)
+//            return nil  // where is this returning to?
+//        }) { (object, error) in
+//            if let error = error {
+//                print("Error updating Timer stats: \(error.localizedDescription)")
+//            } else {
+//                print("Member data saved! \(timerRef.documentID)")
+//            }
+//        }
+//    }
 
 }
