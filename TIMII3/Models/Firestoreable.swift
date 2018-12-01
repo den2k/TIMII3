@@ -5,6 +5,11 @@
 //  Created by Dennis Huang on 10/11/18.
 //  Copyright © 2018 Autonomii. All rights reserved.
 //
+/*
+ 
+ TODO: 11.25.18 - Change startTime/timestamp from server time to app time
+ 
+ */
 
 import Firebase
 

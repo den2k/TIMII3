@@ -1,0 +1,23 @@
+<UICollectionViewCell clipsToBounds="true">
+    <UIImageView
+    contentMode="scaleAspectFit"
+    top=""
+    left="50% - width/2"
+    height="75%"
+    width="75%"
+    image="{image}"
+    tintColor=""
+    />
+    
+    <UILabel
+    text="New timer"
+    top="previous.bottom - 2"
+    left="50% - width/2"
+    height="auto"
+    width="auto"
+    backgroundColor="// text label background color"
+    font="Avenir Next 16"
+    textColor="white"
+    />
+    
+</UICollectionViewCell>

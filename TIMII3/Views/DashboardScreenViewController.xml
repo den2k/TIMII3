@@ -39,21 +39,30 @@ going from VC -> Layout, but Layout -> VC.
     <ActiveTimerViewController xml="ActiveTimerViewController.xml"/>
 
     <!-- Timer Panel Section -->
+    <!-- No longer needed. Replaced manual placement with Collection view
     <macro name="row1" value="18% - height/2" />
     <macro name="row2" value="48% - height/2" />
     <macro name="row3" value="78% - height/2" />
     <macro name="col1" value="20% - width/2" />
     <macro name="col2" value="50% - width/2" />
     <macro name="col3" value="80% - width/2" />
+    -->
+    
     
     <UIView
         backgroundColor="// Timer Dashboard Section"
         top="previous.bottom"
-        left="0"
+        left=""
         height="100% - safeAreaInsets.top - 50 - 200 - safeAreaInsets.bottom - 50"
         width="100%">
+
+        <NewTimerViewController xml="Collection.xml"/>
         
+
+<!--        <NewTimerViewController xml="NewTimerViewController.xml"/>-->
+
         <!-- Add new Timer -->
+        <!--
         <UIButton
             title="+"
             touchUpInside=""
@@ -75,6 +84,7 @@ going from VC -> Layout, but Layout -> VC.
             font="Avenir Next 16"
             textColor="white"
         />
+         -->
         
 <!-- Add new timer section for more rows and columns
 

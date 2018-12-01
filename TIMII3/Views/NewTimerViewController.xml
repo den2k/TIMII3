@@ -1,0 +1,39 @@
+<!-- This holds the round Add New Timer code -->
+
+<!-- Add new Timer -->
+<UICollectionView
+    backgroundColor="#fff"
+    collectionViewLayout.itemSize.height="100"
+    collectionViewLayout.itemSize.width="100"
+    collectionViewLayout.minimumInteritemSpacing="10"
+    collectionViewLayout.scrollDirection="horizontal">
+    
+    <UICollectionViewCell
+        clipsToBounds="true"
+        reuseIdentifier="newTimerCell">
+        
+        <UIButton
+        title="+"
+        touchUpInside=""
+        top=""
+        left=""
+        height=""
+        width=""
+        backgroundColor="porcelainOpaque"
+        layer.cornerRadius="50"
+        titleLabel.font="Avenir Next 50"
+        />
+        <UILabel
+        text="New timer"
+        top="previous.bottom + 5"
+        left="previous.left"
+        height="auto"
+        width="auto"
+        backgroundColor=""
+        font="Avenir Next 16"
+        textColor="white"
+        />
+        
+    </UICollectionViewCell>
+    
+</UICollectionView>
