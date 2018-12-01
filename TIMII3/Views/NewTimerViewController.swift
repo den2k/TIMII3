@@ -7,7 +7,10 @@
 //
 /*
 
- TODO: 11.28.18 - Make this into a collection view.
+ TODO: 11.28.18 [DONE - 12.1.18] - Make this into a collection view. Created a temporary visual timer dashboard with a collection view.
+ TODO: 12.1.18 [DONE 12.1.18] - Cleanup unnecessary code from previous collection layout.
+ TODO: 12.1.18 [DONE 12.1.18] - Remove use of templateCell
+ TODO: 12.1.18 - Add 'Add Timer' functionality to each timer button
  
  */
 
@@ -15,12 +18,17 @@ import Layout
 import UIKit
 
 private let images = [
-    UIImage(named: "One"),
-    UIImage(named: "Two"),
-    UIImage(named: "Three"),
+    UIImage(named: "Add"),
 ]
 
-class NewTimerViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource {
+//private let images = [
+//    UIImage(named: "One"),
+//    UIImage(named: "Two"),
+//    UIImage(named: "Three"),
+//]
+
+class NewTimerViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource
+{
     @IBOutlet var collectionView: UICollectionView? {
         didSet {
             collectionView?.registerLayout(
@@ -35,7 +43,8 @@ class NewTimerViewController: UIViewController, UICollectionViewDelegate, UIColl
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let identifier = (indexPath.row % 2 == 0) ? "templateCell" : "standaloneCell"
+        let identifier = "standaloneCell"
+//        let identifier = (indexPath.row % 2 == 0) ? "templateCell" : "standaloneCell"
         let node = collectionView.dequeueReusableCellNode(withIdentifier: identifier, for: indexPath)
         let image = images[indexPath.row % images.count]!
         

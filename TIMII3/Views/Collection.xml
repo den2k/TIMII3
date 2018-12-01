@@ -6,37 +6,11 @@
         collectionViewLayout.minimumInteritemSpacing="10"
         collectionViewLayout.scrollDirection="vertical"
         contentInset.bottom="safeAreaInsets.bottom"
-        contentInset.top="safeAreaInsets.top + 15 // spacing from top of container view"
+        contentInset.top="safeAreaInsets.top + 20 // spacing from top of container view"
         contentInsetAdjustmentBehavior="never"
         contentOffset.y="-safeAreaInsets.top"
         outlet="collectionView"
         scrollIndicatorInsets.bottom="safeAreaInsets.bottom"
         scrollIndicatorInsets.top="safeAreaInsets.top">
-        
-        <UICollectionViewCell
-            clipsToBounds="false"
-            reuseIdentifier="templateCell">
-            
-            <UIImageView
-            contentMode="scaleAspectFit"
-            top=""
-            left="50% - width/2"
-            height="75%"
-            width="75%"
-            image="{image}"
-            />
-            
-            <UILabel
-            text="New timer"
-            top="previous.bottom - 2"
-            left="50% - width/2"
-            height="auto"
-            width="auto"
-            backgroundColor="// text label background color"
-            font="Avenir Next 16"
-            textColor="white"
-            />
-            
-        </UICollectionViewCell>
     </UICollectionView>
 </NewTimerViewController>

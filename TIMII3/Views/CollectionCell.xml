@@ -1,17 +1,18 @@
 <UICollectionViewCell clipsToBounds="true">
+    
     <UIImageView
     contentMode="scaleAspectFit"
     top=""
     left="50% - width/2"
-    height="75%"
-    width="75%"
+    height="65%"
+    width="65%"
     image="{image}"
     tintColor=""
     />
     
     <UILabel
-    text="New timer"
-    top="previous.bottom - 2"
+    text="Timer {row+1}"
+    top="previous.bottom + 5"
     left="50% - width/2"
     height="auto"
     width="auto"
