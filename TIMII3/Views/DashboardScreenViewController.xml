@@ -9,7 +9,7 @@ going from VC -> Layout, but Layout -> VC.
 
 <DashboardScreenViewController
     outlet="DashboardScreenNode"
-    view.backgroundColor="blue    // whole background"
+    view.backgroundColor="white    // whole background"
     height="100%"
     width="100%">
 
@@ -45,7 +45,7 @@ going from VC -> Layout, but Layout -> VC.
         height="100% - safeAreaInsets.top - 50 - 200 - safeAreaInsets.bottom - 50"
         width="100%">
 
-        <NewTimerViewController xml="Collection.xml"/>
+        <TimerCollectionViewController xml="TimerCollectionViewController.xml"/>
         
     </UIView>
 

@@ -9,7 +9,7 @@
 /* Begin PBXBuildFile section */
 		137F1B957EBBD7E6DEC3CDA7 /* Pods_TIMII3Tests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 62003BEE0B871C0DD255D3B4 /* Pods_TIMII3Tests.framework */; };
 		952165A021AD8AF40094B8AB /* NewTimerViewController.xml in Resources */ = {isa = PBXBuildFile; fileRef = 9521659F21AD8AF40094B8AB /* NewTimerViewController.xml */; };
-		952165A221AD8E260094B8AB /* NewTimerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 952165A121AD8E260094B8AB /* NewTimerViewController.swift */; };
+		952165A221AD8E260094B8AB /* TimerCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 952165A121AD8E260094B8AB /* TimerCollectionViewController.swift */; };
 		953094BB216EEBA500384DF8 /* Login.swift in Sources */ = {isa = PBXBuildFile; fileRef = 953094BA216EEBA500384DF8 /* Login.swift */; };
 		9547754721862F7400D7972A /* Ownable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9547754621862F7400D7972A /* Ownable.swift */; };
 		95533F6F21705AA2004391AF /* Firestoreable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95533F6E21705AA2004391AF /* Firestoreable.swift */; };
@@ -24,8 +24,8 @@
 		957CD6CE216D9CD9000CE343 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 957CD6CB216D9CD9000CE343 /* GoogleService-Info.plist */; };
 		957CD6D2216DA10D000CE343 /* Main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 957CD6D1216DA10D000CE343 /* Main.swift */; };
 		95B0AA92216E42E100E73F36 /* FirestoreableTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95B0AA91216E42E100E73F36 /* FirestoreableTests.swift */; };
-		95B650C221B251480020275A /* CollectionCell.xml in Resources */ = {isa = PBXBuildFile; fileRef = 95B650C121B251480020275A /* CollectionCell.xml */; };
-		95B650C621B251E80020275A /* Collection.xml in Resources */ = {isa = PBXBuildFile; fileRef = 95B650C521B251E80020275A /* Collection.xml */; };
+		95B650C221B251480020275A /* TimerCollectionCell.xml in Resources */ = {isa = PBXBuildFile; fileRef = 95B650C121B251480020275A /* TimerCollectionCell.xml */; };
+		95B650C621B251E80020275A /* TimerCollectionViewController.xml in Resources */ = {isa = PBXBuildFile; fileRef = 95B650C521B251E80020275A /* TimerCollectionViewController.xml */; };
 		95C8F8AF2187DC7A003AED25 /* DashboardScreenViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95C8F8AE2187DC7A003AED25 /* DashboardScreenViewController.swift */; };
 		95C8F8B12187DC9E003AED25 /* DashboardScreenViewController.xml in Resources */ = {isa = PBXBuildFile; fileRef = 95C8F8B02187DC9E003AED25 /* DashboardScreenViewController.xml */; };
 		95C8F8B52188038B003AED25 /* ActiveTimerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95C8F8B42188038B003AED25 /* ActiveTimerViewController.swift */; };
@@ -70,7 +70,7 @@
 		62003BEE0B871C0DD255D3B4 /* Pods_TIMII3Tests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_TIMII3Tests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		6F190E17B9C78B61B2D5E588 /* Pods-TIMII3.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TIMII3.debug.xcconfig"; path = "Pods/Target Support Files/Pods-TIMII3/Pods-TIMII3.debug.xcconfig"; sourceTree = "<group>"; };
 		9521659F21AD8AF40094B8AB /* NewTimerViewController.xml */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = NewTimerViewController.xml; sourceTree = "<group>"; };
-		952165A121AD8E260094B8AB /* NewTimerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewTimerViewController.swift; sourceTree = "<group>"; };
+		952165A121AD8E260094B8AB /* TimerCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerCollectionViewController.swift; sourceTree = "<group>"; };
 		953094BA216EEBA500384DF8 /* Login.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Login.swift; sourceTree = "<group>"; };
 		9547754621862F7400D7972A /* Ownable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Ownable.swift; sourceTree = "<group>"; };
 		95533F6E21705AA2004391AF /* Firestoreable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Firestoreable.swift; sourceTree = "<group>"; };
@@ -90,8 +90,8 @@
 		957CD6CB216D9CD9000CE343 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		957CD6D1216DA10D000CE343 /* Main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Main.swift; sourceTree = "<group>"; };
 		95B0AA91216E42E100E73F36 /* FirestoreableTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirestoreableTests.swift; sourceTree = "<group>"; };
-		95B650C121B251480020275A /* CollectionCell.xml */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = CollectionCell.xml; sourceTree = "<group>"; };
-		95B650C521B251E80020275A /* Collection.xml */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = Collection.xml; sourceTree = "<group>"; };
+		95B650C121B251480020275A /* TimerCollectionCell.xml */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = TimerCollectionCell.xml; sourceTree = "<group>"; };
+		95B650C521B251E80020275A /* TimerCollectionViewController.xml */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = TimerCollectionViewController.xml; sourceTree = "<group>"; };
 		95C8F8AE2187DC7A003AED25 /* DashboardScreenViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DashboardScreenViewController.swift; sourceTree = "<group>"; };
 		95C8F8B02187DC9E003AED25 /* DashboardScreenViewController.xml */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = DashboardScreenViewController.xml; sourceTree = "<group>"; };
 		95C8F8B42188038B003AED25 /* ActiveTimerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActiveTimerViewController.swift; sourceTree = "<group>"; };
@@ -208,11 +208,10 @@
 				95EC6A12216F139C00643F19 /* SettingScreenViewController.xml */,
 				95C8F8B42188038B003AED25 /* ActiveTimerViewController.swift */,
 				95C8F8B62188106C003AED25 /* ActiveTimerViewController.xml */,
-				952165A121AD8E260094B8AB /* NewTimerViewController.swift */,
+				952165A121AD8E260094B8AB /* TimerCollectionViewController.swift */,
+				95B650C521B251E80020275A /* TimerCollectionViewController.xml */,
+				95B650C121B251480020275A /* TimerCollectionCell.xml */,
 				9521659F21AD8AF40094B8AB /* NewTimerViewController.xml */,
-				95B650C121B251480020275A /* CollectionCell.xml */,
-				95B650C521B251E80020275A /* Collection.xml */,
-				95EC6A16216F152600643F19 /* Colors.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -227,6 +226,7 @@
 				95533F6E21705AA2004391AF /* Firestoreable.swift */,
 				95EC6A1B21701D0E00643F19 /* Nameable.swift */,
 				9547754621862F7400D7972A /* Ownable.swift */,
+				95EC6A16216F152600643F19 /* Colors.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -376,14 +376,14 @@
 			files = (
 				95EC6A13216F139C00643F19 /* SettingScreenViewController.xml in Resources */,
 				95EC6A0C216F0CE500643F19 /* LoginScreen.xml in Resources */,
-				95B650C221B251480020275A /* CollectionCell.xml in Resources */,
+				95B650C221B251480020275A /* TimerCollectionCell.xml in Resources */,
 				95C8F8B72188106C003AED25 /* ActiveTimerViewController.xml in Resources */,
 				957CD6A5216D995C000CE343 /* Assets.xcassets in Resources */,
 				95EC6A10216F103200643F19 /* Main.xml in Resources */,
 				952165A021AD8AF40094B8AB /* NewTimerViewController.xml in Resources */,
 				95C8F8B12187DC9E003AED25 /* DashboardScreenViewController.xml in Resources */,
 				957CD6CC216D9CD9000CE343 /* GoogleService-Info.plist in Resources */,
-				95B650C621B251E80020275A /* Collection.xml in Resources */,
+				95B650C621B251E80020275A /* TimerCollectionViewController.xml in Resources */,
 				95EC6A0E216F0D2A00643F19 /* CreateAccountScreen.xml in Resources */,
 				95EC6A19216F8A8A00643F19 /* Launch Screen.storyboard in Resources */,
 			);
@@ -524,7 +524,7 @@
 				9547754721862F7400D7972A /* Ownable.swift in Sources */,
 				95EC6A07216EF2D200643F19 /* LoginScreen.swift in Sources */,
 				95533F712170E298004391AF /* Member.swift in Sources */,
-				952165A221AD8E260094B8AB /* NewTimerViewController.swift in Sources */,
+				952165A221AD8E260094B8AB /* TimerCollectionViewController.swift in Sources */,
 				9563D5E82172AD7100708913 /* AuthenticationMethod.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -1,5 +1,6 @@
-<NewTimerViewController>
+<TimerCollectionViewController>
     <UICollectionView
+        outlet="timerCollectionView"
         backgroundColor="transparent // Collection View background color"
         collectionViewLayout.itemSize.height="collectionViewLayout.itemSize.width"
         collectionViewLayout.itemSize.width="(100% -  4 * 10) / 3     // size of the button"
@@ -9,8 +10,7 @@
         contentInset.top="safeAreaInsets.top + 20 // spacing from top of container view"
         contentInsetAdjustmentBehavior="never"
         contentOffset.y="-safeAreaInsets.top"
-        outlet="collectionView"
         scrollIndicatorInsets.bottom="safeAreaInsets.bottom"
         scrollIndicatorInsets.top="safeAreaInsets.top">
     </UICollectionView>
-</NewTimerViewController>
+</TimerCollectionViewController>

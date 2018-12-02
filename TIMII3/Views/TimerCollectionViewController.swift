@@ -1,5 +1,5 @@
 //
-//  NewTimerViewController.swift
+//  TimerCollectionViewController.swift
 //  TIMII3
 //
 //  Created by Dennis Huang on 11/27/18.
@@ -27,12 +27,12 @@ private let images = [
 //    UIImage(named: "Three"),
 //]
 
-class NewTimerViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource
+class TimerCollectionViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource
 {
-    @IBOutlet var collectionView: UICollectionView? {
+    @IBOutlet var timerCollectionView: UICollectionView? {
         didSet {
-            collectionView?.registerLayout(
-                named: "CollectionCell.xml",
+            timerCollectionView?.registerLayout(
+                named: "TimerCollectionCell.xml",
                 forCellReuseIdentifier: "standaloneCell"
             )
         }
@@ -56,4 +56,10 @@ class NewTimerViewController: UIViewController, UICollectionViewDelegate, UIColl
         
         return node.view as! UICollectionViewCell
     }
+    
+    @IBAction func onDidPressButton()
+    {
+        print("Pressed button.")
+    }
+    
 }

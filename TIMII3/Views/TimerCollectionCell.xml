@@ -1,0 +1,34 @@
+<UICollectionViewCell clipsToBounds="true">
+    
+    <UIButton
+    title=""
+    touchUpInside="onDidPressButton"
+    top=""
+    left=""
+    height="100%"
+    width="100%"
+    backgroundColor="//porcelainOpaque">
+    
+        <UIImageView
+        contentMode="scaleAspectFit"
+        top=""
+        left="50% - width/2"
+        height="65%"
+        width="65%"
+        image="{image}"
+        />
+        
+        <UILabel
+        text="Timer {row+1}"
+        top="previous.bottom + 5"
+        left="50% - width/2"
+        height="auto"
+        width="auto"
+        backgroundColor="// text label background color"
+        font="Avenir Next 16"
+        textColor="gray"
+        />
+        
+    </UIButton>
+    
+</UICollectionViewCell>

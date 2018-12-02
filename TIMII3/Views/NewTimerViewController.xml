@@ -1,6 +1,7 @@
 <!-- This holds the round Add New Timer code -->
 
 <!-- Add new Timer -->
+<!--
 <UICollectionView
     backgroundColor="#fff"
     collectionViewLayout.itemSize.height="100"
@@ -37,3 +38,4 @@
     </UICollectionViewCell>
     
 </UICollectionView>
+-->
