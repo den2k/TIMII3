@@ -89,9 +89,6 @@ struct FS
         let Ref = db.collection(FSCollectionName.Members.rawValue).document(UID)
                     .collection(collectionName.rawValue).document(docName)
         
-        print("ref \(Ref.documentID)")  // delete
-        print("dN \(docName)")          // delete
-        
         Ref.setData(dict)
         { (error) in
             if let error = error {

@@ -19,7 +19,7 @@
         />
         
         <UILabel
-        text="Timer {row+1}"
+        text="{title}"
         top="previous.bottom + 5"
         left="50% - width/2"
         height="auto"

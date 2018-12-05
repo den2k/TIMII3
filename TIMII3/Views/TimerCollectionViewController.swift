@@ -10,25 +10,31 @@
  TODO: 11.28.18 [DONE - 12.1.18] - Make this into a collection view. Created a temporary visual timer dashboard with a collection view.
  TODO: 12.1.18 [DONE 12.1.18] - Cleanup unnecessary code from previous collection layout.
  TODO: 12.1.18 [DONE 12.1.18] - Remove use of templateCell
+ TODO: 12.1.18 [DONE 12.4.18] - Retrieve existing Timers and display them in Timer Collection
  TODO: 12.1.18 - Add 'Add Timer' functionality to each timer button
  
  */
 
 import Layout
 import UIKit
+import Firebase
 
 private let images = [
     UIImage(named: "Add"),
 ]
 
-//private let images = [
-//    UIImage(named: "One"),
-//    UIImage(named: "Two"),
-//    UIImage(named: "Three"),
-//]
-
-class TimerCollectionViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource
+class TimerCollectionViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, Ownable
 {
+    var db: Firestore!
+    var timerTitles: [String] = [String](repeating: "", count: 12)
+    
+    override func viewDidLoad()
+    {
+        super.viewDidLoad()
+        db = Firestore.firestore()
+        getTimers()
+    }
+    
     @IBOutlet var timerCollectionView: UICollectionView? {
         didSet {
             timerCollectionView?.registerLayout(
@@ -50,6 +56,7 @@ class TimerCollectionViewController: UIViewController, UICollectionViewDelegate,
         
         node.setState([
             "row": indexPath.row,
+            "title": timerTitles[indexPath.row],
             "image": image,
             "whiteImage": image.withRenderingMode(.alwaysOriginal),
             ])
@@ -60,6 +67,24 @@ class TimerCollectionViewController: UIViewController, UICollectionViewDelegate,
     @IBAction func onDidPressButton()
     {
         print("Pressed button.")
+        getTimers()
     }
     
+    func getTimers()
+    {
+        db.collection("Members").document(memberID).collection("Timers").getDocuments() { (querySnapshot, error) in
+            if let err = error {
+                print("Error getting document: \(err)")
+            } else {
+                for (index, document) in querySnapshot!.documents.enumerated()
+                {
+                    print("--->>>\(document.documentID) => \(document.data())")
+                    self.timerTitles[index] = document.documentID
+                }
+                DispatchQueue.main.async { self.timerCollectionView?.reloadData() }
+                print(self.timerTitles)  // delete
+            }
+        }
+    }
 }
+
