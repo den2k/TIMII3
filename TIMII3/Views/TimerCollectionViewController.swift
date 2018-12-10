@@ -97,7 +97,7 @@ class TimerCollectionViewController: UIViewController, UICollectionViewDelegate,
         
         // Keeps the presenting "TimerCollectionViewController" VC in view beneath the presented "newTimerScreen" VC.
         newTimerScreen.modalPresentationStyle = .overFullScreen
-        present(newTimerScreen, animated: true, completion: nil)
+        present(newTimerScreen, animated: false, completion: nil)
     }
     
     var listenerDash: ListenerRegistration!

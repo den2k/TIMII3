@@ -6,82 +6,98 @@
  -->
 
 <UIViewController
-    width="70%"
-    height="50%"
+width="100%"
+height="100%"
+top="0"
+left="0"
+view.backgroundColor="rgba(0,0,0,0.7)       // background of the presented VC covering the presenting VC">
+    
+    <UIView
+    width="80%"
+    height="60%"
     top="50% - height/2"
     left="50% - width/2"
-    view.backgroundColor="white //halfTransparent"
-    >
+    backgroundColor="white      // background of the popup screen">
+    
+        <UIView
+        width="100%"
+        height="100%"
+        top="70"
+        left="50% - width/2">
         
-    <UILabel
-    text="New timer"
-    top="50"
-    textAlignment="center"
-    width="100%"
-    textColor="UIColor.black"
-    font="Avenir Next ultraLight 30"
-    />
-    
-    <!-- error -->
-    <UILabel
-    outlet="errorLabel"
-    text="{error}"
-    top="previous.bottom + 10"
-    left="50% - width/2"
-    textAlignment="center"
-    width="65%"
-    textColor="UIColor.red"
-    numberOfLines="4"
-    font="Avenir Next 16"
-    />
-    
-    <!-- timer name -->
-    <UITextField
-    outlet = "nameTextField"
-    placeholder="name of new timer"
-    top="previous.bottom + 20"
-    left="50% - width/2"
-    width="100% - 40"
-    height="44"
-    layer.cornerRadius="22"
-    backgroundColor="UIColor.cararra"
-    textAlignment="center"
-    />
-    
-    <!-- timer description -->
-    <UITextField
-    outlet = "descriptionTextField"
-    placeholder="description (optional)"
-    top="previous.bottom + 20"
-    left="50% - width/2"
-    width="100% - 40"
-    height="44"
-    layer.cornerRadius="22"
-    backgroundColor="UIColor.cararra"
-    textAlignment="center"
-    />
-    
-    <!-- Create Button -->
-    <UIButton
-    touchUpInside="handleNewTimer"
-    title="Create Timer"
-    top="previous.bottom + 30"
-    left="50% - width/2"
-    width="100% - 120"
-    height="66"
-    layer.cornerRadius="33"
-    backgroundColor="UIColor.camo"
-    />
-    
-    <!-- Cancel -->
-    <UIButton
-    touchUpInside="cancel"
-    title="Cancel"
-    top="previous.bottom + 15"
-    left="50% - width/2"
-    width="100% - 40"
-    height="auto"
-    titleColor="#9AACB1"
-    />
+            <UILabel
+            text="New timer"
+            top=""
+            textAlignment="center"
+            width="100%"
+            textColor="UIColor.black"
+            font="Avenir Next ultraLight 30"
+            />
+            
+            <!-- error -->
+            <UILabel
+            outlet="errorLabel"
+            text="{error}"
+            top="previous.bottom + 10"
+            left="50% - width/2"
+            textAlignment="center"
+            width="65%"
+            textColor="UIColor.red"
+            numberOfLines="4"
+            font="Avenir Next 16"
+            />
+            
+            <!-- timer name -->
+            <UITextField
+            outlet = "nameTextField"
+            placeholder="name of new timer"
+            top="previous.bottom + 20"
+            left="50% - width/2"
+            width="100% - 40"
+            height="44"
+            layer.cornerRadius="22"
+            backgroundColor="UIColor.cararra"
+            textAlignment="center"
+            />
+            
+            <!-- timer description -->
+            <UITextField
+            outlet = "descriptionTextField"
+            placeholder="description (optional)"
+            top="previous.bottom + 20"
+            left="50% - width/2"
+            width="100% - 40"
+            height="44"
+            layer.cornerRadius="22"
+            backgroundColor="UIColor.cararra"
+            textAlignment="center"
+            />
+            
+            <!-- Create Button -->
+            <UIButton
+            touchUpInside="handleNewTimer"
+            title="Create Timer"
+            top="previous.bottom + 30"
+            left="50% - width/2"
+            width="100% - 120"
+            height="66"
+            layer.cornerRadius="33"
+            backgroundColor="UIColor.camo"
+            />
+            
+            <!-- Cancel -->
+            <UIButton
+            touchUpInside="cancel"
+            title="Cancel"
+            top="previous.bottom + 15"
+            left="50% - width/2"
+            width="100% - 40"
+            height="auto"
+            titleColor="#9AACB1"
+            />
+            
+        </UIView>
+        
+    </UIView>
     
 </UIViewController>
