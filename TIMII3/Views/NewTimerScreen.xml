@@ -1,0 +1,87 @@
+<!--
+ New Timer Screen
+ 
+ TODO: 12.8.18 - Create new timer screen visuals.
+ 
+ -->
+
+<UIViewController
+    width="70%"
+    height="50%"
+    top="50% - height/2"
+    left="50% - width/2"
+    view.backgroundColor="white //halfTransparent"
+    >
+        
+    <UILabel
+    text="New timer"
+    top="50"
+    textAlignment="center"
+    width="100%"
+    textColor="UIColor.black"
+    font="Avenir Next ultraLight 30"
+    />
+    
+    <!-- error -->
+    <UILabel
+    outlet="errorLabel"
+    text="{error}"
+    top="previous.bottom + 10"
+    left="50% - width/2"
+    textAlignment="center"
+    width="65%"
+    textColor="UIColor.red"
+    numberOfLines="4"
+    font="Avenir Next 16"
+    />
+    
+    <!-- timer name -->
+    <UITextField
+    outlet = "nameTextField"
+    placeholder="name of new timer"
+    top="previous.bottom + 20"
+    left="50% - width/2"
+    width="100% - 40"
+    height="44"
+    layer.cornerRadius="22"
+    backgroundColor="UIColor.cararra"
+    textAlignment="center"
+    />
+    
+    <!-- timer description -->
+    <UITextField
+    outlet = "descriptionTextField"
+    placeholder="description (optional)"
+    top="previous.bottom + 20"
+    left="50% - width/2"
+    width="100% - 40"
+    height="44"
+    layer.cornerRadius="22"
+    backgroundColor="UIColor.cararra"
+    textAlignment="center"
+    />
+    
+    <!-- Create Button -->
+    <UIButton
+    touchUpInside="handleNewTimer"
+    title="Create Timer"
+    top="previous.bottom + 30"
+    left="50% - width/2"
+    width="100% - 120"
+    height="66"
+    layer.cornerRadius="33"
+    backgroundColor="UIColor.camo"
+    />
+    
+    <!-- Cancel -->
+    <UIButton
+    touchUpInside="cancel"
+    title="Cancel"
+    top="previous.bottom + 15"
+    left="50% - width/2"
+    width="100% - 40"
+    height="auto"
+    titleColor="#9AACB1"
+    />
+    
+</UIViewController>

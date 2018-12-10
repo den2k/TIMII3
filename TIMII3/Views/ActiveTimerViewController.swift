@@ -7,9 +7,10 @@
 //
 /*
  
- TODO: 11.3.18 - delete testing VC properties timer1
+ TODO: 11.3.18 [DONE - 12.8.18] - delete testing VC properties timer1
  TODO: 11.3.18 [DONE - 11.3.18] - Save time results to Firestore
  TODO: 11.18.18 - Refactor getTimerStats to somwhere else so we can remove Firebase code from this VC.
+ TODO: 12.9.18 - Add isTimerActive function
  
  */
 
@@ -22,7 +23,7 @@ class ActiveTimerViewController: UIViewController, Ownable
     
     // ViewController properties
     var timer1 = Timii(name: "History", description: "History 101 for Ellie")
-    var timer2 = Timii(name: "English", description: "English 201 for Eaton")
+//    var timer2 = Timii(name: "English", description: "English 201 for Eaton")
 
     var listenerDash: ListenerRegistration!
 
@@ -38,8 +39,8 @@ class ActiveTimerViewController: UIViewController, Ownable
                 "minute"            : timer1.minutes,
                 "second"            : timer1.seconds,
                 "isTimerRunning"    : timer1.isTimerRunning,
-                "numOfSessions"     : "loading",
-                "loggedTotal"       : "loading",
+                "numOfSessions"     : "",
+                "loggedTotal"       : "",
             ])
         }
     }

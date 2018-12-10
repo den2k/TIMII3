@@ -12,8 +12,9 @@
  TODO: 11.17.18 - Save time spent on the same Task for the present day. Need to take total time and calculate per day time spent.
  TODO: 11.17.18 [DONE 11.18.18] - Save the number of sessions for Task
  TODO: 11.18.18 [DONE 11.18.18] - Save total time spent on a task
- TODO: 11.19.18 - Make Firestore display of values more responsive (real-time).
+ TODO: 11.19.18 [Delete 12.9.18] - Make Firestore display of values more responsive (real-time). This issue seems to have gone away..
  TODO: 11.24.18 [DONE 11.25.18] - Add background / foreground timer support.
+ TODO: 12.9.18 [DONE 12.9.18] - Changed time stamp from Google Firestore to local Date stamp from app.
  
  */
 
@@ -25,15 +26,6 @@ extension Timii
     // Protocol functions
     func FSSave()
     {
-        /*
-         Creates a new Timer for the first time with a time stamp
-         
-         Members / [UID]
-            Timers / [name]
-                “name”: “History”
-                “description”: “AVHS HIS204”
-         */
-        
         print("Saving new Timii.")
         
         let dict = [
@@ -41,7 +33,7 @@ extension Timii
             "description":      self.description,
             ]
         
-        FS().FSSaveNewCollection(collectionName: self.FSCollectionName, docName: self.name, dictionary: dict)
+        FS().FSSaveMemberCollectionDict(collectionName: self.FSCollectionName, dictionary: dict)
     }
 
     func FSSaveTimerLog()
@@ -243,85 +235,5 @@ extension Timii
         {
             print("App moved to foreground without timer running.")
         }
-        
     }
-
-//    func newFSUpdateTimerStats??()
-//    {
-//        print("Saving calculated Timer statistics.")
-//        
-//        /*
-//         11.23.18
-//         Writes to Firestore are slow... So using Firebase RT maybe necessary?!
-//         Write Transactions sometimes fail....Originally this function was a combo timer stats + log save and working
-//         but I've reduce it to just saving the timer stats. This function can save multiple collections simultaneously
-//         though one transaction call but these FS transactions feel super slow... 1++ seconds.
-//         */
-//        
-//        // Firestore Initialization
-//        let db = Firestore.firestore()
-//        let settings = db.settings
-//        settings.areTimestampsInSnapshotsEnabled = true
-//        db.settings = settings
-//        
-//        let timerRef: DocumentReference = db.collection("Members").document("\(memberID)/Timers/\(self.name)")
-//        
-//        // https://firebase.google.com/docs/firestore/solutions/aggregation
-//        // https://firebase.google.com/docs/firestore/manage-data/transactions
-//        db.runTransaction({ (transaction, errorPointer) -> Any? in
-//            let timerDocument: DocumentSnapshot
-//            do {
-//                try timerDocument = transaction.getDocument(timerRef)
-//            } catch let fetchError as NSError {
-//                errorPointer?.pointee = fetchError
-//                return nil
-//            }
-//            
-//            // Safely retrieve record from Firestore
-//            guard let oldNumOfSessions = timerDocument.data()?["numOfSessions"] as? Int else {
-//                let error = NSError(
-//                    domain: "AppErrorDomain",
-//                    code: -1,
-//                    userInfo: [
-//                        NSLocalizedDescriptionKey: "Unable to retrieve from snapshot \(timerDocument)"
-//                    ]
-//                )
-//                errorPointer?.pointee = error
-//                return nil
-//            }
-//            
-//            // Safely retrieve record from Firestore
-//            guard let oldLogTotal = timerDocument.data()?["loggedTotal"] as? Double else {
-//                let error = NSError(
-//                    domain: "AppErrorDomain",
-//                    code: -2,
-//                    userInfo: [
-//                        NSLocalizedDescriptionKey: "Unable to retrieve from snapshot \(timerDocument)"
-//                    ]
-//                )
-//                errorPointer?.pointee = error
-//                return nil
-//            }
-//            
-//            // Compute new number of sessions
-//            let newNumOfSessions = oldNumOfSessions + 1
-//            let newLogTotal = oldLogTotal + self.endTimeInterval.duration
-//            
-//            // Set new info
-//            guard var timerData = timerDocument.data() else { return nil }
-//            timerData["numOfSessions"] = newNumOfSessions
-//            timerData["loggedTotal"] = newLogTotal
-//            
-//            // Commit to Firestore - Merge updates existing documents, but doesn't create..
-//            transaction.setData(timerData, forDocument: timerRef, merge: true)
-//            return nil  // where is this returning to?
-//        }) { (object, error) in
-//            if let error = error {
-//                print("Error updating Timer stats: \(error.localizedDescription)")
-//            } else {
-//                print("Member data saved! \(timerRef.documentID)")
-//            }
-//        }
-//    }
-
 }

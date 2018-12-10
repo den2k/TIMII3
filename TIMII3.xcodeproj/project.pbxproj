@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 51;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -26,6 +26,8 @@
 		95B0AA92216E42E100E73F36 /* FirestoreableTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95B0AA91216E42E100E73F36 /* FirestoreableTests.swift */; };
 		95B650C221B251480020275A /* TimerCollectionCell.xml in Resources */ = {isa = PBXBuildFile; fileRef = 95B650C121B251480020275A /* TimerCollectionCell.xml */; };
 		95B650C621B251E80020275A /* TimerCollectionViewController.xml in Resources */ = {isa = PBXBuildFile; fileRef = 95B650C521B251E80020275A /* TimerCollectionViewController.xml */; };
+		95C0D08F21BCD26900626077 /* NewTimerScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95C0D08E21BCD26900626077 /* NewTimerScreen.swift */; };
+		95C0D09121BCD75B00626077 /* NewTimerScreen.xml in Resources */ = {isa = PBXBuildFile; fileRef = 95C0D09021BCD75B00626077 /* NewTimerScreen.xml */; };
 		95C8F8AF2187DC7A003AED25 /* DashboardScreenViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95C8F8AE2187DC7A003AED25 /* DashboardScreenViewController.swift */; };
 		95C8F8B12187DC9E003AED25 /* DashboardScreenViewController.xml in Resources */ = {isa = PBXBuildFile; fileRef = 95C8F8B02187DC9E003AED25 /* DashboardScreenViewController.xml */; };
 		95C8F8B52188038B003AED25 /* ActiveTimerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95C8F8B42188038B003AED25 /* ActiveTimerViewController.swift */; };
@@ -92,6 +94,8 @@
 		95B0AA91216E42E100E73F36 /* FirestoreableTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirestoreableTests.swift; sourceTree = "<group>"; };
 		95B650C121B251480020275A /* TimerCollectionCell.xml */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = TimerCollectionCell.xml; sourceTree = "<group>"; };
 		95B650C521B251E80020275A /* TimerCollectionViewController.xml */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = TimerCollectionViewController.xml; sourceTree = "<group>"; };
+		95C0D08E21BCD26900626077 /* NewTimerScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewTimerScreen.swift; sourceTree = "<group>"; };
+		95C0D09021BCD75B00626077 /* NewTimerScreen.xml */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = NewTimerScreen.xml; sourceTree = "<group>"; };
 		95C8F8AE2187DC7A003AED25 /* DashboardScreenViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DashboardScreenViewController.swift; sourceTree = "<group>"; };
 		95C8F8B02187DC9E003AED25 /* DashboardScreenViewController.xml */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = DashboardScreenViewController.xml; sourceTree = "<group>"; };
 		95C8F8B42188038B003AED25 /* ActiveTimerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActiveTimerViewController.swift; sourceTree = "<group>"; };
@@ -212,6 +216,8 @@
 				95B650C521B251E80020275A /* TimerCollectionViewController.xml */,
 				95B650C121B251480020275A /* TimerCollectionCell.xml */,
 				9521659F21AD8AF40094B8AB /* NewTimerViewController.xml */,
+				95C0D08E21BCD26900626077 /* NewTimerScreen.swift */,
+				95C0D09021BCD75B00626077 /* NewTimerScreen.xml */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -351,7 +357,7 @@
 				};
 			};
 			buildConfigurationList = 957CD695216D995B000CE343 /* Build configuration list for PBXProject "TIMII3" */;
-			compatibilityVersion = "Xcode 9.3";
+			compatibilityVersion = "Xcode 10.0";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
 			knownRegions = (
@@ -385,6 +391,7 @@
 				95C8F8B12187DC9E003AED25 /* DashboardScreenViewController.xml in Resources */,
 				957CD6CC216D9CD9000CE343 /* GoogleService-Info.plist in Resources */,
 				95B650C621B251E80020275A /* TimerCollectionViewController.xml in Resources */,
+				95C0D09121BCD75B00626077 /* NewTimerScreen.xml in Resources */,
 				95EC6A0E216F0D2A00643F19 /* CreateAccountScreen.xml in Resources */,
 				95EC6A19216F8A8A00643F19 /* Launch Screen.storyboard in Resources */,
 			);
@@ -528,6 +535,7 @@
 				95C8F8B52188038B003AED25 /* ActiveTimerViewController.swift in Sources */,
 				95EC6A09216EF42900643F19 /* CreateAccountScreen.swift in Sources */,
 				95EC6A15216F13F900643F19 /* SettingScreenViewController.swift in Sources */,
+				95C0D08F21BCD26900626077 /* NewTimerScreen.swift in Sources */,
 				957CD69E216D995B000CE343 /* AppDelegate.swift in Sources */,
 				95EC6A1C21701D0E00643F19 /* Nameable.swift in Sources */,
 				95C8F8AF2187DC7A003AED25 /* DashboardScreenViewController.swift in Sources */,
