@@ -36,7 +36,7 @@ going from VC -> Layout, but Layout -> VC.
     </UIView>
     
     <!-- Active Timer Section -->
-    <ActiveTimerViewController xml="ActiveTimerViewController.xml"/>
+    <ActiveTimerViewController xml="SubViews/ActiveTimerViewController.xml"/>
     
     <UIView
         backgroundColor="// Timer Dashboard Section"
@@ -45,7 +45,7 @@ going from VC -> Layout, but Layout -> VC.
         height="100% - safeAreaInsets.top - 50 - 200 - safeAreaInsets.bottom - 50"
         width="100%">
 
-        <TimerCollectionViewController xml="TimerCollectionViewController.xml"/>
+        <TimerCollectionViewController xml="SubViews/TimerCollectionViewController.xml"/>
         
     </UIView>
 

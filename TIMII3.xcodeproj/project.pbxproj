@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		137F1B957EBBD7E6DEC3CDA7 /* Pods_TIMII3Tests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 62003BEE0B871C0DD255D3B4 /* Pods_TIMII3Tests.framework */; };
-		952165A021AD8AF40094B8AB /* NewTimerViewController.xml in Resources */ = {isa = PBXBuildFile; fileRef = 9521659F21AD8AF40094B8AB /* NewTimerViewController.xml */; };
 		952165A221AD8E260094B8AB /* TimerCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 952165A121AD8E260094B8AB /* TimerCollectionViewController.swift */; };
 		953094BB216EEBA500384DF8 /* Login.swift in Sources */ = {isa = PBXBuildFile; fileRef = 953094BA216EEBA500384DF8 /* Login.swift */; };
 		9547754721862F7400D7972A /* Ownable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9547754621862F7400D7972A /* Ownable.swift */; };
@@ -71,7 +70,6 @@
 		5C6E2750660F39C3A454D323 /* Pods-TIMII3UITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TIMII3UITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-TIMII3UITests/Pods-TIMII3UITests.release.xcconfig"; sourceTree = "<group>"; };
 		62003BEE0B871C0DD255D3B4 /* Pods_TIMII3Tests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_TIMII3Tests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		6F190E17B9C78B61B2D5E588 /* Pods-TIMII3.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TIMII3.debug.xcconfig"; path = "Pods/Target Support Files/Pods-TIMII3/Pods-TIMII3.debug.xcconfig"; sourceTree = "<group>"; };
-		9521659F21AD8AF40094B8AB /* NewTimerViewController.xml */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = NewTimerViewController.xml; sourceTree = "<group>"; };
 		952165A121AD8E260094B8AB /* TimerCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerCollectionViewController.swift; sourceTree = "<group>"; };
 		953094BA216EEBA500384DF8 /* Login.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Login.swift; sourceTree = "<group>"; };
 		9547754621862F7400D7972A /* Ownable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Ownable.swift; sourceTree = "<group>"; };
@@ -177,7 +175,6 @@
 				957CD69D216D995B000CE343 /* AppDelegate.swift */,
 				957CD6CB216D9CD9000CE343 /* GoogleService-Info.plist */,
 				95EC6A18216F8A8A00643F19 /* Launch Screen.storyboard */,
-				9521659F21AD8AF40094B8AB /* NewTimerViewController.xml */,
 			);
 			path = TIMII3;
 			sourceTree = "<group>";
@@ -201,16 +198,39 @@
 			path = TIMII3UITests;
 			sourceTree = "<group>";
 		};
-		95EC6A0A216F0C9F00643F19 /* Views */ = {
+		958DBB0D21C353BE002AD953 /* Main */ = {
 			isa = PBXGroup;
 			children = (
-				95EC6A1A216F9DF100643F19 /* Login */,
 				957CD6D1216DA10D000CE343 /* Main.swift */,
 				95EC6A0F216F103200643F19 /* Main.xml */,
+				958DBB0E21C353EB002AD953 /* Dashboard */,
+				958DBB0F21C35402002AD953 /* Settings */,
+			);
+			path = Main;
+			sourceTree = "<group>";
+		};
+		958DBB0E21C353EB002AD953 /* Dashboard */ = {
+			isa = PBXGroup;
+			children = (
 				95C8F8AE2187DC7A003AED25 /* DashboardScreenViewController.swift */,
 				95C8F8B02187DC9E003AED25 /* DashboardScreenViewController.xml */,
+				958DBB1021C3541B002AD953 /* SubViews */,
+			);
+			path = Dashboard;
+			sourceTree = "<group>";
+		};
+		958DBB0F21C35402002AD953 /* Settings */ = {
+			isa = PBXGroup;
+			children = (
 				95EC6A14216F13F900643F19 /* SettingScreenViewController.swift */,
 				95EC6A12216F139C00643F19 /* SettingScreenViewController.xml */,
+			);
+			path = Settings;
+			sourceTree = "<group>";
+		};
+		958DBB1021C3541B002AD953 /* SubViews */ = {
+			isa = PBXGroup;
+			children = (
 				95C8F8B42188038B003AED25 /* ActiveTimerViewController.swift */,
 				95C8F8B62188106C003AED25 /* ActiveTimerViewController.xml */,
 				952165A121AD8E260094B8AB /* TimerCollectionViewController.swift */,
@@ -218,6 +238,15 @@
 				95B650C121B251480020275A /* TimerCollectionCell.xml */,
 				95C0D08E21BCD26900626077 /* NewTimerScreen.swift */,
 				95C0D09021BCD75B00626077 /* NewTimerScreen.xml */,
+			);
+			path = SubViews;
+			sourceTree = "<group>";
+		};
+		95EC6A0A216F0C9F00643F19 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				95EC6A1A216F9DF100643F19 /* Login */,
+				958DBB0D21C353BE002AD953 /* Main */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -387,7 +416,6 @@
 				95C8F8B72188106C003AED25 /* ActiveTimerViewController.xml in Resources */,
 				957CD6A5216D995C000CE343 /* Assets.xcassets in Resources */,
 				95EC6A10216F103200643F19 /* Main.xml in Resources */,
-				952165A021AD8AF40094B8AB /* NewTimerViewController.xml in Resources */,
 				95C8F8B12187DC9E003AED25 /* DashboardScreenViewController.xml in Resources */,
 				957CD6CC216D9CD9000CE343 /* GoogleService-Info.plist in Resources */,
 				95B650C621B251E80020275A /* TimerCollectionViewController.xml in Resources */,

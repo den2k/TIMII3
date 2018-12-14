@@ -13,7 +13,7 @@
  TODO: 12.1.18 [DONE 12.4.18] - Retrieve existing Timers and display them in Timer Collection
  TODO: 12.5.18 [DONE 12.5.18] - Add a default image for each retrieved timer. We have 3 now.
  TODO: 12.1.18 - Add 'Add Timer' functionality only to empty timer button
- TODO: 12.9.18 - Limit timers to Max and fix reading more timers crashing
+ TODO: 12.9.18 [DONE 12.13.18] - Limit timers to Max and fix reading more timers crashing
  TODO: 12.11.18 [DONE 12.13.18] - After adding new timers, refresh screen. Added observer to reload data.
  
  */
@@ -22,8 +22,9 @@ import Layout
 import UIKit
 import Firebase
 
+private let add = UIImage(named: "Add")
+
 private let images = [
-    UIImage(named: "Add"),
     UIImage(named: "One"),
     UIImage(named: "Two"),
     UIImage(named: "Three"),
@@ -33,12 +34,16 @@ private let images = [
     UIImage(named: "Seven"),
     UIImage(named: "Eight"),
     UIImage(named: "Nine"),
+    UIImage(named: "Ten")
 ]
+
+private let numberOfTimersAllowed = 6
 
 class TimerCollectionViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, Ownable
 {
     var db: Firestore!
-    var timerTitles: [String] = [String](repeating: "", count: 9)
+    
+    var timerTitles: [String] = [String](repeating: "", count: numberOfTimersAllowed)
     
     override func viewDidLoad()
     {
@@ -66,7 +71,7 @@ class TimerCollectionViewController: UIViewController, UICollectionViewDelegate,
     }
     
     func collectionView(_: UICollectionView, numberOfItemsInSection _: Int) -> Int {
-        return 9
+        return numberOfTimersAllowed
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -77,9 +82,9 @@ class TimerCollectionViewController: UIViewController, UICollectionViewDelegate,
         // Sets default timer image when a timer is loaded
         let image: UIImage
         if timerTitles[indexPath.row] == "" {
-            image = images[0]!
+            image = add!
         } else {
-            image = images[indexPath.row+1]!
+            image = images[(indexPath.row) % 10]!
         }
         
         node.setState([
@@ -114,9 +119,13 @@ class TimerCollectionViewController: UIViewController, UICollectionViewDelegate,
             } else {
                 for (index, document) in querySnapshot!.documents.enumerated()
                 {
-                    print("--->>>\(document.documentID) => \(document.data())")
+                    print("\(index):--->>>\(document.documentID) => \(document.data())")
                     let timerDoc = document.data()
-                    self.timerTitles[index] = timerDoc["name"] as? String ?? ""
+                    if index < numberOfTimersAllowed {
+                        self.timerTitles[index] = timerDoc["name"] as? String ?? ""
+                    } else {
+                        print("Too many timers!")
+                    }
                 }
                 DispatchQueue.main.async { self.timerCollectionView?.reloadData() }
                 print(self.timerTitles)  // delete
@@ -125,6 +134,4 @@ class TimerCollectionViewController: UIViewController, UICollectionViewDelegate,
     }
 }
 
-extension Notification.Name {
-    static let didCreateNewTimer = Notification.Name("didCreateNewTimer")
-}
+
