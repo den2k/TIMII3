@@ -10,7 +10,8 @@
  TODO: 11.3.18 [DONE - 12.8.18] - delete testing VC properties timer1
  TODO: 11.3.18 [DONE - 11.3.18] - Save time results to Firestore
  TODO: 11.18.18 - Refactor getTimerStats to somwhere else so we can remove Firebase code from this VC.
- TODO: 12.9.18 - Add isTimerActive function
+ TODO: 12.9.18 - Add isTimerActive / ActiveTimer functions and delete all timer1 placeholder timer code.
+ TODO: 12.9.18 - Fix getTimerStats as its not reacing ActiveTimer info and saves data to the wrong place.
  
  */
 
@@ -69,7 +70,7 @@ class ActiveTimerViewController: UIViewController, Ownable
     }
     
     
-    // viewWillAppear is called everything time VC is presented.
+    // viewWillAppear is called everything time VC is presented and runs every 0.5 sec
     override func viewDidAppear(_ animated: Bool)
     {
         getTimerStats()

@@ -12,7 +12,9 @@
  TODO: 12.1.18 [DONE 12.1.18] - Remove use of templateCell
  TODO: 12.1.18 [DONE 12.4.18] - Retrieve existing Timers and display them in Timer Collection
  TODO: 12.5.18 [DONE 12.5.18] - Add a default image for each retrieved timer. We have 3 now.
- TODO: 12.1.18 - Add 'Add Timer' functionality to each timer button
+ TODO: 12.1.18 - Add 'Add Timer' functionality only to empty timer button
+ TODO: 12.9.18 - Limit timers to Max and fix reading more timers crashing
+ TODO: 12.11.18 [DONE 12.13.18] - After adding new timers, refresh screen. Added observer to reload data.
  
  */
 
@@ -43,12 +45,16 @@ class TimerCollectionViewController: UIViewController, UICollectionViewDelegate,
         super.viewDidLoad()
         db = Firestore.firestore()
         getTimers()
+
+        NotificationCenter.default.addObserver(self, selector: #selector(getTimers), name: .didCreateNewTimer, object: nil)
     }
     
-    override func viewWillAppear(_ animated: Bool) {
+    override func viewWillAppear(_ animated: Bool)
+    {
         super.viewWillAppear(true)
-        getTimers()
+        getTimers()        
     }
+    
     
     @IBOutlet var timerCollectionView: UICollectionView? {
         didSet {
@@ -97,12 +103,10 @@ class TimerCollectionViewController: UIViewController, UICollectionViewDelegate,
         
         // Keeps the presenting "TimerCollectionViewController" VC in view beneath the presented "newTimerScreen" VC.
         newTimerScreen.modalPresentationStyle = .overFullScreen
-        present(newTimerScreen, animated: false, completion: nil)
+        present(newTimerScreen, animated: true, completion: nil)
     }
     
-    var listenerDash: ListenerRegistration!
-    
-    func getTimers()
+    @objc func getTimers()
     {
         db.collection("Members").document(memberID).collection("Timers").getDocuments() { (querySnapshot, error) in
             if let err = error {
@@ -121,3 +125,6 @@ class TimerCollectionViewController: UIViewController, UICollectionViewDelegate,
     }
 }
 
+extension Notification.Name {
+    static let didCreateNewTimer = Notification.Name("didCreateNewTimer")
+}

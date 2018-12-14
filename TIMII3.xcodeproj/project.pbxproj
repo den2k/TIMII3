@@ -177,6 +177,7 @@
 				957CD69D216D995B000CE343 /* AppDelegate.swift */,
 				957CD6CB216D9CD9000CE343 /* GoogleService-Info.plist */,
 				95EC6A18216F8A8A00643F19 /* Launch Screen.storyboard */,
+				9521659F21AD8AF40094B8AB /* NewTimerViewController.xml */,
 			);
 			path = TIMII3;
 			sourceTree = "<group>";
@@ -215,7 +216,6 @@
 				952165A121AD8E260094B8AB /* TimerCollectionViewController.swift */,
 				95B650C521B251E80020275A /* TimerCollectionViewController.xml */,
 				95B650C121B251480020275A /* TimerCollectionCell.xml */,
-				9521659F21AD8AF40094B8AB /* NewTimerViewController.xml */,
 				95C0D08E21BCD26900626077 /* NewTimerScreen.swift */,
 				95C0D09021BCD75B00626077 /* NewTimerScreen.xml */,
 			);

@@ -15,7 +15,7 @@
     <!-- TIMII Logo -->
     <UIImageView
         image="//timer.png"
-        top="isKeyboardVisible ? 7% - height/2 : 22% - height/2"
+        top="isKeyboardVisible ? 3% - height/2 : 20% - height/2"
         left="50% - width/2"
         width="60"
         height="60"

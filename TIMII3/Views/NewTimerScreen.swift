@@ -59,12 +59,14 @@ class NewTimerScreen: UIViewController, LayoutLoading
         
         // This creates a new timer
         FS().FSSaveMemberCollectionDict(collectionName: FSCollectionName.Timers, dictionary: dict)
-        self.dismiss(animated: false, completion: nil)
+        self.dismiss(animated: true, completion: {
+            NotificationCenter.default.post(name: .didCreateNewTimer, object: nil)
+        })
     }
     
     @objc func cancel()
     {
-        self.dismiss(animated: false, completion: nil)
+        self.dismiss(animated: true, completion: nil)
     }
     
     private func updateView()
