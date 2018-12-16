@@ -15,6 +15,9 @@
  TODO: 12.1.18 - Add 'Add Timer' functionality only to empty timer button
  TODO: 12.9.18 [DONE 12.13.18] - Limit timers to Max and fix reading more timers crashing
  TODO: 12.11.18 [DONE 12.13.18] - After adding new timers, refresh screen. Added observer to reload data.
+ TODO: 12.13.18 [DONE 12.16.18] - Add Number of Timers Stats to Member document
+ TODO: 12.13.18 - Limit the showing of New Timer Screen if user exceeds the number of timers allowed. Need to add stats into FS to do this.
+ TODO: 12.13.18 - Delete timers with press and hold gesture to show delete dialog.
  
  */
 
@@ -52,6 +55,15 @@ class TimerCollectionViewController: UIViewController, UICollectionViewDelegate,
         getTimers()
 
         NotificationCenter.default.addObserver(self, selector: #selector(getTimers), name: .didCreateNewTimer, object: nil)
+        
+        
+        // Add Long Press Gesture to delete
+        let lpgr : UILongPressGestureRecognizer = UILongPressGestureRecognizer(target: self, action: #selector(onDidLongPressTimer))
+        lpgr.minimumPressDuration = 0.5
+        lpgr.delegate = self
+        lpgr.delaysTouchesBegan = true
+        timerCollectionView?.addGestureRecognizer(lpgr)
+        
     }
     
     override func viewWillAppear(_ animated: Bool)
@@ -135,3 +147,19 @@ class TimerCollectionViewController: UIViewController, UICollectionViewDelegate,
 }
 
 
+extension TimerCollectionViewController: UIGestureRecognizerDelegate
+{
+    @objc func onDidLongPressTimer(gestureRecognizer : UILongPressGestureRecognizer)
+    {
+        print(">onDidLongPressTimer")
+        if gestureRecognizer.state != UIGestureRecognizer.State.began { return }
+        
+        let p = gestureRecognizer.location(in: timerCollectionView)
+        if let indexPath = timerCollectionView?.indexPathForItem(at: p)
+        {
+            print("\(indexPath.row) Let's delete this timer.")
+        } else {
+            print("got nothing...")
+        }
+    }
+}

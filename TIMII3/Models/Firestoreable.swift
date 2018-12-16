@@ -156,7 +156,7 @@ struct FS
     func FSSaveMemberDocumentPathDict(documentPath: String, dictionary: Dictionary<String,Any>)
     {
         /*
-         This function saves a subcollection tied to a member ID.
+         This function creates or updates (setDate... merge: true) a subcollection tied to a member ID.
          Collections and documents must always follow the pattern
          of collection/document/collection/document.
          

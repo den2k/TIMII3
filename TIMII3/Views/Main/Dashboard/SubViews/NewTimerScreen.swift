@@ -7,13 +7,13 @@
 //
 /* --- TODO Section ---
  
- TODO: 12.8.18 - Create a simple popup for creating a new timer.
+ TODO: 12.8.18 [DONE 12.12.18] - Create a simple popup for creating a new timer.
+ TODO: 12.13.18 [DONE 12.16.18] - add timer stats: numOfTimers (Member), maxNumOfTimers (Member)
  
  */
 
 import UIKit
 import Layout
-import Firebase
 
 class NewTimerScreen: UIViewController, LayoutLoading
 {
@@ -62,6 +62,14 @@ class NewTimerScreen: UIViewController, LayoutLoading
         self.dismiss(animated: true, completion: {
             NotificationCenter.default.post(name: .didCreateNewTimer, object: nil)
         })
+        
+        // Saves Timer stats that need updating
+        updateTimerStats()
+
+        self.dismiss(animated: true, completion: {
+            NotificationCenter.default.post(name: .didCreateNewTimer, object: nil)
+        })
+        
     }
     
     @objc func cancel()
@@ -105,4 +113,62 @@ class NewTimerScreen: UIViewController, LayoutLoading
 
 extension Notification.Name {
     static let didCreateNewTimer = Notification.Name("didCreateNewTimer")
+}
+
+
+
+import Firebase
+
+extension NewTimerScreen: Ownable
+{
+    @objc func updateTimerStats()
+    {
+        let db = Firestore.firestore()
+        let memberRef: DocumentReference = db.collection(FSCollectionName.Members.rawValue).document(memberID)
+        
+        // https://firebase.google.com/docs/firestore/solutions/aggregation
+        db.runTransaction({ (transaction, errorPointer) -> Any? in
+            
+            let memberDocument: DocumentSnapshot
+            do {
+                try memberDocument = transaction.getDocument(memberRef)
+            } catch let fetchError as NSError {
+                errorPointer?.pointee = fetchError
+                return nil
+            }
+            
+            guard let numOfTimers = memberDocument.data()?["numOfTimers"] as? Int else {
+                let error = NSError(
+                    domain: "AppErrorDomain",
+                    code: -1,
+                    userInfo: [
+                        NSLocalizedDescriptionKey: "Unable to retrieve member data from snapshot \(memberDocument)"
+                    ]
+                )
+                errorPointer?.pointee = error
+                return nil
+            }
+            
+            var newNumOfTimers: Int = 0
+            
+            if numOfTimers < Main().MAXNUMOFTIMERS {
+                newNumOfTimers = numOfTimers + 1
+            } else {
+                print("Too many timers. Cannot add anymore.")
+                newNumOfTimers = numOfTimers
+            }
+            
+            // Commit to Firestore - Merge updates existing documents, but doesn't create..
+            transaction.updateData(["numOfTimers": newNumOfTimers], forDocument: memberRef)
+            return nil
+        }) { (object, error) in
+            if let error = error {
+                print("Transaction failed: \(error.localizedDescription)")
+            } else {
+                print("Member data tranasaction updated! \(memberRef.documentID)")
+            }
+        }
+        
+    }
+    
 }

@@ -8,6 +8,7 @@
 /*
  TODO: 11.4.18 [DONE 11.?.18] - Add username, fullname so I can use this for later...
  TODO: 11.21.18 [DONE 11.21.18] - Added member ID to Member fields and refactored the saving a member function
+ TODO: 12.16.18 [DONE 12.16.19] - Added default numOfTimers, MaxNumOfTimers values.
  */
 
 import Firebase
@@ -37,11 +38,13 @@ class Member: Firestoreable, AuthMethod, Ownable
     // Protocol functions
     func FSSave()
     {
-        let dict = [
+        let dict: [String:Any] = [
             "email":            self.email,
             "fullName":         self.fullName,
             "userName":         self.userName,
             "authMethod":       authMethod.rawValue,
+            "maxNumOfTimers":   Main().MAXNUMOFTIMERS,
+            "numOfTimers":      0,
             ]
         
         FS().FSSaveMember(userName: self.userName, dictionary: dict)
