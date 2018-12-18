@@ -111,11 +111,6 @@ class NewTimerScreen: UIViewController, LayoutLoading
     }
 }
 
-extension Notification.Name {
-    static let didCreateNewTimer = Notification.Name("didCreateNewTimer")
-}
-
-
 
 import Firebase
 

@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		137F1B957EBBD7E6DEC3CDA7 /* Pods_TIMII3Tests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 62003BEE0B871C0DD255D3B4 /* Pods_TIMII3Tests.framework */; };
+		9512E3B321C8AABD001E6453 /* NotificationHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9512E3B221C8AABD001E6453 /* NotificationHelper.swift */; };
 		952165A221AD8E260094B8AB /* TimerCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 952165A121AD8E260094B8AB /* TimerCollectionViewController.swift */; };
 		953094BB216EEBA500384DF8 /* Login.swift in Sources */ = {isa = PBXBuildFile; fileRef = 953094BA216EEBA500384DF8 /* Login.swift */; };
 		9547754721862F7400D7972A /* Ownable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9547754621862F7400D7972A /* Ownable.swift */; };
@@ -40,7 +41,7 @@
 		95EC6A10216F103200643F19 /* Main.xml in Resources */ = {isa = PBXBuildFile; fileRef = 95EC6A0F216F103200643F19 /* Main.xml */; };
 		95EC6A13216F139C00643F19 /* SettingScreenViewController.xml in Resources */ = {isa = PBXBuildFile; fileRef = 95EC6A12216F139C00643F19 /* SettingScreenViewController.xml */; };
 		95EC6A15216F13F900643F19 /* SettingScreenViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95EC6A14216F13F900643F19 /* SettingScreenViewController.swift */; };
-		95EC6A17216F152600643F19 /* Colors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95EC6A16216F152600643F19 /* Colors.swift */; };
+		95EC6A17216F152600643F19 /* UIColorHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95EC6A16216F152600643F19 /* UIColorHelper.swift */; };
 		95EC6A19216F8A8A00643F19 /* Launch Screen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 95EC6A18216F8A8A00643F19 /* Launch Screen.storyboard */; };
 		95EC6A1C21701D0E00643F19 /* Nameable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95EC6A1B21701D0E00643F19 /* Nameable.swift */; };
 		AC9368CD879471FF007D3B11 /* Pods_TIMII3.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A6FEA52EC11DEB5CA6E837DB /* Pods_TIMII3.framework */; };
@@ -70,6 +71,7 @@
 		5C6E2750660F39C3A454D323 /* Pods-TIMII3UITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TIMII3UITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-TIMII3UITests/Pods-TIMII3UITests.release.xcconfig"; sourceTree = "<group>"; };
 		62003BEE0B871C0DD255D3B4 /* Pods_TIMII3Tests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_TIMII3Tests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		6F190E17B9C78B61B2D5E588 /* Pods-TIMII3.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TIMII3.debug.xcconfig"; path = "Pods/Target Support Files/Pods-TIMII3/Pods-TIMII3.debug.xcconfig"; sourceTree = "<group>"; };
+		9512E3B221C8AABD001E6453 /* NotificationHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationHelper.swift; sourceTree = "<group>"; };
 		952165A121AD8E260094B8AB /* TimerCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerCollectionViewController.swift; sourceTree = "<group>"; };
 		953094BA216EEBA500384DF8 /* Login.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Login.swift; sourceTree = "<group>"; };
 		9547754621862F7400D7972A /* Ownable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Ownable.swift; sourceTree = "<group>"; };
@@ -107,7 +109,7 @@
 		95EC6A0F216F103200643F19 /* Main.xml */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = Main.xml; sourceTree = "<group>"; };
 		95EC6A12216F139C00643F19 /* SettingScreenViewController.xml */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = SettingScreenViewController.xml; sourceTree = "<group>"; };
 		95EC6A14216F13F900643F19 /* SettingScreenViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingScreenViewController.swift; sourceTree = "<group>"; };
-		95EC6A16216F152600643F19 /* Colors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Colors.swift; sourceTree = "<group>"; };
+		95EC6A16216F152600643F19 /* UIColorHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIColorHelper.swift; sourceTree = "<group>"; };
 		95EC6A18216F8A8A00643F19 /* Launch Screen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = "Launch Screen.storyboard"; sourceTree = "<group>"; };
 		95EC6A1B21701D0E00643F19 /* Nameable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Nameable.swift; sourceTree = "<group>"; };
 		A6FEA52EC11DEB5CA6E837DB /* Pods_TIMII3.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_TIMII3.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -261,7 +263,8 @@
 				95533F6E21705AA2004391AF /* Firestoreable.swift */,
 				95EC6A1B21701D0E00643F19 /* Nameable.swift */,
 				9547754621862F7400D7972A /* Ownable.swift */,
-				95EC6A16216F152600643F19 /* Colors.swift */,
+				95EC6A16216F152600643F19 /* UIColorHelper.swift */,
+				9512E3B221C8AABD001E6453 /* NotificationHelper.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -558,7 +561,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				957CD6D2216DA10D000CE343 /* Main.swift in Sources */,
-				95EC6A17216F152600643F19 /* Colors.swift in Sources */,
+				95EC6A17216F152600643F19 /* UIColorHelper.swift in Sources */,
 				953094BB216EEBA500384DF8 /* Login.swift in Sources */,
 				95C8F8B52188038B003AED25 /* ActiveTimerViewController.swift in Sources */,
 				95EC6A09216EF42900643F19 /* CreateAccountScreen.swift in Sources */,
@@ -573,6 +576,7 @@
 				9547754721862F7400D7972A /* Ownable.swift in Sources */,
 				95EC6A07216EF2D200643F19 /* LoginScreen.swift in Sources */,
 				95533F712170E298004391AF /* Member.swift in Sources */,
+				9512E3B321C8AABD001E6453 /* NotificationHelper.swift in Sources */,
 				952165A221AD8E260094B8AB /* TimerCollectionViewController.swift in Sources */,
 				9563D5E82172AD7100708913 /* AuthenticationMethod.swift in Sources */,
 			);

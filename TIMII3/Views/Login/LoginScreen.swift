@@ -65,7 +65,11 @@ class LoginScreen: UIViewController, LayoutLoading, UITextFieldDelegate
                     return
                 }
                 // Dismiss to Main screen
-                print("Sign in successful.")
+                print("Sign in successful. \(email)")
+                
+                // Add a Notification on new user login so Tabs (other screens) can reload
+//                NotificationCenter.default.post(name: .didNewUserLogin, object: nil)
+                
                 self.dismiss(animated: true, completion: nil)
         })
     }

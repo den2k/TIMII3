@@ -48,6 +48,11 @@ class Member: Firestoreable, AuthMethod, Ownable
             ]
         
         FS().FSSaveMember(userName: self.userName, dictionary: dict)
+     
+        // Create First Default timer for a new Member
+        let t = Timii(name: "First Timer", description: "Change this timer to one that suits you.")
+        t.FSSave()
+        
     }
     
 }

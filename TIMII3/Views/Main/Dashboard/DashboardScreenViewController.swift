@@ -52,6 +52,9 @@ class DashboardScreenViewController: UIViewController, Ownable, LayoutLoading
         db.settings = settings
 
         let memberRef = db.collection(FSCollectionName.Members.rawValue).document(memberID)
+        
+        print("memberID: --> \(memberID)")      // delete
+        
         listenerDash = memberRef.addSnapshotListener { (document, error) in
             guard let doc = document, doc.exists else { return }
             if let err = error {
@@ -67,8 +70,21 @@ class DashboardScreenViewController: UIViewController, Ownable, LayoutLoading
                 ])
             }
         }
+        
+        // Observe for .didNewUserLogin so as to reload this Screen
+//        NotificationCenter.default.addObserver(self, selector: #selector(reloadScreen), name: .didNewUserLogin, object: nil)
+        
+        
     }
 
+//    @objc func reloadScreen()
+//    {
+//        print("Reloading DashboardScreen.")
+//        DispatchQueue.main.async {
+//            self.reloadLayout()
+//        }
+//    }
+    
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         listenerDash.remove()   // removes listener to present memory hog, network access and also no need for weak reference in definition

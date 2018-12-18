@@ -16,6 +16,7 @@
  TODO: 12.9.18 [DONE 12.13.18] - Limit timers to Max and fix reading more timers crashing
  TODO: 12.11.18 [DONE 12.13.18] - After adding new timers, refresh screen. Added observer to reload data.
  TODO: 12.13.18 [DONE 12.16.18] - Add Number of Timers Stats to Member document
+ TODO: 12.17.18 [DONE 12.17.18] - Clear timer views upon new member login
  TODO: 12.13.18 - Limit the showing of New Timer Screen if user exceeds the number of timers allowed. Need to add stats into FS to do this.
  TODO: 12.13.18 - Delete timers with press and hold gesture to show delete dialog.
  
@@ -40,13 +41,13 @@ private let images = [
     UIImage(named: "Ten")
 ]
 
-private let numberOfTimersAllowed = 6
+private let NUMOFALLOWEDTIMERS = 6
 
 class TimerCollectionViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, Ownable
 {
     var db: Firestore!
     
-    var timerTitles: [String] = [String](repeating: "", count: numberOfTimersAllowed)
+    var timerTitles: [String] = [String](repeating: "", count: NUMOFALLOWEDTIMERS)
     
     override func viewDidLoad()
     {
@@ -69,7 +70,7 @@ class TimerCollectionViewController: UIViewController, UICollectionViewDelegate,
     override func viewWillAppear(_ animated: Bool)
     {
         super.viewWillAppear(true)
-        getTimers()        
+        getTimers()
     }
     
     
@@ -83,7 +84,7 @@ class TimerCollectionViewController: UIViewController, UICollectionViewDelegate,
     }
     
     func collectionView(_: UICollectionView, numberOfItemsInSection _: Int) -> Int {
-        return numberOfTimersAllowed
+        return NUMOFALLOWEDTIMERS
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -125,6 +126,8 @@ class TimerCollectionViewController: UIViewController, UICollectionViewDelegate,
     
     @objc func getTimers()
     {
+        var timerCount: Int = 0
+        
         db.collection("Members").document(memberID).collection("Timers").getDocuments() { (querySnapshot, error) in
             if let err = error {
                 print("Error getting document: \(err)")
@@ -133,12 +136,25 @@ class TimerCollectionViewController: UIViewController, UICollectionViewDelegate,
                 {
                     print("\(index):--->>>\(document.documentID) => \(document.data())")
                     let timerDoc = document.data()
-                    if index < numberOfTimersAllowed {
+                    if index < NUMOFALLOWEDTIMERS {
                         self.timerTitles[index] = timerDoc["name"] as? String ?? ""
+                        timerCount = index+1    // For looping through timerCount
+                        print(timerCount)   //delete
                     } else {
                         print("Too many timers!")
                     }
                 }
+                
+                // Loop through blank timers
+                if timerCount < NUMOFALLOWEDTIMERS
+                {
+                    for index in timerCount...NUMOFALLOWEDTIMERS-1
+                    {
+                        print(index)
+                        self.timerTitles[index] = ""
+                    }
+                }
+                    
                 DispatchQueue.main.async { self.timerCollectionView?.reloadData() }
                 print(self.timerTitles)  // delete
             }
