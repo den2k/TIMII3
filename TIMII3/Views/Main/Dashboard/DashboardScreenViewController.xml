@@ -30,13 +30,15 @@ going from VC -> Layout, but Layout -> VC.
             backgroundColor=""
             font="Avenir Next 16"
             textAlignment="center"
-            textColor="white"
+            textColor="gray"
         />
 
     </UIView>
     
     <!-- Active Timer Section -->
-    <ActiveTimerViewController xml="SubViews/ActiveTimerViewController.xml"/>
+    <ActiveTimerViewController
+        view.isHidden="{hideActiveTimer}     // show after a timer is pressed"
+        xml="SubViews/ActiveTimerViewController.xml"/>
     
     <UIView
         backgroundColor="// Timer Dashboard Section"

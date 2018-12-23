@@ -15,16 +15,19 @@
  
  */
 
-import Foundation
+import UIKit
 import Layout
 import Firebase
 
 class ActiveTimerViewController: UIViewController, Ownable
 {
+    // Timers Array
+    var timers: [Timii] = []
     
     // ViewController properties
+//    var timer1 = Timii()
+    
     var timer1 = Timii(name: "History", description: "History 101 for Ellie")
-//    var timer2 = Timii(name: "English", description: "English 201 for Eaton")
 
     var listenerDash: ListenerRegistration!
 
@@ -40,8 +43,8 @@ class ActiveTimerViewController: UIViewController, Ownable
                 "minute"            : timer1.minutes,
                 "second"            : timer1.seconds,
                 "isTimerRunning"    : timer1.isTimerRunning,
-                "numOfSessions"     : "",
-                "loggedTotal"       : "",
+                "numOfSessions"     : timer1.numOfSessions,
+                "loggedTotalTime"   : timer1.loggedTotalTime,
             ])
         }
     }
@@ -69,8 +72,14 @@ class ActiveTimerViewController: UIViewController, Ownable
         ])
     }
     
+    override func viewDidLoad()
+    {
+        super.viewDidLoad()
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(showTimer), name: .didSelectNewActiveTimer, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(killTimer), name: .didDeselectActiveTimer, object: nil)
+    }
     
-    // viewWillAppear is called everything time VC is presented and runs every 0.5 sec
     override func viewDidAppear(_ animated: Bool)
     {
         getTimerStats()
@@ -81,9 +90,9 @@ class ActiveTimerViewController: UIViewController, Ownable
     {
         // FS Boilerplate to remove warning.
         let db = Firestore.firestore()
-        let settings = db.settings
-        settings.areTimestampsInSnapshotsEnabled = true
-        db.settings = settings
+//        let settings = db.settings
+//        settings.areTimestampsInSnapshotsEnabled = true
+//        db.settings = settings
         
         let timerRef = db.collection("Members").document(memberID).collection("Timers").document(timer1.name)
         listenerDash = timerRef.addSnapshotListener { (document, error) in
@@ -93,16 +102,16 @@ class ActiveTimerViewController: UIViewController, Ownable
             } else {
                 let timerDoc = document?.data()
                 let retNumOfSessions   = timerDoc!["numOfSessions"] as? Int ?? 0
-                let retLoggedTotal     = timerDoc!["loggedTotal"] as? Double ?? 0
+                let retLoggedTotalTime     = timerDoc!["loggedTotalTime"] as? Double ?? 0
                 
                 // Convert Double to Time
-                let hrs = Timii.hours(retLoggedTotal*10)
-                let min = Timii.minutes(retLoggedTotal*10)
-                let sec = Timii.seconds(retLoggedTotal*10)
+                let hrs = Timii.hours(retLoggedTotalTime*10)
+                let min = Timii.minutes(retLoggedTotalTime*10)
+                let sec = Timii.seconds(retLoggedTotalTime*10)
                 
                 self.ActiveTimerNode?.setState([
                     "numOfSessions": retNumOfSessions,
-                    "loggedTotal": "\(hrs):\(min):\(sec)",
+                    "loggedTotalTime": "\(hrs):\(min):\(sec)",
                     ])
             }
         }
@@ -112,6 +121,58 @@ class ActiveTimerViewController: UIViewController, Ownable
     {
         super.viewWillDisappear(animated)
         listenerDash.remove()   // removes listener to present memory hog, network access and also no need for weak reference in definition
+        
+        NotificationCenter.default.removeObserver(self, name: .didSelectNewActiveTimer, object: nil)
+        NotificationCenter.default.removeObserver(self, name: .didDeselectActiveTimer, object: nil)
     }
     
 }
+
+//MARK: ---------- Show Timer ----------
+extension ActiveTimerViewController
+{
+    
+    @objc func showTimer(_ notification: Notification)
+    {
+        let index: Int = notification.userInfo?["index"] as? Int ?? 0
+        let timerID: String = notification.userInfo?["timerID"] as? String ?? ""
+        print("received index: \(index) \(timerID)")
+        getTimer(timerID: timerID)
+    }
+    
+    @objc func getTimer(timerID: String)
+    {
+        let db = Firestore.firestore()
+        db.collection("Members").document(memberID).collection("Timers").document(timerID).getDocument()
+        { (document, error) in
+            if let err = error {
+                print("Error getting document: \(err)")
+            } else {
+                let timerDoc = document?.data()
+                print("timerID: \(timerID)")
+                print(document?.data() as Any)
+                let timerName = timerDoc!["name"] as? String ?? ""
+                let timerDesc = timerDoc!["description"] as? String ?? ""
+//                let timerCreatedTime = timerDoc!["createdTime"] as?
+                
+                
+                self.timer1.name = timerName
+                self.timer1.description = timerDesc
+            }
+        }
+        
+    }
+    
+}
+
+//MARK: ---------- Kill Timer ----------
+extension ActiveTimerViewController
+{
+    
+    @objc func killTimer()
+    {
+        print("Kill timer")
+    }
+    
+}
+

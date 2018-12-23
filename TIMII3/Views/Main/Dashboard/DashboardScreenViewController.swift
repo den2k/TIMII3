@@ -11,6 +11,8 @@
  
  
  TODO: 11.4.18 - Adding a whole code block in viewDidLoad() just to retrive member info...Would like to refactor this into Firestoreable
+ 
+ TODO: 12.22.18 [DONE 12.22.18] - Added hideActiveTimer to show and hide the active timer section in the dashboard
  */
 
 import UIKit
@@ -21,6 +23,8 @@ class DashboardScreenViewController: UIViewController, Ownable, LayoutLoading
 {
  
     // For a view or controller whose layout is loaded by another class (like BoxesViewController) you can override the layoutNode property and add your own didSet handler.
+    
+    var hideActiveTimer: Bool = true
 
     @IBOutlet var DashboardScreenNode: LayoutNode?
     {
@@ -29,12 +33,12 @@ class DashboardScreenViewController: UIViewController, Ownable, LayoutLoading
             // Set FS fields to "blank" so no errors show up waiting for data retrival
             // 11.4.18 - added isTimerRunning..... should not need to.
             DashboardScreenNode?.setState([
-                "userName": ""
+                "userName": "",
+                "hideActiveTimer": hideActiveTimer,
             ])
         }
     }
 
-//    @IBOutlet var userNameLabel: LayoutNode?
     var listenerDash: ListenerRegistration!
   
     /*
@@ -45,6 +49,9 @@ class DashboardScreenViewController: UIViewController, Ownable, LayoutLoading
     {
         super.viewDidLoad()
         
+        NotificationCenter.default.addObserver(self, selector: #selector(showTimer), name: .didSelectNewActiveTimer, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(killTimer), name: .didDeselectActiveTimer, object: nil)
+
         // FS Boilerplate to remove warning.
         let db = Firestore.firestore()
         let settings = db.settings
@@ -66,27 +73,43 @@ class DashboardScreenViewController: UIViewController, Ownable, LayoutLoading
                 // let memberAuthMethod    = memberDoc!["authMethod"] as? String ?? ""
 
                 self.DashboardScreenNode?.setState([
-                    "userName": userName
+                    "userName": userName,
+                    "hideActiveTimer": self.hideActiveTimer,
                 ])
             }
         }
-        
-        // Observe for .didNewUserLogin so as to reload this Screen
-//        NotificationCenter.default.addObserver(self, selector: #selector(reloadScreen), name: .didNewUserLogin, object: nil)
-        
-        
     }
-
-//    @objc func reloadScreen()
-//    {
-//        print("Reloading DashboardScreen.")
-//        DispatchQueue.main.async {
-//            self.reloadLayout()
-//        }
-//    }
+ 
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         listenerDash.remove()   // removes listener to present memory hog, network access and also no need for weak reference in definition
+        
+        NotificationCenter.default.removeObserver(self, name: .didSelectNewActiveTimer, object: nil)
+        NotificationCenter.default.removeObserver(self, name: .didDeselectActiveTimer, object: nil)
+
     }
 }
+
+
+extension DashboardScreenViewController
+{
+    @objc func showTimer()
+    {
+        hideActiveTimer = false
+        print("Dashboard Show timer")
+        self.DashboardScreenNode?.setState([
+            "hideActiveTimer": self.hideActiveTimer,
+            ])
+    }
+
+    @objc func killTimer()
+    {
+        hideActiveTimer = true
+        print("Dashboard Kill timer")
+        self.DashboardScreenNode?.setState([
+            "hideActiveTimer": self.hideActiveTimer,
+            ])
+    }
+}
+

@@ -10,5 +10,8 @@ import Foundation
 
 extension Notification.Name {
     static let didCreateNewTimer = Notification.Name("didCreateNewTimer")
+    static let didSelectNewActiveTimer = Notification.Name("didSelectNewActiveTimer")
+    static let didDeselectActiveTimer = Notification.Name("didDeselectActiveTimer")
+    
 //    static let didNewUserLogin = Notification.Name("didNewUserLogin")
 }

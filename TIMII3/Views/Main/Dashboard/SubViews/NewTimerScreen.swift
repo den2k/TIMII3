@@ -55,7 +55,9 @@ class NewTimerScreen: UIViewController, LayoutLoading
         let dict = [
             "name": name,
             "description": description,
-        ]
+            "numOfSessions": 0,
+            "loggedTotalTime": 0,
+            ] as [String : Any]
         
         // This creates a new timer
         FS().FSSaveMemberCollectionDict(collectionName: FSCollectionName.Timers, dictionary: dict)

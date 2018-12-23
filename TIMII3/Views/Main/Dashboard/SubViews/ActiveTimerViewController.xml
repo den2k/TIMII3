@@ -7,14 +7,14 @@
     view.backgroundColor="softWhite   // Active Timer Section"
     top="previous.bottom"
     left="0"
-    height="200"
+    height="400"
     width="100%">
     
     <!-- Timer Control Section -->
     <UIButton
         title="{isTimerRunning ? '| |':'>'}"
         touchUpInside="toggleTimerButton"
-        top="35"
+        top="50% - height / 2"
         left="20% - width/2"
         height="100"
         width="100"
@@ -69,8 +69,8 @@
     />
 
     <UILabel
-    text="# {loggedTotal}   # {numOfSessions}"
-        top="160"
+    text="# {loggedTotalTime}   # {numOfSessions}"
+        bottom="parent.bottom - 50"
         left="65% - width/2"
         height="auto"
         width="auto"

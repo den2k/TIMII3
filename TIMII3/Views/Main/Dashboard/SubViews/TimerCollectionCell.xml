@@ -1,17 +1,42 @@
-<UICollectionViewCell clipsToBounds="true">
-    
+<UICollectionViewCell
+    reuseIdentifier="timerCollectionCell"
+    clipsToBounds="true">
+
+    <UIImageView
+        image="{image}"
+        contentMode="scaleAspectFit"
+        top="10"
+        left="50% - width/2"
+        height="65%"
+        width="65%"
+        />
+        
+    <UILabel
+        text="{title}"
+        top="previous.bottom + 5"
+        left="50% - width/2"
+        height="auto"
+        width="auto"
+        backgroundColor="// text label background color"
+        font="Avenir Next 16"
+        textColor="gray"
+        />
+
+<!--
     <UIButton
-    title=""
-    touchUpInside="onDidPressButton"
-    top=""
-    left=""
-    height="100%"
-    width="100%"
-    backgroundColor="//porcelainOpaque">
-    
+        touchUpInside="onDidPressEmptyButton"
+        isHidden="{!timerIsEmpty}"
+        title=""
+        top=""
+        left=""
+        height="100%"
+        width="100%"
+        backgroundColor="">
+ 
+        
         <UIImageView
         contentMode="scaleAspectFit"
-        top=""
+        top="10"
         left="50% - width/2"
         height="65%"
         width="65%"
@@ -28,7 +53,7 @@
         font="Avenir Next 16"
         textColor="gray"
         />
-        
     </UIButton>
-    
+-->
+
 </UICollectionViewCell>

@@ -26,6 +26,7 @@ extension Timii
     // Protocol functions
     func FSSave()
     {
+        // 12.12.18 - Not being used....
         print("Saving new Timii.")
         
         let dict = [
@@ -184,7 +185,7 @@ extension Timii
                 
                 // Set new info --- what is this for?
                 timerData["numOfSessions"] = newNumOfSessions
-                timerData["loggedTotal"] = newLogTotal
+                timerData["loggedTotalTime"] = newLogTotal
                 
                 // Commit to Firestore - Merge updates existing documents, but doesn't create..
                 transaction.setData(timerData, forDocument: timerRef, merge: true)

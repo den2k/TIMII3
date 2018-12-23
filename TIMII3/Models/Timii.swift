@@ -35,6 +35,11 @@ class Timii: Firestoreable, Nameable, Ownable
     var startTime: Date                 = Date()            // holds the start time of a timed session
     var endTimeInterval: DateInterval   = DateInterval()    // holds the end time of a timed session
     var pauseTimerDate                  = Date()            // temporary holder of the timer value in case of suspened to background
+    var numOfSessions                   = 0
+    var loggedTotalTime                 = 0
+    
+    
+    init() {}
     
     init(name: String, description: String)
     {
