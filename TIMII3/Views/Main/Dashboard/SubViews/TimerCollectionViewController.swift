@@ -19,6 +19,9 @@
  TODO: 12.17.18 [DONE 12.17.18] - Clear timer views upon new member login
  TODO: 12.13.18 [DONE 12.22.18] - Updated so newTimerScreen only shows with an empty Timer slot in didSelectItemAt. Limit the showing of New Timer Screen if user exceeds the number of timers allowed. Need to add stats into FS to do this.
  TODO: 12.13.18 - Delete timers with press and hold gesture to show delete dialog.
+ TODO: 12.23.18 - Highlighted background to show selected timer is messedup. Fix.
+ TODO: 12.24.18 [DONE 12.24.18] - Show only 1 Add Timer at a time. (Ellie)
+ TODO: 12.24.18 - When NUMOFALLOWEDTIMERS is reached. Show $$$ Screen. (Ellie)
  
  */
 
@@ -50,15 +53,19 @@ class TimerCollectionViewController: UIViewController, UICollectionViewDelegate,
     var timerTitles: [String] = [String](repeating: "Add Timer", count: NUMOFALLOWEDTIMERS)
     var timerIDs: [String] = [String](repeating: "", count: NUMOFALLOWEDTIMERS)
     var timerSlotIsEmpty: [Bool] = [Bool](repeating: true, count: NUMOFALLOWEDTIMERS)
-    var activeTimers: [Int] = []
+//    var activeTimers: [Int] = []
+    
+    // Used to store
+    var numOfTimers: Int = 0
+
     
     override func viewDidLoad()
     {
         super.viewDidLoad()
         db = Firestore.firestore()
-//        getTimers()     // can probably safely delete this given viewWillAppear also calls it
+        readTimers()     // can probably safely delete this given viewWillAppear also calls it
 
-        NotificationCenter.default.addObserver(self, selector: #selector(getTimers), name: .didCreateNewTimer, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(readTimers), name: .didCreateNewTimer, object: nil)
         
         
         // Add Long Press Gesture to delete
@@ -73,7 +80,9 @@ class TimerCollectionViewController: UIViewController, UICollectionViewDelegate,
     override func viewWillAppear(_ animated: Bool)
     {
         super.viewWillAppear(true)
-        getTimers()
+        
+        // Reset timer when it reappears.
+        readTimers()
     }
     
     
@@ -87,7 +96,11 @@ class TimerCollectionViewController: UIViewController, UICollectionViewDelegate,
     }
     
     func collectionView(_: UICollectionView, numberOfItemsInSection _: Int) -> Int {
-        return NUMOFALLOWEDTIMERS
+//        return NUMOFALLOWEDTIMERS
+        
+        // This should display the Timers + 1 Add Timer slot
+        return numOfTimers + 1
+        
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -125,13 +138,13 @@ class TimerCollectionViewController: UIViewController, UICollectionViewDelegate,
         if timerSlotIsEmpty[indexPath.row] == true {
             
             // An empty timer slot has been selected so show the newTimerScreen so a new timer can be created
-            cell.backgroundColor = UIColor.green
+//            cell.backgroundColor = UIColor.green
             newTimerScreen()
             
         } else {
             
             // A Member timer has been selected so show this timer in the ActiveTimer View Controller
-            cell.backgroundColor = UIColor.red
+//            cell.backgroundColor = UIColor.red
 
             let dict = [
                 "index": indexPath.row,
@@ -162,9 +175,9 @@ class TimerCollectionViewController: UIViewController, UICollectionViewDelegate,
         present(newTimerScreen, animated: true, completion: nil)
     }
     
-    @objc func getTimers()
+    @objc func readTimers()
     {
-        var timerCount: Int = 0
+//        var timerCount: Int = 0
         
         db.collection("Members").document(memberID).collection("Timers").getDocuments() { (querySnapshot, error) in
             if let err = error {
@@ -179,8 +192,8 @@ class TimerCollectionViewController: UIViewController, UICollectionViewDelegate,
                         self.timerTitles[index] = timerDoc["name"] as? String ?? ""
                         self.timerIDs[index] = document.documentID
                         self.timerSlotIsEmpty[index] = false
-                        timerCount = index+1    // For looping through timerCount
-                        print("timerCount: \(timerCount) \(self.timerIDs[index])")   //delete
+                        self.numOfTimers = index + 1    // For looping through timerCount
+                        print("numOfTimers: \(self.numOfTimers) \(self.timerIDs[index])")   //delete
                     
                     } else {
                 
@@ -191,9 +204,9 @@ class TimerCollectionViewController: UIViewController, UICollectionViewDelegate,
                 
                 // Loop through blank timers
                 // 12.22.18 - Do I need to do this if / for loop????
-                if timerCount < NUMOFALLOWEDTIMERS
+                if self.numOfTimers < NUMOFALLOWEDTIMERS
                 {
-                    for index in timerCount...NUMOFALLOWEDTIMERS-1
+                    for index in self.numOfTimers...NUMOFALLOWEDTIMERS-1
                     {
                         print(index)
                         self.timerTitles[index] = "Add Timer"

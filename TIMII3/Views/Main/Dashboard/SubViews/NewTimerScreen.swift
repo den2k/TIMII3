@@ -9,6 +9,7 @@
  
  TODO: 12.8.18 [DONE 12.12.18] - Create a simple popup for creating a new timer.
  TODO: 12.13.18 [DONE 12.16.18] - add timer stats: numOfTimers (Member), maxNumOfTimers (Member)
+ TODO: 12.24.18 [DONE 12.24.18] - Add empty timer check.
  
  */
 
@@ -46,9 +47,10 @@ class NewTimerScreen: UIViewController, LayoutLoading
     
     @objc func handleNewTimer()
     {
-        guard let name = nameTextField?.text, let description = descriptionTextField?.text else
+        guard let name = nameTextField?.text, !name.isEmpty, let description = descriptionTextField?.text, !description.isEmpty else
         {
-            print("Form is not valid. Unable to create timer.")
+            self.errorLabel?.text = "Please enter timer information"
+            self.updateView()
             return
         }
         

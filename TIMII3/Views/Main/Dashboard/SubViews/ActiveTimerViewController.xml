@@ -7,7 +7,7 @@
     view.backgroundColor="softWhite   // Active Timer Section"
     top="previous.bottom"
     left="0"
-    height="400"
+    height="200"
     width="100%">
     
     <!-- Timer Control Section -->
@@ -70,7 +70,7 @@
 
     <UILabel
     text="# {loggedTotalTime}   # {numOfSessions}"
-        bottom="parent.bottom - 50"
+        bottom="parent.bottom - 20"
         left="65% - width/2"
         height="auto"
         width="auto"
