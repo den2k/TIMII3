@@ -50,9 +50,71 @@ class Member: Firestoreable, AuthMethod, Ownable
         FS().FSSaveMember(userName: self.userName, dictionary: dict)
      
         // Create First Default timer for a new Member
-        let t = Timii(name: "First Timer", description: "Change this timer to one that suits you.")
-        t.FSSave()
+        let name = "First Timer"
+        let desc = "Change this timer to one that suits you."
+        let t = Timii(name: name, description: desc)
+        t.FSSave(name: name, description: desc)
         
     }
     
+}
+
+extension Member
+{
+    /*
+     This function updates statistics related to all timers for a Member.
+     This function does not update individual timer statistics.
+     */
+    @objc func FSUpdateTimersStats()
+    {
+        print("FSUpdateTimersStats - Updated Timers statistics.")
+        
+        let db = Firestore.firestore()
+        let memberRef: DocumentReference = db.collection("Members").document(memberID)
+        
+        // https://firebase.google.com/docs/firestore/solutions/aggregation
+        db.runTransaction({ (transaction, errorPointer) -> Any? in
+            
+            let memberDocument: DocumentSnapshot
+            do {
+                try memberDocument = transaction.getDocument(memberRef)
+            } catch let fetchError as NSError {
+                errorPointer?.pointee = fetchError
+                return nil
+            }
+            
+            guard let numOfTimers = memberDocument.data()?["numOfTimers"] as? Int else {
+                let error = NSError(
+                    domain: "AppErrorDomain",
+                    code: -1,
+                    userInfo: [
+                        NSLocalizedDescriptionKey: "Unable to retrieve member data from snapshot \(memberDocument)"
+                    ]
+                )
+                errorPointer?.pointee = error
+                return nil
+            }
+            
+            var newNumOfTimers: Int = 0
+            
+            if numOfTimers < Main().MAXNUMOFTIMERS {
+                newNumOfTimers = numOfTimers + 1
+            } else {
+                print("Too many timers. Cannot add anymore.")
+                newNumOfTimers = numOfTimers
+            }
+            
+            // Commit to Firestore - Merge updates existing documents, but doesn't create..
+            transaction.updateData(["numOfTimers": newNumOfTimers], forDocument: memberRef)
+            return nil
+        }) { (object, error) in
+            if let error = error {
+                print("Transaction failed: \(error.localizedDescription)")
+            } else {
+                print("Member data tranasaction updated! \(memberRef.documentID)")
+            }
+        }
+        
+    }
+
 }

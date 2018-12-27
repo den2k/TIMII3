@@ -16,7 +16,7 @@ import Firebase
 protocol Firestoreable
 {
     var FSCollectionName: FSCollectionName    { get }     // Members or ...
-    func FSSave()       // Every conforming object needs to save info to Firestore
+//    func FSSave()       // Every conforming object needs to save info to Firestore
 }
 
 enum FSCollectionName: String
@@ -116,7 +116,7 @@ struct FS
     }
     
 
-    func FSSaveMemberCollectionDict(collectionName: FSCollectionName, dictionary: Dictionary<String,Any>)
+    func FSSaveMemberCollectionDict(collectionName: FSCollectionName, dictionary: Dictionary<String,Any>) -> String
     {
         /*
          12.9.18 - Updated 
@@ -128,7 +128,7 @@ struct FS
         let db = Firestore.firestore()
 
         // Retrieve Member documentation
-        guard let UID = Auth.auth().currentUser?.uid else { return } // Auto-generated Firebase user ID
+        guard let UID = Auth.auth().currentUser?.uid else { return "No member found." } // Auto-generated Firebase user ID
         
         // Create time stamp
         let currentDateTime = Date()        // get the current date and time
@@ -151,16 +151,19 @@ struct FS
                 print("Member data saved! \(Ref.documentID)")
             }
         }
+        
+        return Ref.documentID.description
+    
     }
     
     func FSSaveMemberDocumentPathDict(documentPath: String, dictionary: Dictionary<String,Any>)
     {
         /*
-         This function creates or updates (setDate... merge: true) a subcollection tied to a member ID.
-         Collections and documents must always follow the pattern
-         of collection/document/collection/document.
+         This function creates or updates (setDate... merge: true) a subcollection based on the provided document path.
          
-         "Members/<UID>/Timers/<TimerID>/History/<HistoryID>/[dictionary+Timestamp]"
+         <documentPath>/[dictionary+Timestamp]
+         example "Members/<UID>/Timers/<TimerID>/History/<HistoryID>/[dictionary+Timestamp]"
+
          */
         
         // Firestore Initialization
@@ -172,7 +175,6 @@ struct FS
         let dict = dictionary  // cannot append to let dictionary thus created a temp dict1
 //        dict.append(other: dictTS)
         
-        // example "Members/<UID>/Timers/<TimerID>/History/<HistoryID>/[dictionary+Timestamp]"
         let Ref = db.document(documentPath)
         Ref.setData(dict, merge: true)
         { (error) in

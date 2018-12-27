@@ -15,65 +15,22 @@
  TODO: 11.19.18 [Delete 12.9.18] - Make Firestore display of values more responsive (real-time). This issue seems to have gone away..
  TODO: 11.24.18 [DONE 11.25.18] - Add background / foreground timer support.
  TODO: 12.9.18 [DONE 12.9.18] - Changed time stamp from Google Firestore to local Date stamp from app.
+ TODO: 12.27.18 [DONE 12.27.18] - Update FSSaveSelectedTimerLog() so it uses a generated ID vs timer name.
+ TODO: 12.27.18 - Combine FSSaveSelectedTimerLog() and FSUpdateSelectedTimerStats() into 1 FS transaction and not 2 separate function calls.
  
  */
 
-import Foundation
-import Firebase
 
 extension Timii
 {
-    // Protocol functions
-    func FSSave()
-    {
-        // 12.12.18 - Not being used....
-        print("Saving new Timii.")
-        
-        let dict = [
-            "name":             self.name,
-            "description":      self.description,
-            ]
-        
-        FS().FSSaveMemberCollectionDict(collectionName: self.FSCollectionName, dictionary: dict)
-    }
 
-    func FSSaveTimerLog()
-    {
-        /*
-         
-         Saves a timer log session
-         
-         Members : memberID
-            [Collection Name] : 'timer name'
-            Logs :
-                "startTime":            self.startTime.description,
-                "endTimeInterval":      self.endTimeInterval.duration,
-         */
-        
-        print("Saving new Timii session information.")
-        
-        // Create Log ID with time stamp
-        let currentDateTime = Date()        // get the current date and time
-        let formatter = DateFormatter()     // initialize the date formatter and set the style
-        formatter.dateStyle = .medium       // "Oct 8, 2016"
-        formatter.timeStyle = .medium       // "10:52:30 PM"
-        let historyID = formatter.string(from: currentDateTime)  // "Oct 8, 2016, 10:52:30 PM"
-        
-        let uid = memberID  // from Ownable
-
-        let dict = [
-            "startTime":            self.startTime.description,
-            "endTimeInterval":      self.endTimeInterval.duration,
-            ] as [String : Any]
-        
-        // "Members/<UID>/Timers/<TimerID>/Logs/<LogID>/[dictionary+Timestamp]"
-        FS().FSSaveMemberDocumentPathDict(documentPath: "Members/\(uid)/Timers/\(self.name)/Logs/\(historyID)", dictionary: dict)
-    }
-
-    @objc func toggleTimer()
+// MARK: ---------- TIMII FUNCTIONS ----------
+// This section handles user interactions with the timer.
+    
+    @objc func toggleTimer(timerID: String)
     {
         if isTimerRunning {
-            stopTimer()
+            stopTimer(timerID: timerID)
             resetTimer()
         } else {
             startTimer(dateInterval: 0)
@@ -90,7 +47,7 @@ extension Timii
         self.startTime = Date(timeIntervalSinceNow: -dateInterval)
     }
     
-    private func stopTimer()
+    private func stopTimer(timerID: String)
     {
         print("Pausing timer.")
         tempTimer.invalidate()
@@ -102,8 +59,10 @@ extension Timii
          I may need to move both of these 'saves' to Firebase given how slow
          Firestore is for writes.
          */
-        FSSaveTimerLog()            // Just saves the Log session
-        FSUpdateTimerStats()        // Update aggregate stats for the Timer
+        
+        print("Timii/timerID: \(timerID)")
+        FSSaveSelectedTimerLog(timerID: timerID)            // Just saves the Log session
+        FSUpdateSelectedTimerStats(timerID: timerID)        // Update aggregate stats for the Timer
     }
     
     func resetTimer()
@@ -148,12 +107,91 @@ extension Timii
         let tenthSecs = Int(time) % 10
         return String(format: "%01i", tenthSecs)
     }
+}
+// MARK: ---------- FIRESTORE FUNCTIONS ----------
+// This section handles the CRUD that comes with timers
     
-    func FSUpdateTimerStats()
+import Firebase
+
+extension Timii
+{
+    
+    func FSSave(name: String, description: String)
     {
-        print("Saving calculated Timer statistics.")
+        print("FSSave()")
+        
+        let timerDict = [
+            "name": name,
+            "description": description,
+            "numOfSessions": 0,
+            "loggedTotalTime": 0,
+            ] as [String : Any]
+        
+        // This creates a new timer
+        self.timerID = FS().FSSaveMemberCollectionDict(collectionName: .Timers, dictionary: timerDict)
+        print("-->timerID: \(timerID)")
+    }
+    
+    func FSSaveSelectedTimerLog(timerID: String)
+    {
+        /*
+         
+         Saves a timer log session
+         
+         Members : memberID
+         [Collection Name] : 'timer ID'
+         Logs :
+         "startTime":            self.startTime.description,
+         "endTimeInterval":      self.endTimeInterval.duration,
+         */
+        
+        print("Saving new Timii session information.")
+        
+        // Create Log ID with time stamp
+        let creationDateTime = Date()        // get the current date and time
+        let formatter = DateFormatter()     // initialize the date formatter and set the style
+        formatter.dateStyle = .medium       // "Oct 8, 2016"
+        formatter.timeStyle = .medium       // "10:52:30 PM"
+        let creationDateID = formatter.string(from: creationDateTime)  // "Oct 8, 2016, 10:52:30 PM"
+        
+        let UID = memberID  // from Ownable
+        
+        let dict = [
+            "startTime":            self.startTime.description,
+            "endTimeInterval":      self.endTimeInterval.duration,
+            ] as [String : Any]
+        
+        let db = Firestore.firestore()
+        let documentPath = "Members/\(UID)/Timers/\(timerID)/Logs/\(creationDateID)"
+        let Ref = db.document(documentPath)
+        Ref.setData(dict, merge: true)
+        { (error) in
+            if let error = error {
+                print("Oh no! \(error.localizedDescription)")
+            } else {
+                print("Member data saved! \(Ref.documentID)")
+            }
+        }
+        
+        // "Members/<UID>/Timers/<TimerID>/Logs/<LogID>/[dictionary+Timestamp]"
+        //        FS().FSSaveMemberDocumentPathDict(documentPath: "Members/\(uid)/Timers/\(self.name)/Logs/\(historyID)", dictionary: dict)
+        
+    }
+
+    /*
+     This function updates statistics related to one specific timer for a Member.
+     This function does not update statistics related to all timers for a member.
+     */
+    func FSUpdateSelectedTimerStats(timerID: String)
+    {
+        print("FSUpdateSelectedTimerStats - Updated one Timer's statistics.")
         
         /*
+         12.27.18
+         On 11.23.18 I recorded a note that FS Transactions are super slow. True.
+         Documentation states they update one per second.
+         
+         They operate on once per second. But
          11.23.18
          Writes to Firestore are slow... So using Firebase RT maybe necessary?!
          Write Transactions sometimes fail....Originally this function was a combo timer stats + log save and working
@@ -163,11 +201,7 @@ extension Timii
         
         // Firestore Initialization
         let db = Firestore.firestore()
-        let settings = db.settings
-        settings.areTimestampsInSnapshotsEnabled = true
-        db.settings = settings
-        
-        let timerRef: DocumentReference = db.collection("Members").document("\(memberID)/Timers/\(self.name)")
+        let timerRef: DocumentReference = db.collection("Members").document("\(memberID)/Timers/\(timerID)")
         
         // https://firebase.google.com/docs/firestore/solutions/aggregation
         db.runTransaction({ (transaction, errorPointer) -> Any? in
@@ -180,7 +214,7 @@ extension Timii
                 let newNumOfSessions = numOfSessions + 1
                 
                 // Compute new time spent on Task today
-                let logTotal = timerData["loggedTotal"] as? Double ?? 0
+                let logTotal = timerData["loggedTotalTime"] as? Double ?? 0
                 let newLogTotal = logTotal + self.endTimeInterval.duration
                 
                 // Set new info --- what is this for?
@@ -201,10 +235,13 @@ extension Timii
             }
         }
     }
+}
 
-    // MARK: ---------- START / PAUSE APP TO BACKGROUND ----------
-    // This section controls suspend functions when the APP goes to the background
-    
+// MARK: ---------- FOREGROUND / BACKGROUND FUNCTIONS ----------
+// This section controls suspend functions when the APP goes to the background
+
+extension Timii
+{
     @objc func onDidEnterBackground()
     {
         self.pauseTimerDate = Date()

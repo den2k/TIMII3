@@ -9,10 +9,11 @@
 
  TODO: 11.4.18 [DONE 11.17.18] - Fix LayoutLoading conflicts errors when adding the following commented out code in this VC. This was fixed after Layout fixed a race condition in the library.  A new release 0.6.33 was committed to the Layout repository due to this bug.
  
- 
  TODO: 11.4.18 - Adding a whole code block in viewDidLoad() just to retrive member info...Would like to refactor this into Firestoreable
  
  TODO: 12.22.18 [DONE 12.22.18] - Added hideActiveTimer to show and hide the active timer section in the dashboard
+ TODO: 12.23.18 - ActiveTimerViewController is hidden but still executes. Bad. 
+ 
  */
 
 import UIKit
@@ -52,6 +53,45 @@ class DashboardScreenViewController: UIViewController, Ownable, LayoutLoading
         NotificationCenter.default.addObserver(self, selector: #selector(showTimer), name: .didSelectNewActiveTimer, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(killTimer), name: .didDeselectActiveTimer, object: nil)
 
+        readMember()
+    }
+ 
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        listenerDash.remove()   // removes listener to present memory hog, network access and also no need for weak reference in definition
+        
+        NotificationCenter.default.removeObserver(self, name: .didSelectNewActiveTimer, object: nil)
+        NotificationCenter.default.removeObserver(self, name: .didDeselectActiveTimer, object: nil)
+
+    }
+}
+
+
+// MARK: -------------------- Extension --------------------
+
+extension DashboardScreenViewController
+{
+    @objc func showTimer()
+    {
+        print("Dashboard/showTimer()")
+        hideActiveTimer = false
+        self.DashboardScreenNode?.setState([
+            "hideActiveTimer": self.hideActiveTimer,
+            ])
+    }
+
+    @objc func killTimer()
+    {
+        print("Dashboard/killTimer()")
+        hideActiveTimer = true
+        self.DashboardScreenNode?.setState([
+            "hideActiveTimer": self.hideActiveTimer,
+            ])
+    }
+    
+    func readMember()
+    {
         // FS Boilerplate to remove warning.
         let db = Firestore.firestore()
         let settings = db.settings
@@ -71,45 +111,13 @@ class DashboardScreenViewController: UIViewController, Ownable, LayoutLoading
                 let userName         = memberDoc!["userName"] as? String ?? ""
                 // let memberID            = document?.documentID
                 // let memberAuthMethod    = memberDoc!["authMethod"] as? String ?? ""
-
+                
                 self.DashboardScreenNode?.setState([
                     "userName": userName,
                     "hideActiveTimer": self.hideActiveTimer,
-                ])
+                    ])
             }
         }
-    }
- 
-    
-    override func viewWillDisappear(_ animated: Bool) {
-        super.viewWillDisappear(animated)
-        listenerDash.remove()   // removes listener to present memory hog, network access and also no need for weak reference in definition
-        
-        NotificationCenter.default.removeObserver(self, name: .didSelectNewActiveTimer, object: nil)
-        NotificationCenter.default.removeObserver(self, name: .didDeselectActiveTimer, object: nil)
-
-    }
-}
-
-
-extension DashboardScreenViewController
-{
-    @objc func showTimer()
-    {
-        hideActiveTimer = false
-        print("Dashboard Show timer")
-        self.DashboardScreenNode?.setState([
-            "hideActiveTimer": self.hideActiveTimer,
-            ])
-    }
-
-    @objc func killTimer()
-    {
-        hideActiveTimer = true
-        print("Dashboard Kill timer")
-        self.DashboardScreenNode?.setState([
-            "hideActiveTimer": self.hideActiveTimer,
-            ])
     }
 }
 

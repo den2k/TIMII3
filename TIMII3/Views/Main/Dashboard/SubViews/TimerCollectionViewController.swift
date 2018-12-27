@@ -133,7 +133,7 @@ class TimerCollectionViewController: UIViewController, UICollectionViewDelegate,
   
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath)
     {
-        let cell : UICollectionViewCell = collectionView.cellForItem(at: indexPath as IndexPath)!
+//        let cell : UICollectionViewCell = collectionView.cellForItem(at: indexPath as IndexPath)!
         
         if timerSlotIsEmpty[indexPath.row] == true {
             
@@ -150,7 +150,9 @@ class TimerCollectionViewController: UIViewController, UICollectionViewDelegate,
                 "index": indexPath.row,
                 "timerID": timerIDs[indexPath.row],
                 ] as [String : Any]
-                NotificationCenter.default.post(name: .didSelectNewActiveTimer, object: nil, userInfo: dict)
+            
+            NotificationCenter.default.post(name: .didSelectNewActiveTimer, object: nil, userInfo: dict)
+        
         }
         
         print("Selected: \(indexPath.row)")
