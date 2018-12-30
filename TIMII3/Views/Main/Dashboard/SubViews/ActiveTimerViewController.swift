@@ -14,7 +14,9 @@
  TODO: 12.9.18 [DONE 12.27.18] - Fix FSUpdateTimerStats as its not reaching ActiveTimer info and saves data to the wrong place.
  TODO: 12.24.18 - Why is there a Listener AND the scheduleTimer/updateView()? Seems the listener should be converted to a regular read only and not read in real time. As no longer function will change this timer at the same time.
  TODO: 12.24.18 [DONE 12.27.18] - Yes. The didSet calls the updateView() function. If I have a didSet, do I still need the updateView() function? Not if there is a way to call the didSet every 1/2 second like I am doing with the scheduledTimer()
- TODO: 12.27.18 - Logged time shows the whole Double number. Fix it.
+ TODO: 12.27.18 [DONE 12.28.18] - Logged time shows the whole Double number. Fix it.
+ TODO: 12.28.18 - Update with Listeners for realtime updates.
+ TODO: 12.30.18 [DONE 12.30.18] - timer.scheduled trigger not terminating properly.
  
  */
 
@@ -27,6 +29,15 @@ class ActiveTimerViewController: UIViewController, Ownable
     let db = Firestore.firestore()
     var timerID: String = ""
     var timer = Timii(name: " ", description: " ")
+    
+    // Holds the function for running the timer.scheduledtimer() loop
+    var timeLoop: Timer?
+
+
+    // Holds the loggedTotalTime values in its converted form
+    var hrs = ""
+    var min = ""
+    var sec = ""
 
 //    var listenerDash: ListenerRegistration!
 
@@ -40,7 +51,7 @@ class ActiveTimerViewController: UIViewController, Ownable
     @IBAction func toggleTimerButton()
     {
         timer.toggleTimer(timerID: timerID)
-        updateView()
+//        updateView()
     }
     
     @objc func updateView()
@@ -58,8 +69,10 @@ class ActiveTimerViewController: UIViewController, Ownable
             "second"            : timer.seconds,
             "isTimerRunning"    : timer.isTimerRunning,
             "numOfSessions"     : timer.numOfSessions,
-            "loggedTotalTime"   : timer.loggedTotalTime,
+            "loggedTotalTime"   : "\(hrs):\(min):\(sec)",
         ])
+        
+        print("Y")
     }
     
     override func viewDidLoad()
@@ -75,7 +88,6 @@ class ActiveTimerViewController: UIViewController, Ownable
 //        // This will not trigger a read of the timer values unless .didSelectNewActivetimer is triggered.
 //        if showActiveTimerConsole == true {
 //            FSReadTimerStats()
-//            Timer.scheduledTimer(timeInterval: 0.5, target: self, selector: (#selector(updateView)), userInfo: nil, repeats: true)
 //        }
     }
 
@@ -107,16 +119,29 @@ extension ActiveTimerViewController
         FSReadTimer(timerID: timerID)
 //        FSReadTimerStats(timerID: timerID)  // combined into FSReadTimer
         
-        // Trigger the updating of this View every 1/2 second.
-        Timer.scheduledTimer(timeInterval: 0.5, target: self, selector: (#selector(updateView)), userInfo: nil, repeats: true)
+        // Trigger the updating of this view every 1/2 second.
+        if timeLoop == nil
+        {
+            timeLoop = Timer.scheduledTimer(
+                timeInterval: 0.5,
+                target: self,
+                selector: (#selector(updateView)),
+                userInfo: nil,
+                repeats: true)
+        }
     }
     
     
     @objc func killTimer()
     {
         print("ActiveTimerViewController/killTimer()")
-//        self.showActiveTimerConsole = false
         
+        // Kills the scheduled timer for refreshing the UI
+        if timeLoop != nil
+        {
+            timeLoop?.invalidate()
+            timeLoop = nil
+        }
     }
     
 }
@@ -128,38 +153,34 @@ extension ActiveTimerViewController
 {
     @objc func FSReadTimer(timerID: String)
     {
-        db.collection("Members").document(memberID).collection("Timers").document(timerID).getDocument()
-            { (document, error) in
-                if let err = error {
-                    print("Error getting document: \(err)")
-                } else {
-                    let timerDoc = document?.data()
-                    print("ActiveTimerViewController/readTimer() - timerID: \(timerID)")
-                    print(document?.data() as Any)
-                    let timerName = timerDoc!["name"] as? String ?? ""
-                    let timerDescription = timerDoc!["description"] as? String ?? ""
-                    let timerNumOfSessions = timerDoc!["numOfSessions"] as? Int ?? 0
-                    let timerLoggedTotalTime = timerDoc!["loggedTotalTime"] as? Double ?? 0
-                    
-                    self.timer.name = timerName
-                    self.timer.description = timerDescription
-                    self.timer.numOfSessions = timerNumOfSessions
-                    self.timer.loggedTotalTime = timerLoggedTotalTime
-                    
-                    // Convert Double to Time.
-                    let hrs = Timii.hours(timerLoggedTotalTime*10)
-                    let min = Timii.minutes(timerLoggedTotalTime*10)
-                    let sec = Timii.seconds(timerLoggedTotalTime*10)
-                    
-                    self.ActiveTimerNode?.setState([
-                        "numOfSessions": timerNumOfSessions
-                        ])
-
-//                    self.ActiveTimerNode?.setState([
-//                        "numOfSessions": timerNumOfSessions,
-//                        "loggedTotalTime": "\(hrs):\(min):\(sec)",
-//                        ])
-                }
+    db.collection("Members").document(memberID).collection("Timers").document(timerID).getDocument()
+        { (document, error) in
+            if let err = error {
+                print("Error getting document: \(err)")
+            } else {
+                let timerDoc = document?.data()
+                print("ActiveTimerViewController/readTimer() - timerID: \(timerID)")
+                print(document?.data() as Any)
+                let timerName = timerDoc!["name"] as? String ?? ""
+                let timerDescription = timerDoc!["description"] as? String ?? ""
+                let timerNumOfSessions = timerDoc!["numOfSessions"] as? Int ?? 0
+                let timerLoggedTotalTime = timerDoc!["loggedTotalTime"] as? Double ?? 0
+                
+                self.timer.name = timerName
+                self.timer.description = timerDescription
+                self.timer.numOfSessions = timerNumOfSessions
+                self.timer.loggedTotalTime = Double(timerLoggedTotalTime).rounded()
+                
+                // Convert Double to Time.
+                self.hrs = Timii.hours(timerLoggedTotalTime*10)
+                self.min = Timii.minutes(timerLoggedTotalTime*10)
+                self.sec = Timii.seconds(timerLoggedTotalTime*10)
+                
+                self.ActiveTimerNode?.setState([
+                    "numOfSessions": timerNumOfSessions,
+                    "loggedTotalTime": "\(self.hrs):\(self.min):\(self.sec)"
+                    ])
+            }
         }
     }
 

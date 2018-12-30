@@ -11,19 +11,19 @@ TODO: 10.10.18 [DONE 10.10.18] - Migrated code from TIMII to TIMII3 -->
     />
     <UIViewController
         tabBarItem.image="timii.png"
-        tabBarItem.title=""
+        tabBarItem.title="Dashboard"
         tabBarItem.imageInsets.top="5"
         tabBarItem.imageInsets.left="0"
-        tabBarItem.imageInsets.bottom="-6"
+        tabBarItem.imageInsets.bottom="0"
         tabBarItem.imageInsets.right="0"
         xml="Dashboard/DashboardScreenViewController.xml"
     />
     <UIViewController
         tabBarItem.image="setting.png"
-        tabBarItem.title=""
+        tabBarItem.title="Setting"
         tabBarItem.imageInsets.top="5"
         tabBarItem.imageInsets.left="0"
-        tabBarItem.imageInsets.bottom="-6"
+        tabBarItem.imageInsets.bottom="0"
         tabBarItem.imageInsets.right="0"
         xml="Settings/SettingScreenViewController.xml"
     />

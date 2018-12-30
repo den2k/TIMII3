@@ -69,18 +69,31 @@
     />
 
     <UILabel
-    text="# {loggedTotalTime}   # {numOfSessions}"
-        bottom="parent.bottom - 20"
+        text="Total Time {loggedTotalTime}"
+        bottom="parent.bottom - 25"
         left="65% - width/2"
         height="auto"
         width="auto"
         backgroundColor=""
-        font="Avenir Next 16"
+        font="Avenir Next 14"
         textAlignment=""
         textColor="isTimerRunning ? halfTransparent : gray"
         transform.scale="//isTimerRunning ? 1.0 : 1.5"
         transform.rotation="//isTimerRunning ? pi / 2 : 0"
     />
-    
+    <UILabel
+        text="Total Sessions {numOfSessions}"
+        top="previous.bottom"
+        left="65% - width/2"
+        height="auto"
+        width="auto"
+        backgroundColor=""
+        font="Avenir Next 14"
+        textAlignment=""
+        textColor="isTimerRunning ? halfTransparent : gray"
+        transform.scale="//isTimerRunning ? 1.0 : 1.5"
+        transform.rotation="//isTimerRunning ? pi / 2 : 0"
+    />
+
 
 </ActiveTimerViewController>
