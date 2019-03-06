@@ -1,0 +1,145 @@
+<!--
+ Create Account Screen
+ 
+ TODO: 8.7.18 [DONE 8.7.18] - Add hide screen for password to be unreadable
+ TODO: 10.10.18 [DONE 10.10.18] - Migrated code from TIMII to TIMII3
+ 
+ TODO: 10.14.18 [DONE] - Add UserName/Alias in Created Account so it shows up under Profile Picture. Use verify password field.
+ TODO: 10.14.18 - Add Email validation checking during signup through Firebase provided templates
+
+ -->
+
+<UIView
+    backgroundColor="UIColor.lightTan">
+    
+    <!-- This view holds the entire form fill and shifts with KB if visible -->
+    <UIView
+        backgroundColor="//green"
+        top="isKeyboardVisible ? 5% : 50% - height/2"
+        height="auto">
+        
+    <!-- TIMII Logo -->
+
+    <UILabel
+        text="TIMII"
+        top=""
+        textAlignment="center"
+        width="100%"
+        height="auto"
+        textColor="UIColor.black"
+        backgroundColor="//purple"
+        font="Avenir Next ultraLight 45"
+    />
+    
+    <!-- error -->
+    <UILabel
+        outlet="errorLabel"
+        text="{error}"
+        top="previous.bottom + 10"
+        left="50% - width/2"
+        textAlignment="center"
+        width="65%"
+        height="auto"
+        textColor="UIColor.red"
+        numberOfLines="4"
+        font="Avenir Next 16"
+    />
+    
+    <!-- email -->
+    <UITextField
+        outlet = "emailTextField"
+        placeholder="Email"
+        top="previous.bottom + 20"
+        left="50% - width/2"
+        width="100% - 40"
+        height="44"
+        layer.cornerRadius="22"
+        backgroundColor="UIColor.cararra"
+        textAlignment="center"
+    />
+    
+    <!-- Full Name -->
+    <UITextField
+        outlet = "fullNameTextField"
+        placeholder="Full Name"
+        top="previous.bottom + 20"
+        left="50% - width/2"
+        width="100% - 40"
+        height="44"
+        layer.cornerRadius="22"
+        backgroundColor="UIColor.cararra"
+        textAlignment="center"
+    />
+    
+    <!-- Username -->
+    <UITextField
+        outlet = "userNameTextField"
+        placeholder="Username"
+        top="previous.bottom + 20"
+        left="50% - width/2"
+        width="100% - 40"
+        height="44"
+        layer.cornerRadius="22"
+        backgroundColor="UIColor.cararra"
+        textAlignment="center"
+    />
+    
+    <!-- password -->
+    <UITextField
+        outlet = "passwordTextField"
+        placeholder="Password"
+        isSecureTextEntry="true"
+        top="previous.bottom + 15"
+        left="50% - width/2"
+        width="100% - 40"
+        height="44"
+        layer.cornerRadius="22"
+        backgroundColor="UIColor.cararra"
+        textAlignment="center"
+    />
+    
+    <!--
+    <UITextField
+        isHidden="true    // 10.14.18 - use this section for username/alias"
+        placeholder="verify password"
+        isSecureTextEntry="true"
+        top="previous.bottom + 15"
+        left="50% - width/2"
+        width="100% - 40"
+        height="44"
+        layer.cornerRadius="22"
+        backgroundColor="UIColor.cararra"
+        textAlignment="center"
+    />
+     -->
+    
+    <!-- Create Button -->
+    <UIButton
+        touchUpInside="handleCreateAccount"
+        title="Create Account"
+        top="previous.bottom + 30"
+        left="50% - width/2"
+        width="100% - 120"
+        height="66"
+        layer.cornerRadius="33"
+        backgroundColor="UIColor.camo"
+    />
+    
+    <!-- Sign in -->
+    <UIButton
+        touchUpInside="loginScreen"
+        title="Or sign in"
+        top="previous.bottom + 15"
+        left="50% - width/2"
+        width="100% - 40"
+        height="auto"
+        backgroundColor="//purple"
+        titleColor="UIColor.white"
+    />
+    
+    </UIView>
+    
+</UIView>
+
+
+

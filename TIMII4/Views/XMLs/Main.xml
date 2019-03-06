@@ -1,0 +1,35 @@
+<!--
+ Main - the main container for the app
+ It is just a tab view so different View Controllers can be presented
+ TODO: 10.10.18 [DONE 10.10.18] - Migrated code from TIMII to TIMII3
+ TODO: 1.13.19 [DONE 1.xx.19] - FIXED. TabBar Icon shrinks as I tap it.
+ -->
+
+<UITabBarController>
+    <UITabBar
+        alpha="0.95"
+        isTranslucent="false"
+        barTintColor="softWhite"
+        tintColor="eucalyptus"
+        barStyle="default"
+    />
+    <UIViewController
+        tabBarItem.image="timii"
+        tabBarItem.title="Dashboard"
+        tabBarItem.imageInsets.top="0"
+        tabBarItem.imageInsets.left="0"
+        tabBarItem.imageInsets.bottom="0"
+        tabBarItem.imageInsets.right="0"
+        xml="DashboardScreenViewController.xml"
+    />
+    <UIViewController
+        tabBarItem.image="setting"
+        tabBarItem.title="Setting"
+        tabBarItem.imageInsets.top="0"
+        tabBarItem.imageInsets.left="0"
+        tabBarItem.imageInsets.bottom="0"
+        tabBarItem.imageInsets.right="0"
+        xml="SettingScreenViewController.xml"
+    />
+    
+</UITabBarController>

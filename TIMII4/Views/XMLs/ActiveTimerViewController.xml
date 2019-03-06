@@ -1,0 +1,115 @@
+<!--
+ TODO: 10.31.18 - Blink the Second text. Don't show actual seconds counted
+ -->
+ 
+ <ActiveTimerViewController
+    outlet="ActiveTimerNode"
+    view.backgroundColor="softWhite   // Active Timer Section"
+    top="previous.bottom"
+    left="0"
+    height="200"
+    width="100%">
+    
+    <!-- Change Button Section -->
+    <UIButton
+        touchUpInside="onDidPressMenuButton">
+        
+        <UIImageView
+        image="Menu"
+        contentMode="scaleAspectFit"
+        top="10"
+        left="10"
+        height="100%"
+        width="100%"
+        />
+    
+    </UIButton>
+    
+    
+    <!-- Timer Control Section -->
+    <UIButton
+        title="{isTimerRunning ? '| |':'>'}"
+        touchUpInside="toggleTimerButton"
+        top="50% - height / 2"
+        left="20% - width/2"
+        height="100"
+        width="100"
+        backgroundColor="mintGreen"
+        layer.cornerRadius="50"
+        titleLabel.font="Avenir Next 50"
+    />
+    <UILabel
+        text="{name}"
+        top="previous.bottom + 5"
+        left="20% - width/2"
+        height="auto"
+        width="auto"
+        backgroundColor=""
+        font="Avenir Next 16"
+        textColor="gray"
+    />
+    
+    <!-- Timer Time Section -->
+    <UILabel
+        text="{hour}:"
+        top="50% - height / 2"
+        left="45%"
+        height="auto"
+        width="auto"
+        backgroundColor=""
+        font="Avenir Next ultraLight 65"
+        textAlignment="center"
+        textColor="gray"
+    />
+    <UILabel
+        text="{minute}"
+        top="previous.top"
+        left="previous.right"
+        height="auto"
+        width="auto"
+        backgroundColor=""
+        font="Avenir Next ultraLight 65"
+        textAlignment="center"
+        textColor="gray"
+    />
+    <UILabel
+        text="{second}"
+        top="previous.top+12"
+        left="previous.right+3"
+        height="auto"
+        width="auto"
+        backgroundColor=""
+        font="Avenir Next ultraLight 32"
+        textAlignment="center"
+        textColor="gray"
+    />
+
+    <UILabel
+        text="Total Time {loggedTotalTime}"
+        bottom="parent.bottom - 25"
+        left="55% - width/2"
+        height="auto"
+        width="auto"
+        backgroundColor=""
+        font="Avenir Next 14"
+        textAlignment=""
+        textColor="black //isTimerRunning ? halfTransparent : gray"
+        transform.scale="//isTimerRunning ? 1.0 : 1.5"
+        transform.rotation="//isTimerRunning ? pi / 2 : 0"
+    />
+    <UILabel
+        text="Sessions {numOfSessions}"
+        bottom="previous.bottom"
+        left="previous.right+5"
+        height="auto"
+        width="auto"
+        backgroundColor=""
+        font="Avenir Next 14"
+        textAlignment=""
+        textColor="black //isTimerRunning ? halfTransparent : gray"
+        transform.scale="//isTimerRunning ? 1.0 : 1.5"
+        transform.rotation="//isTimerRunning ? pi / 2 : 0"
+    />
+
+
+</ActiveTimerViewController>

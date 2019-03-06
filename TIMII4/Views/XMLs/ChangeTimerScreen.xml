@@ -1,0 +1,116 @@
+
+<!--
+ Change Timer Screen
+ 
+ 1.19.19 - Create Change Timer Screen (Modal)
+ 1.24.19 - Paused development on Change Timer Log Record function to work on VOICE activation instead.
+
+ 
+ -->
+
+<UIViewController
+    width="100%"
+    height="100%"
+    top="0"
+    left="0"
+    view.backgroundColor="rgba(0,0,0,0.8)       // background of the presented VC covering the presenting VC">
+    
+    <UIView
+        width="100%"
+        height="auto"
+        top="isKeyboardVisible ? 30% - height/2 : 50% - height/2"
+        left="50% - width/2"
+        backgroundColor="transparent    // background of the popup screen">
+        
+        <UILabel
+        text="Edit Timer"
+        width="auto"
+        height="auto"
+        top="0"
+        left="50% - width/2"
+        textAlignment="center"
+        textColor="UIColor.white"
+        font="Avenir Next ultraLight 30"
+        />
+        
+        <!-- error -->
+        <UILabel
+        outlet="errorLabel"
+        text="{error}"
+        width="65%"
+        height="auto"
+        top="previous.bottom + 10"
+        left="50% - width/2"
+        textAlignment="center"
+        textColor="UIColor.red"
+        numberOfLines="4"
+        font="Avenir Next 16"
+        />
+        
+        <!-- timer name -->
+        <UITextField
+        outlet = "changeNameTextField"
+        text="{name}"
+        placeholder="name of new timer"
+        top="previous.bottom + 20"
+        left="50% - width/2"
+        width="100% - 40"
+        height="44"
+        layer.cornerRadius="22"
+        backgroundColor="UIColor.cararra"
+        textAlignment="center"
+        />
+        
+        <!-- timer description -->
+        <UITextField
+        outlet = "changeDescriptionTextField"
+        text="{description}"
+        placeholder="description (optional)"
+        top="previous.bottom + 20"
+        left="50% - width/2"
+        width="100% - 40"
+        height="44"
+        layer.cornerRadius="22"
+        backgroundColor="UIColor.cararra"
+        textAlignment="center"
+        />
+        
+        <!-- Update Button -->
+        <UIButton
+        touchUpInside="onDidPressUpdateTimer"
+        title="Update Timer"
+        top="previous.bottom + 30"
+        left="50% - width/2"
+        width="100% - 120"
+        height="66"
+        layer.cornerRadius="33"
+        backgroundColor="UIColor.camo"
+        />
+        
+        <!-- Delete Button -->
+        <UIButton
+        touchUpInside="onDidPressDeleteTimer"
+        title="Delete Timer"
+        top="previous.bottom + 30"
+        left="50% - width/2"
+        width="100% - 120"
+        height="66"
+        titleColor="valencia"
+        layer.cornerRadius="33"
+        backgroundColor="// UIColor.camo"
+        />
+        
+        <!-- Cancel -->
+        <UIButton
+        touchUpInside="onDidPressCancelButton"
+        title="Cancel"
+        top="previous.bottom + 15"
+        left="50% - width/2"
+        width="100% - 40"
+        height="auto"
+        titleColor="#9AACB1"
+        />
+        
+    </UIView>
+    
+</UIViewController>
