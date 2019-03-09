@@ -7,7 +7,7 @@
     view.backgroundColor="softWhite   // Active Timer Section"
     top="previous.bottom"
     left="0"
-    height="200"
+    height="220"
     width="100%">
     
     <!-- Change Button Section -->
@@ -15,12 +15,12 @@
         touchUpInside="onDidPressMenuButton">
         
         <UIImageView
-        image="Menu"
-        contentMode="scaleAspectFit"
-        top="10"
-        left="10"
-        height="100%"
-        width="100%"
+            image="Menu"
+            contentMode="scaleAspectFit"
+            top="10"
+            left="10"
+            height="100%"
+            width="100%"
         />
     
     </UIButton>
@@ -30,36 +30,37 @@
     <UIButton
         title="{isTimerRunning ? '| |':'>'}"
         touchUpInside="toggleTimerButton"
-        top="50% - height / 2"
+        top="50% - height/2"
         left="20% - width/2"
-        height="100"
-        width="100"
+        height="120"
+        width="120"
         backgroundColor="mintGreen"
-        layer.cornerRadius="50"
-        titleLabel.font="Avenir Next 50"
+        layer.cornerRadius="height/2"
+        titleLabel.font="Avenir Next 70"
     />
+
+
+    <!-- Timer Time Section -->
     <UILabel
         text="{name}"
-        top="previous.bottom + 5"
-        left="20% - width/2"
+        top="25% - height/2"
+        left="43%"
         height="auto"
-        width="auto"
+        width="53%"
         backgroundColor=""
-        font="Avenir Next 16"
-        textColor="gray"
+        font="Avenir Next 20"
+        textColor="black"
     />
-    
-    <!-- Timer Time Section -->
     <UILabel
         text="{hour}:"
         top="50% - height / 2"
-        left="45%"
+        left="42%"
         height="auto"
         width="auto"
         backgroundColor=""
         font="Avenir Next ultraLight 65"
         textAlignment="center"
-        textColor="gray"
+        textColor="black"
     />
     <UILabel
         text="{minute}"
@@ -70,7 +71,7 @@
         backgroundColor=""
         font="Avenir Next ultraLight 65"
         textAlignment="center"
-        textColor="gray"
+        textColor="black"
     />
     <UILabel
         text="{second}"
@@ -79,15 +80,35 @@
         height="auto"
         width="auto"
         backgroundColor=""
-        font="Avenir Next ultraLight 32"
+        font="Avenir Next ultraLight 28"
         textAlignment="center"
-        textColor="gray"
+        textColor="black"
     />
 
+    
+    <!-- Total Time Section -->
+    <UIImageView
+        image="Timer"
+        contentMode="scaleAspectFit"
+        bottom="parent.bottom - 35"
+        left="parent.left + 50% - 15"
+        height="10%"
+        width="10%"
+        backgroundColor=""
+    />
     <UILabel
-        text="Total Time {loggedTotalTime}"
-        bottom="parent.bottom - 25"
-        left="55% - width/2"
+        text="Total"
+        bottom="parent.bottom - 20"
+        left="previous.left + previous.width/2 - width/2"
+        height="auto"
+        width="auto"
+        backgroundColor=""
+        font="Avenir Next 10"
+    />
+    <UILabel
+        text="{loggedTotalTime}"
+        bottom="parent.bottom - 35"
+        left="previous.right + 5"
         height="auto"
         width="auto"
         backgroundColor=""
@@ -97,10 +118,32 @@
         transform.scale="//isTimerRunning ? 1.0 : 1.5"
         transform.rotation="//isTimerRunning ? pi / 2 : 0"
     />
+    
+    <!-- Session Count Section -->
+    <UIImageView
+        image="Count"
+        contentMode="scaleAspectFit"
+        bottom="parent.bottom - 35"
+        left="previous.right + 10"
+        height="10%"
+        width="10%"
+        tintColor="blue"
+        backgroundColor=""
+    />
     <UILabel
-        text="Sessions {numOfSessions}"
-        bottom="previous.bottom"
-        left="previous.right+5"
+        text="Sessions"
+        bottom="parent.bottom - 20"
+        left="previous.left + previous.width/2 - width/2"
+        height="auto"
+        width="auto"
+        backgroundColor=""
+        font="Avenir Next 10"
+    />
+
+    <UILabel
+        text="{numOfSessions}"
+        bottom="parent.bottom - 35"
+        left="previous.right"
         height="auto"
         width="auto"
         backgroundColor=""
