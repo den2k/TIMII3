@@ -12,17 +12,20 @@
     
     <!-- Change Button Section -->
     <UIButton
-        touchUpInside="onDidPressMenuButton">
-        
+        touchUpInside="onDidPressMenuButton"
+        top="10"
+        left="10"
+        backgroundColor=""
+        >
         <UIImageView
             image="Menu"
             contentMode="scaleAspectFit"
-            top="10"
-            left="10"
+            top="0"
+            left="0"
             height="100%"
             width="100%"
+            backgroundColor=""
         />
-    
     </UIButton>
     
     
