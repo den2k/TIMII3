@@ -2,6 +2,7 @@
     reuseIdentifier="timerCollectionCell"
     clipsToBounds="true">
 
+<!--
     <UIImageView
         image="{image}"
         contentMode="scaleAspectFit"
@@ -10,7 +11,40 @@
         height="65%"
         width="65%"
         />
-        
+ -->
+
+    <UIView
+        top="10"
+        left="50% - width/2"
+        height="70"
+        width="70"
+        layer.cornerRadius="height/2"
+        backgroundColor="{isAddButton ? gray : brightOrange  //background color for timer circle}"
+        >
+    <!--
+        <UIView
+            isHidden="{isSelectedTimer}"
+            top="-5"
+            left="50% - width/2"
+            height="80"
+            width="80"
+            layer.cornerRadius="height/2"
+            backgroundColor="halfTransparent"
+            />
+-->
+            <!--            backgroundColor="{isSelectedTimer ? white : transparent  //background color for timer circle}" -->
+
+        <UILabel
+            text="{timerButtonText}"
+            top="50% - height/2"
+            left="50% - width/2"
+            font="Avenir Next 32"
+            textColor="white"
+            textAlignment="center"
+            />
+    
+    </UIView>
+    
     <UILabel
         text="{title}"
         top="previous.bottom + 5"

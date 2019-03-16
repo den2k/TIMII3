@@ -233,6 +233,13 @@
 			path = XMLs;
 			sourceTree = "<group>";
 		};
+		9522AC4F22359A720092D699 /* Animations */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Animations;
+			sourceTree = "<group>";
+		};
 		9544688B22067A69000F108C /* TimiiIntent */ = {
 			isa = PBXGroup;
 			children = (
@@ -282,6 +289,7 @@
 			isa = PBXGroup;
 			children = (
 				9544688522065500000F108C /* TIMII4.entitlements */,
+				9522AC4F22359A720092D699 /* Animations */,
 				95EC6A11216F11FF00643F19 /* Models */,
 				957F26DF2205FB1D00FD03D1 /* Shortcuts */,
 				95EC6A0A216F0C9F00643F19 /* Views */,

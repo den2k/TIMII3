@@ -59,6 +59,9 @@ class TimerCollectionViewController: UIViewController, UICollectionViewDelegate,
     var timerTitles: [String] = [String](repeating: "Add Timer", count: NUMOFALLOWEDTIMERS)
     var timerIDs: [String] = [String](repeating: "", count: NUMOFALLOWEDTIMERS)
     var timerSlotIsEmpty: [Bool] = [Bool](repeating: true, count: NUMOFALLOWEDTIMERS)
+    var timerButtonText: String = ""        // The text shown on a collection button.
+    var isAddButton: Bool = true
+    var isSelectedTimer: Bool = false
 //    var activeTimers: [Int] = []
     
     // Used to store
@@ -116,8 +119,12 @@ class TimerCollectionViewController: UIViewController, UICollectionViewDelegate,
         let image: UIImage
         if timerSlotIsEmpty[indexPath.row] == true {
             image = add!
+            timerButtonText = "+"
+            isAddButton = true
         } else {
             image = images[(indexPath.row) % 10]!
+            timerButtonText = String(indexPath.row+1)
+            isAddButton = false
         }
         
 //        let identifier = (indexPath.row % 2 == 0) ? "templateCell" : "standaloneCell"
@@ -127,7 +134,10 @@ class TimerCollectionViewController: UIViewController, UICollectionViewDelegate,
             "row": indexPath.row,
             "title": timerTitles[indexPath.row],
             "image": image,
-            "timerIsEmpty": timerSlotIsEmpty[indexPath.row]
+            "timerIsEmpty": timerSlotIsEmpty[indexPath.row],
+            "timerButtonText":  timerButtonText,
+            "isAddButton": isAddButton,
+//            "isSelectedTimer": isSelectedTimer,
             ])
         
         return node.view as! UICollectionViewCell
@@ -136,18 +146,26 @@ class TimerCollectionViewController: UIViewController, UICollectionViewDelegate,
   
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath)
     {
-//        let cell : UICollectionViewCell = collectionView.cellForItem(at: indexPath as IndexPath)!
+        let cell : UICollectionViewCell = collectionView.cellForItem(at: indexPath as IndexPath)!
         
         if timerSlotIsEmpty[indexPath.row] == true {
             
             // An empty timer slot has been selected so show the newTimerScreen so a new timer can be created
-//            cell.backgroundColor = UIColor.green
+            cell.backgroundColor = UIColor.green
             newTimerScreen()
             
         } else {
             
             // A Member timer has been selected so show this timer in the ActiveTimer View Controller
-//            cell.backgroundColor = UIColor.red
+            cell.backgroundColor = UIColor.white
+//            cell.highlighted()
+            
+//            isSelectedTimer = true
+//            let identifier: String = "timerCollectionCell"
+//            let node = collectionView.dequeueReusableCellNode(withIdentifier: identifier, for: indexPath)
+//            node.setState([
+//                "isSelectedTimer": isSelectedTimer,
+//                ])
             
             let dict = [
                 "index": indexPath.row,
@@ -168,6 +186,13 @@ class TimerCollectionViewController: UIViewController, UICollectionViewDelegate,
         let cell : UICollectionViewCell = collectionView.cellForItem(at: indexPath as IndexPath)!
         
         cell.backgroundColor = UIColor.transparent
+//        isSelectedTimer = false
+//        let identifier: String = "timerCollectionCell"
+//        let node = collectionView.dequeueReusableCellNode(withIdentifier: identifier, for: indexPath)
+//        node.setState([
+//            "isSelectedTimer": isSelectedTimer,
+//            ])
+        
         
         // Sends a notification that the active timer is no longer being selected
         NotificationCenter.default.post(name: .didDeselectActiveTimer, object: nil)
@@ -275,3 +300,14 @@ extension TimerCollectionViewController
 //    }
 //
 //}
+
+extension UIView
+{
+    func highlightedCircle()
+    {
+        self.layer.cornerRadius = self.frame.width / 2
+//        self.layer.
+        self.layer.masksToBounds = true
+    }
+    
+}
