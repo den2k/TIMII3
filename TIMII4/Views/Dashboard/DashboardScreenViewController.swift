@@ -123,9 +123,9 @@ extension DashboardScreenViewController
         print("--> readMember()")
         // FS Boilerplate to remove warning.
         let db = Firestore.firestore()
-        let settings = db.settings
-        settings.areTimestampsInSnapshotsEnabled = true
-        db.settings = settings
+//        let settings = db.settings
+//        settings.areTimestampsInSnapshotsEnabled = true
+//        db.settings = settings
 
         let memberRef = db.collection(FSCollectionName.Members.rawValue).document(memberID)
 

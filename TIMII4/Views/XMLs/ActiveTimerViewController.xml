@@ -12,6 +12,7 @@
     
     <!-- Change Button Section -->
     <UIButton
+        id="ActiveTimerMenuButton"
         touchUpInside="onDidPressMenuButton"
         top="10"
         left="10"

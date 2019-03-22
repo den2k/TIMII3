@@ -99,6 +99,13 @@ class ActiveTimerViewController: UIViewController, Ownable
     {
         super.viewDidLoad()
         
+//        let button = UIButton(frame: CGRect(x: 10, y: 10, width: 100, height: 50))
+//        button.backgroundColor = .green
+//        button.setTitle("Menu", for: .normal)
+//        button.addTarget(self, action: #selector(onDidPressActiveTimerMenuButton), for: .touchUpInside)
+//        self.view.addSubview(button)
+        
+        
         NotificationCenter.default.addObserver(self, selector: #selector(FSReadTimerStats), name: .didSelectNewActiveTimer, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(FSReadTimerStats), name: .didUpdateExistingTimer, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(onDidDeleteActiveTimer), name: .didDeleteExistingTimer, object: nil)
@@ -131,6 +138,22 @@ class ActiveTimerViewController: UIViewController, Ownable
 extension ActiveTimerViewController
 {
     
+//    @IBAction func onDidPressActiveTimerMenuButton(sender: UIButton!)
+//    {
+//        let vc = UITableViewController()
+//        vc.modalPresentationStyle = .overCurrentContext
+////        vc.view.backgroundColor = UIColor.yellow
+//        vc.preferredContentSize = CGSize(width: 200, height: 300)
+//        vc.view.isOpaque = false
+//
+//        let popoverPresentationController =
+//        popoverPresentationController?.backgroundColor = UIColor.gray
+//        popoverPresentationController?.sourceView = sender
+//        popoverPresentationController?.sourceRect = CGRect(x: 0, y: 0, width: 200, height: 300)
+//        present(vc, animated: true, completion: nil)
+//
+//    }
+
     @objc func setupUpdateView(_ notification: Notification)
     {
         print("-> ActiveTimerViewController: setupUpdateView()")
@@ -169,9 +192,13 @@ extension ActiveTimerViewController
     {
         print("Pressed Menu button.")
         
-        let screen = ChangeTimerScreen()
-
+        // Popover Menu to replace FullScreen editing of an existing Timer name
+//        let menu = ActiveTimerMenuPopover()
+//        menu.modalPresentationStyle = .popover
+//        self.present(menu, animated: false)
+        
         // Keeps the presenting "ActiveTimerViewController" in view beneath the presented "ChangeTimerScreen" VC.
+        let screen = ChangeTimerScreen()
         screen.modalPresentationStyle = .overFullScreen
         self.present(screen, animated: true, completion: nil)
 

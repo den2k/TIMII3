@@ -46,9 +46,9 @@ class SettingScreenViewController: UIViewController, Ownable
         // Adding a whole code block just to retrive member info...
         // FS Boilerplate to remove warning.
         let db = Firestore.firestore()
-        let settings = db.settings
-        settings.areTimestampsInSnapshotsEnabled = true
-        db.settings = settings
+//        let settings = db.settings
+//        settings.areTimestampsInSnapshotsEnabled = true
+//        db.settings = settings
         
         let memberRef = db.collection(FSCollectionName.Members.rawValue).document(memberID)
         listener = memberRef.addSnapshotListener { (document, error) in

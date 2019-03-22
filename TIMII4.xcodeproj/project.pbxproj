@@ -25,6 +25,7 @@
 		95533F712170E298004391AF /* Member.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95533F702170E298004391AF /* Member.swift */; };
 		9563D5E82172AD7100708913 /* AuthenticationMethod.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9563D5E72172AD7100708913 /* AuthenticationMethod.swift */; };
 		9567B97621FAD367002D95EA /* SpeechDectectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9567B97521FAD367002D95EA /* SpeechDectectionViewController.swift */; };
+		9572DA8D223DCB21004136FC /* ActiveTimerMenuPopover.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9572DA8C223DCB21004136FC /* ActiveTimerMenuPopover.swift */; };
 		957CD69E216D995B000CE343 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 957CD69D216D995B000CE343 /* AppDelegate.swift */; };
 		957CD6A5216D995C000CE343 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 957CD6A4216D995C000CE343 /* Assets.xcassets */; };
 		957CD6B3216D995C000CE343 /* TIMII4Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 957CD6B2216D995C000CE343 /* TIMII4Tests.swift */; };
@@ -133,6 +134,7 @@
 		95533F702170E298004391AF /* Member.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Member.swift; sourceTree = "<group>"; };
 		9563D5E72172AD7100708913 /* AuthenticationMethod.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticationMethod.swift; sourceTree = "<group>"; };
 		9567B97521FAD367002D95EA /* SpeechDectectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpeechDectectionViewController.swift; sourceTree = "<group>"; };
+		9572DA8C223DCB21004136FC /* ActiveTimerMenuPopover.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActiveTimerMenuPopover.swift; sourceTree = "<group>"; };
 		957CD69A216D995B000CE343 /* TIMII4.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TIMII4.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		957CD69D216D995B000CE343 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		957CD6A4216D995C000CE343 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -342,6 +344,7 @@
 			children = (
 				95C8F8AE2187DC7A003AED25 /* DashboardScreenViewController.swift */,
 				95C8F8B42188038B003AED25 /* ActiveTimerViewController.swift */,
+				9572DA8C223DCB21004136FC /* ActiveTimerMenuPopover.swift */,
 				952165A121AD8E260094B8AB /* TimerCollectionViewController.swift */,
 				95C0D08E21BCD26900626077 /* NewTimerScreen.swift */,
 				95D461C421F3E88800480228 /* ChangeTimerScreen.swift */,
@@ -761,6 +764,7 @@
 				957CD69E216D995B000CE343 /* AppDelegate.swift in Sources */,
 				9567B97621FAD367002D95EA /* SpeechDectectionViewController.swift in Sources */,
 				95EC6A1C21701D0E00643F19 /* Nameable.swift in Sources */,
+				9572DA8D223DCB21004136FC /* ActiveTimerMenuPopover.swift in Sources */,
 				95C8F8AF2187DC7A003AED25 /* DashboardScreenViewController.swift in Sources */,
 				95D34F182173DA5900BB6547 /* Timii.swift in Sources */,
 				95533F6F21705AA2004391AF /* Firestoreable.swift in Sources */,
