@@ -9,6 +9,7 @@ target 'TIMII4' do
   pod 'Firebase/Core'
   pod 'Firebase/Firestore'
   pod 'Firebase/Auth'
+  pod 'lottie-ios'
 
   # Pod for Swift Layout Framework
   pod 'Layout'

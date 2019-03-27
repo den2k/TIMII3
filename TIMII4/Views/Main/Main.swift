@@ -19,7 +19,7 @@ import Layout
 class Main: UIViewController, LayoutLoading, UITabBarControllerDelegate
 {
     // MARK: ----- GLOBAL CONSTANTS -----
-    let MAXNUMOFTIMERS = 6
+    let MAXNUMOFTIMERS = 9
 
     
     private var selectedTab = 0     // Set to TimelineScreen

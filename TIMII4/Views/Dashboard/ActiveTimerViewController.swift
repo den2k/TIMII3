@@ -29,6 +29,7 @@
 import UIKit
 import Layout
 import Firebase
+import Lottie
 
 private let menu = UIImage(named: "Menu")
 
@@ -46,6 +47,10 @@ class ActiveTimerViewController: UIViewController, Ownable
     var min = ""
     var sec = ""
 
+    // Animation Play / Pause button
+//    var playButton = UIImageView()
+    var playButton = LOTAnimationView(name: "play-button")
+    
 //    var listenerDash: ListenerRegistration!
 
     // This is to initialize FS fields to a value so no errors show up waiting for data retrival
@@ -58,6 +63,19 @@ class ActiveTimerViewController: UIViewController, Ownable
     @IBAction func toggleTimerButton()
     {
         timer.toggleTimer(timerID: timerID)
+        
+        // Animated play button
+//        if self.timer.isTimerRunning == true { playButton.isHidden = false }
+//        else { playButton.isHidden = true }
+        if self.timer.isTimerRunning == true {
+            playButton.isHidden = true
+            playButton.stop()
+        } else {
+            playButton.isHidden = false
+            playButton.play()
+            playButton.animationSpeed = 4
+        }
+
         
         updateView() // Pause and Start icon text don't update if this not called.
         
@@ -105,6 +123,19 @@ class ActiveTimerViewController: UIViewController, Ownable
 //        button.addTarget(self, action: #selector(onDidPressActiveTimerMenuButton), for: .touchUpInside)
 //        self.view.addSubview(button)
         
+        // Added 'beacon' image animation to replace button
+//        playButton = UIImageView(frame: CGRect(x:view.frame.size.width / 5 - 90 - 2 , y: 220 / 2 - 90 + 2, width: 180, height: 180))
+//        playButton.loadGif(name: "beacon")
+//        playButton.layer.zPosition = 1;
+//        self.view.addSubview(playButton)
+//        playButton.isHidden = true
+        playButton.frame = CGRect(x: view.frame.size.width / 5 - 90 - 7, y: 220 / 2 - 90 - 3, width: 190, height: 190)
+        playButton.backgroundColor = UIColor.transparent
+        playButton.layer.zPosition = 1
+        self.view.addSubview(playButton)
+        playButton.animationSpeed = 2
+        playButton.isHidden = false
+        playButton.play()
         
         NotificationCenter.default.addObserver(self, selector: #selector(FSReadTimerStats), name: .didSelectNewActiveTimer, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(FSReadTimerStats), name: .didUpdateExistingTimer, object: nil)

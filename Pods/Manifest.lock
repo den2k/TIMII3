@@ -97,6 +97,7 @@ PODS:
     - Layout/Core (= 0.6.35)
   - Layout/Core (0.6.35)
   - leveldb-library (1.20)
+  - lottie-ios (2.5.2)
   - nanopb (0.3.901):
     - nanopb/decode (= 0.3.901)
     - nanopb/encode (= 0.3.901)
@@ -109,6 +110,7 @@ DEPENDENCIES:
   - Firebase/Core
   - Firebase/Firestore
   - Layout
+  - lottie-ios
 
 SPEC REPOS:
   https://github.com/cocoapods/specs.git:
@@ -127,6 +129,7 @@ SPEC REPOS:
     - GTMSessionFetcher
     - Layout
     - leveldb-library
+    - lottie-ios
     - nanopb
     - Protobuf
 
@@ -146,9 +149,10 @@ SPEC CHECKSUMS:
   GTMSessionFetcher: 32aeca0aa144acea523e1c8e053089dec2cb98ca
   Layout: a970a8bb1cc1e5db8b1cafde341a26bf5b0c386b
   leveldb-library: 08cba283675b7ed2d99629a4bc5fd052cd2bb6a5
+  lottie-ios: 3fef45d3fabe63e3c7c2eb603dd64ddfffc73062
   nanopb: 2901f78ea1b7b4015c860c2fdd1ea2fee1a18d48
   Protobuf: 1eb9700044745f00181c136ef21b8ff3ad5a0fd5
 
-PODFILE CHECKSUM: 9add8e1f974ca3eb3baec979c0bac966308a753d
+PODFILE CHECKSUM: 44f693ff58cfbe3150481f38db91c28cbfec99c7
 
 COCOAPODS: 1.5.3

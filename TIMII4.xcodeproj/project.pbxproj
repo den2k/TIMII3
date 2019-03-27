@@ -23,6 +23,10 @@
 		9547754721862F7400D7972A /* Ownable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9547754621862F7400D7972A /* Ownable.swift */; };
 		95533F6F21705AA2004391AF /* Firestoreable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95533F6E21705AA2004391AF /* Firestoreable.swift */; };
 		95533F712170E298004391AF /* Member.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95533F702170E298004391AF /* Member.swift */; };
+		955A2403224B2AA700CCDFAD /* UIImage+Gif.swift in Sources */ = {isa = PBXBuildFile; fileRef = 955A2402224B2AA700CCDFAD /* UIImage+Gif.swift */; };
+		955A2405224B2ABA00CCDFAD /* beacon.gif in Resources */ = {isa = PBXBuildFile; fileRef = 955A2404224B2ABA00CCDFAD /* beacon.gif */; };
+		955A2407224B45CF00CCDFAD /* upload.json in Resources */ = {isa = PBXBuildFile; fileRef = 955A2406224B45CF00CCDFAD /* upload.json */; };
+		955A2409224B4C8500CCDFAD /* play-button.json in Resources */ = {isa = PBXBuildFile; fileRef = 955A2408224B4C8500CCDFAD /* play-button.json */; };
 		9563D5E82172AD7100708913 /* AuthenticationMethod.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9563D5E72172AD7100708913 /* AuthenticationMethod.swift */; };
 		9567B97621FAD367002D95EA /* SpeechDectectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9567B97521FAD367002D95EA /* SpeechDectectionViewController.swift */; };
 		9572DA8D223DCB21004136FC /* ActiveTimerMenuPopover.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9572DA8C223DCB21004136FC /* ActiveTimerMenuPopover.swift */; };
@@ -132,6 +136,10 @@
 		9547754621862F7400D7972A /* Ownable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Ownable.swift; sourceTree = "<group>"; };
 		95533F6E21705AA2004391AF /* Firestoreable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Firestoreable.swift; sourceTree = "<group>"; };
 		95533F702170E298004391AF /* Member.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Member.swift; sourceTree = "<group>"; };
+		955A2402224B2AA700CCDFAD /* UIImage+Gif.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIImage+Gif.swift"; sourceTree = "<group>"; };
+		955A2404224B2ABA00CCDFAD /* beacon.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = beacon.gif; sourceTree = "<group>"; };
+		955A2406224B45CF00CCDFAD /* upload.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = upload.json; sourceTree = "<group>"; };
+		955A2408224B4C8500CCDFAD /* play-button.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "play-button.json"; sourceTree = "<group>"; };
 		9563D5E72172AD7100708913 /* AuthenticationMethod.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticationMethod.swift; sourceTree = "<group>"; };
 		9567B97521FAD367002D95EA /* SpeechDectectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpeechDectectionViewController.swift; sourceTree = "<group>"; };
 		9572DA8C223DCB21004136FC /* ActiveTimerMenuPopover.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActiveTimerMenuPopover.swift; sourceTree = "<group>"; };
@@ -238,6 +246,9 @@
 		9522AC4F22359A720092D699 /* Animations */ = {
 			isa = PBXGroup;
 			children = (
+				955A2404224B2ABA00CCDFAD /* beacon.gif */,
+				955A2406224B45CF00CCDFAD /* upload.json */,
+				955A2408224B4C8500CCDFAD /* play-button.json */,
 			);
 			path = Animations;
 			sourceTree = "<group>";
@@ -387,6 +398,7 @@
 				95EC6A16216F152600643F19 /* UIColorHelper.swift */,
 				9512E3B221C8AABD001E6453 /* NotificationHelper.swift */,
 				959A8F0F21EC34C4001BB08C /* UIHelper.swift */,
+				955A2402224B2AA700CCDFAD /* UIImage+Gif.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -603,11 +615,14 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				955A2405224B2ABA00CCDFAD /* beacon.gif in Resources */,
 				95EC6A13216F139C00643F19 /* SettingScreenViewController.xml in Resources */,
 				95EC6A0C216F0CE500643F19 /* LoginScreen.xml in Resources */,
+				955A2407224B45CF00CCDFAD /* upload.json in Resources */,
 				95B650C221B251480020275A /* TimerCollectionCell.xml in Resources */,
 				95C8F8B72188106C003AED25 /* ActiveTimerViewController.xml in Resources */,
 				95D461C721F3EA7600480228 /* ChangeTimerScreen.xml in Resources */,
+				955A2409224B4C8500CCDFAD /* play-button.json in Resources */,
 				957CD6A5216D995C000CE343 /* Assets.xcassets in Resources */,
 				95EC6A10216F103200643F19 /* Main.xml in Resources */,
 				95C8F8B12187DC9E003AED25 /* DashboardScreenViewController.xml in Resources */,
@@ -671,6 +686,7 @@
 				"${BUILT_PRODUCTS_DIR}/gRPC-C++/grpcpp.framework",
 				"${BUILT_PRODUCTS_DIR}/gRPC-Core/grpc.framework",
 				"${BUILT_PRODUCTS_DIR}/leveldb-library/leveldb.framework",
+				"${BUILT_PRODUCTS_DIR}/lottie-ios/Lottie.framework",
 				"${BUILT_PRODUCTS_DIR}/nanopb/nanopb.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
@@ -683,6 +699,7 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/grpcpp.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/grpc.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/leveldb.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Lottie.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/nanopb.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -755,6 +772,7 @@
 				95D461C521F3E88800480228 /* ChangeTimerScreen.swift in Sources */,
 				95EC6A17216F152600643F19 /* UIColorHelper.swift in Sources */,
 				953094BB216EEBA500384DF8 /* Login.swift in Sources */,
+				955A2403224B2AA700CCDFAD /* UIImage+Gif.swift in Sources */,
 				959A8F1021EC34C4001BB08C /* UIHelper.swift in Sources */,
 				95C8F8B52188038B003AED25 /* ActiveTimerViewController.swift in Sources */,
 				957F26DE2204132700FD03D1 /* Intents.intentdefinition in Sources */,

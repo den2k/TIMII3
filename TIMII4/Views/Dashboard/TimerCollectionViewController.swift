@@ -25,6 +25,7 @@
  TODO: 12.24.18 [DONE 12.24.18] - Show only 1 Add Timer at a time. (Ellie)
  TODO: 12.24.18 - When NUMOFALLOWEDTIMERS is reached. Show $$$ Screen. (Ellie)
  TODO: 1.13.19 [DONE 1.20.19] - Update an existing timer
+ TODO: 3.23.19 - Bug 1 - switch to new timer when current timer is active.
  
  NOTE:
  UICollectionView UIGestureRecognizer on Long Press not working with Layout.... Issued a ticket on 12/15. No response yet.
@@ -61,8 +62,19 @@ class TimerCollectionViewController: UIViewController, UICollectionViewDelegate,
     var timerSlotIsEmpty: [Bool] = [Bool](repeating: true, count: NUMOFALLOWEDTIMERS)
     var timerButtonText: String = ""        // The text shown on a collection button.
     var isAddButton: Bool = true
-    var isSelectedTimer: Bool = false
+    var isTimerRunning: Bool = false
 //    var activeTimers: [Int] = []
+    
+    // A way to update the collection view when this property changes.
+    var selectedTimerIndexPath: IndexPath? {
+        didSet {
+            var indexPaths: [IndexPath] = []
+            if let selectedTimerIndexPath = selectedTimerIndexPath {
+                indexPaths.append(selectedTimerIndexPath)
+                print(indexPaths)
+            }
+        }
+    }
     
     // Used to store
     var numOfTimers: Int = 0
@@ -74,7 +86,8 @@ class TimerCollectionViewController: UIViewController, UICollectionViewDelegate,
         NotificationCenter.default.addObserver(self, selector: #selector(readTimers), name: .didCreateNewTimer, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(readTimers), name: .didUpdateExistingTimer, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(readTimers), name: .didDeleteExistingTimer, object: nil)
-        
+        NotificationCenter.default.addObserver(self, selector: #selector(timerIsRunning), name: .didStartTimer, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(timerIsNotRunning), name: .didStopTimer, object: nil)
         
         // Add Long Press Gesture to trigger UPDATE / DELETE function
 //        let lpgr : UILongPressGestureRecognizer = UILongPressGestureRecognizer(target: self, action: #selector(onDidLongPressTimer))
@@ -137,7 +150,7 @@ class TimerCollectionViewController: UIViewController, UICollectionViewDelegate,
             "timerIsEmpty": timerSlotIsEmpty[indexPath.row],
             "timerButtonText":  timerButtonText,
             "isAddButton": isAddButton,
-//            "isSelectedTimer": isSelectedTimer,
+//            "selectedTimerIndexPath": selectedTimerIndexPath,
             ])
         
         return node.view as! UICollectionViewCell
@@ -156,26 +169,40 @@ class TimerCollectionViewController: UIViewController, UICollectionViewDelegate,
             
         } else {
             
-            // A Member timer has been selected so show this timer in the ActiveTimer View Controller
+            // 3.26.19 - Alert doesn't work yet.
+//            if isTimerRunning {
+//                let alert = UIAlertController(title: "Switch Timers?", message: "", preferredStyle: UIAlertController.Style.alert)
+//                alert.addAction(UIAlertAction(title: "Yes", style: UIAlertAction.Style.default, handler:
+//                { (alert:UIAlertAction) -> Void in
+////                    self.saveCurrentTimer(timerID: self.timerIDs[indexPath.row])
+//
+//                    Timii().FSSaveSelectedTimerLog(timerID: self.timerIDs[indexPath.row])
+//
+//                }))
+//                alert.addAction(UIAlertAction(title: "Cancel", style: UIAlertAction.Style.default, handler:
+//                { (alert:UIAlertAction) -> Void in
+//
+//                }))
+//                self.present(alert, animated: true, completion: nil)
+//            } else {
+//                // A Member timer has been selected so show this timer in the ActiveTimer View Controller
+//                cell.backgroundColor = UIColor.white
+//                let dict = [
+//                    "index": indexPath.row,
+//                    "timerID": timerIDs[indexPath.row],
+//                    ] as [String : Any]
+//                NotificationCenter.default.post(name: .didSelectNewActiveTimer, object: nil, userInfo: dict)
+//                print("-post didSelectNewActiveTimer-") // delete
+//            }
+
             cell.backgroundColor = UIColor.white
-//            cell.highlighted()
-            
-//            isSelectedTimer = true
-//            let identifier: String = "timerCollectionCell"
-//            let node = collectionView.dequeueReusableCellNode(withIdentifier: identifier, for: indexPath)
-//            node.setState([
-//                "isSelectedTimer": isSelectedTimer,
-//                ])
-            
             let dict = [
                 "index": indexPath.row,
                 "timerID": timerIDs[indexPath.row],
                 ] as [String : Any]
-            
             NotificationCenter.default.post(name: .didSelectNewActiveTimer, object: nil, userInfo: dict)
-            
             print("-post didSelectNewActiveTimer-") // delete
-        
+
         }
         
         print("Selected: \(indexPath.row)")     //delete
@@ -186,13 +213,6 @@ class TimerCollectionViewController: UIViewController, UICollectionViewDelegate,
         let cell : UICollectionViewCell = collectionView.cellForItem(at: indexPath as IndexPath)!
         
         cell.backgroundColor = UIColor.transparent
-//        isSelectedTimer = false
-//        let identifier: String = "timerCollectionCell"
-//        let node = collectionView.dequeueReusableCellNode(withIdentifier: identifier, for: indexPath)
-//        node.setState([
-//            "isSelectedTimer": isSelectedTimer,
-//            ])
-        
         
         // Sends a notification that the active timer is no longer being selected
         NotificationCenter.default.post(name: .didDeselectActiveTimer, object: nil)
@@ -262,6 +282,15 @@ extension TimerCollectionViewController
             }
         }
     }
+    
+    @objc func timerIsRunning()     { isTimerRunning = true }
+    @objc func timerIsNotRunning()  { isTimerRunning = false }
+    
+//    func saveCurrentTimer(timerID: String)
+//    {
+//        Timii().FSSaveSelectedTimerLog(timerID: timerID)
+//    }
+    
 }
 
 
@@ -301,13 +330,30 @@ extension TimerCollectionViewController
 //
 //}
 
-extension UIView
+//extension UIView
+//{
+//    func highlightedCircle()
+//    {
+//        self.layer.cornerRadius = self.frame.width / 2
+////        self.layer.
+//        self.layer.masksToBounds = true
+//    }
+//
+//}
+
+
+// MARK: - UICollectionViewDelegate
+
+extension TimerCollectionViewController
 {
-    func highlightedCircle()
-    {
-        self.layer.cornerRadius = self.frame.width / 2
-//        self.layer.
-        self.layer.masksToBounds = true
-    }
-    
+    // 3.26.19 - doesn't work yet. It triggers what is selected but doesn't show the ActiveTimerVC.
+//    func collectionView(_ collectionView: UICollectionView, shouldSelectItemAt indexPath: IndexPath) -> Bool {
+//        if selectedTimerIndexPath == indexPath {
+//            selectedTimerIndexPath = nil
+//        } else {
+//            selectedTimerIndexPath = indexPath
+//        }
+//
+//        return false
+//    }
 }
