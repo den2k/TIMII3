@@ -48,10 +48,7 @@ class ActiveTimerViewController: UIViewController, Ownable
     var sec = ""
 
     // Animation Play / Pause button
-//    var playButton = UIImageView()
     var playButton = LOTAnimationView(name: "play-button")
-    
-//    var listenerDash: ListenerRegistration!
 
     // This is to initialize FS fields to a value so no errors show up waiting for data retrival
     // 10.30.18 - Outlets must be passed to Layout using UIViewControllers. Cannot use class defined UIViews.
@@ -62,6 +59,7 @@ class ActiveTimerViewController: UIViewController, Ownable
     
     @IBAction func toggleTimerButton()
     {
+        print("-> ActiveTimerViewController/toggleTimerButton()")
         timer.toggleTimer(timerID: timerID)
         
         // Animated play button
@@ -123,12 +121,6 @@ class ActiveTimerViewController: UIViewController, Ownable
 //        button.addTarget(self, action: #selector(onDidPressActiveTimerMenuButton), for: .touchUpInside)
 //        self.view.addSubview(button)
         
-        // Added 'beacon' image animation to replace button
-//        playButton = UIImageView(frame: CGRect(x:view.frame.size.width / 5 - 90 - 2 , y: 220 / 2 - 90 + 2, width: 180, height: 180))
-//        playButton.loadGif(name: "beacon")
-//        playButton.layer.zPosition = 1;
-//        self.view.addSubview(playButton)
-//        playButton.isHidden = true
         playButton.frame = CGRect(x: view.frame.size.width / 5 - 90 - 7, y: 220 / 2 - 90 - 3, width: 190, height: 190)
         playButton.backgroundColor = UIColor.transparent
         playButton.layer.zPosition = 1
@@ -143,23 +135,6 @@ class ActiveTimerViewController: UIViewController, Ownable
         
         NotificationCenter.default.addObserver(self, selector: #selector(setupUpdateView), name: .didStartTimer, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(stopUpdateView), name: .didStopTimer, object: nil)
-    }
-    
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-        
-//        NotificationCenter.default.addObserver(self, selector: #selector(FSReadTimerStats), name: .didSelectNewActiveTimer, object: nil)
-//        NotificationCenter.default.addObserver(self, selector: #selector(setupUpdateView), name: .didStartTimer, object: nil)
-//        NotificationCenter.default.addObserver(self, selector: #selector(stopUpdateView), name: .didStopTimer, object: nil)
-    }
-    
-    override func viewWillDisappear(_ animated: Bool)
-    {
-        super.viewWillDisappear(animated)
-
-//        NotificationCenter.default.removeObserver(self, name: .didSelectNewActiveTimer, object: nil)
-//        NotificationCenter.default.removeObserver(self, name: .didStartTimer, object: nil)
-//        NotificationCenter.default.removeObserver(self, name: .didStopTimer, object: nil)
     }
     
 }
@@ -217,6 +192,10 @@ extension ActiveTimerViewController
             timeLoop?.invalidate()
             timeLoop = nil
         }
+        
+        playButton.isHidden = false
+        playButton.play()
+        playButton.animationSpeed = 4
     }
     
     @objc func onDidPressMenuButton()

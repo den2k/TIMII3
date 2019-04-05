@@ -19,6 +19,8 @@ extension Notification.Name
     public static let didStartTimer = Notification.Name("didStartTimer")
     public static let didStopTimer = Notification.Name("didStopTimer")
     public static let onDidPressActiveTimerMenuButton = Notification.Name("onDidPressActiveTimerMenuButton")
+    public static let stopTimer = Notification.Name("stopTimer")
+    public static let startTimer = Notification.Name("startTimer")
 
     // MARK: --- MEMBERS Related ---
     public static let didMemberLogin = Notification.Name("didMemberLogin")

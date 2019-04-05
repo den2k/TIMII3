@@ -69,6 +69,14 @@ extension Timii
         FSUpdateSelectedTimerStats(timerID: timerID)        // Update aggregate stats for the Timer
     }
     
+    @objc func stopTimerNotificationHandler(_ notification: Notification)
+    {
+        print("-> TimiiExtension:stopTimerNotificationHandler: ", notification.userInfo?["timerID"] as Any)   // can delete
+        let timerID = notification.userInfo?["timerID"] as? String ?? ""
+        stopTimer(timerID: timerID)
+        resetTimer()
+    }
+    
     func resetTimer()
     {
         self.tempTimer.invalidate()
