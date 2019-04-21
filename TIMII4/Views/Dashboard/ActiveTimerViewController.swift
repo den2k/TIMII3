@@ -74,8 +74,9 @@ class ActiveTimerViewController: UIViewController, Ownable
             playButton.animationSpeed = 4
         }
 
-        
         updateView() // Pause and Start icon text don't update if this not called.
+        //timerEndUpdateView()
+
         
         // A hack that waits 2 seconds before doing a read to allow Firestore to have time to perform a write
         DispatchQueue.main.asyncAfter(deadline: .now() + 2) { // change 2 to desired number of seconds
@@ -90,6 +91,32 @@ class ActiveTimerViewController: UIViewController, Ownable
                 self.FSReadTimerStats(notification)
             }
         }
+        
+    }
+    
+    // function to update the numOfSessions and loggedTotalTime locally while the write is happening in
+    // the background
+    private func timerEndUpdateView() {
+        guard timer.isTimerRunning == false else { return }
+        
+        let timerNumOfSessions = timer.numOfSessions + 1
+        let timerLoggedTotalTime = Double(Int(timer.loggedTotalTime) + Int(timer.endTimeInterval.duration))
+        
+        self.timer.numOfSessions = timerNumOfSessions
+        self.timer.loggedTotalTime = timerLoggedTotalTime
+        
+        self.hrs = Timii.hours(timerLoggedTotalTime*10)
+        self.min = Timii.minutes(timerLoggedTotalTime*10)
+        self.sec = Timii.seconds(timerLoggedTotalTime*10)
+        
+        self.ActiveTimerNode?.setState([
+            "name":             self.timer.name,
+            "numOfSessions":    self.timer.numOfSessions,
+            "hour":             "00",
+            "minute":           "00",
+            "second":           "00",
+            "loggedTotalTime": "\(self.hrs):\(self.min):\(self.sec)"
+            ])
     }
     
     @objc func updateView()
