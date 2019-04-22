@@ -75,9 +75,9 @@ class ActiveTimerViewController: UIViewController, Ownable
         }
 
         updateView() // Pause and Start icon text don't update if this not called.
-        //timerEndUpdateView()
+        timerEndUpdateView()
 
-        
+        /*
         // A hack that waits 2 seconds before doing a read to allow Firestore to have time to perform a write
         DispatchQueue.main.asyncAfter(deadline: .now() + 2) { // change 2 to desired number of seconds
             if self.timer.isTimerRunning == false
@@ -91,7 +91,7 @@ class ActiveTimerViewController: UIViewController, Ownable
                 self.FSReadTimerStats(notification)
             }
         }
-        
+        */
     }
     
     // function to update the numOfSessions and loggedTotalTime locally while the write is happening in
