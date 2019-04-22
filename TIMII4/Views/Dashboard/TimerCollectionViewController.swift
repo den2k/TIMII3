@@ -258,9 +258,6 @@ class TimerCollectionViewController: UIViewController, UICollectionViewDelegate,
 }
 
 
-
-
-
 extension TimerCollectionViewController
 {
 
