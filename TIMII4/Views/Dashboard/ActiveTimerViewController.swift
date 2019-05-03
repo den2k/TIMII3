@@ -32,6 +32,7 @@ import Firebase
 import Lottie
 
 private let menu = UIImage(named: "Menu")
+typealias TimiiFileContents = (numOfSessions: Int, loggedTotalTime: Double)
 
 class ActiveTimerViewController: UIViewController, Ownable
 {
@@ -40,7 +41,6 @@ class ActiveTimerViewController: UIViewController, Ownable
     
     // Holds the function for running the timer.scheduledtimer() loop
     var timeLoop: Timer?
-
 
     // Holds the loggedTotalTime values in its converted form
     var hrs = ""
@@ -73,10 +73,12 @@ class ActiveTimerViewController: UIViewController, Ownable
             playButton.play()
             playButton.animationSpeed = 4
         }
+        
 
-        
         updateView() // Pause and Start icon text don't update if this not called.
-        
+        timerEndUpdateView()
+
+        /*
         // A hack that waits 2 seconds before doing a read to allow Firestore to have time to perform a write
         DispatchQueue.main.asyncAfter(deadline: .now() + 2) { // change 2 to desired number of seconds
             if self.timer.isTimerRunning == false
@@ -89,6 +91,85 @@ class ActiveTimerViewController: UIViewController, Ownable
                 let notification = Notification(name: .didSelectNewActiveTimer, object: nil, userInfo: dict)
                 self.FSReadTimerStats(notification)
             }
+        }
+        */
+    }
+    
+    // function to update the numOfSessions and loggedTotalTime locally while the write is happening in
+    // the background
+    private func timerEndUpdateView() {
+        guard timer.isTimerRunning == false else { return }
+        
+        var timerNumOfSessions: Int
+        var timerLoggedTotalTime: Double
+        
+        // read the values from the file if they exist
+        if let fileContents = readFromTimiiFile() {
+            timerNumOfSessions = fileContents.numOfSessions + 1
+            timerLoggedTotalTime = Double(Int(fileContents.loggedTotalTime) + Int(timer.endTimeInterval.duration))
+  
+        } else {
+            timerNumOfSessions = timer.numOfSessions + 1
+            timerLoggedTotalTime = Double(Int(timer.loggedTotalTime) + Int(timer.endTimeInterval.duration))
+        }
+  
+        self.timer.numOfSessions = timerNumOfSessions
+        self.timer.loggedTotalTime = timerLoggedTotalTime
+        
+        self.hrs = Timii.hours(timerLoggedTotalTime*10)
+        self.min = Timii.minutes(timerLoggedTotalTime*10)
+        self.sec = Timii.seconds(timerLoggedTotalTime*10)
+        
+        self.ActiveTimerNode?.setState([
+            "name":             self.timer.name,
+            "numOfSessions":    self.timer.numOfSessions,
+            "hour":             "00",
+            "minute":           "00",
+            "second":           "00",
+            "loggedTotalTime": "\(self.hrs):\(self.min):\(self.sec)"
+            ])
+        
+        saveToTimiiFile(value: "numOfSessions: \(timerNumOfSessions), loggedTotalTime: \(timerLoggedTotalTime)")
+    }
+    
+    private func saveToTimiiFile(value: String) {
+        let filePath = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0].appendingPathComponent("timii.txt")
+        
+        do {
+            try value.write(to: filePath, atomically: true, encoding: String.Encoding.utf8)
+            print("file saved")
+        } catch {
+            print(error.localizedDescription)
+        }
+    }
+    
+    private func readFromTimiiFile() -> TimiiFileContents? {
+        let filePath = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0].appendingPathComponent("timii.txt")
+        
+        do {
+            let contents = try String(contentsOfFile: filePath.path)
+            let values = contents.split(separator: ",")
+            
+            let numOfSessionsDict = values.first?.split(separator: ":")
+            print("key: \(numOfSessionsDict?.first ?? "")")
+            print("value: \(numOfSessionsDict?.last ?? "")")
+            
+            let loggedTotalTimeDict = values.last?.split(separator: ":")
+            print("key: \(loggedTotalTimeDict?.first ?? "")")
+            print("value: \(loggedTotalTimeDict?.last ?? "")")
+            
+            guard let numOfSessionsValue = numOfSessionsDict?.last else { return nil }
+            guard let loggedTotalTimeValue = loggedTotalTimeDict?.last else { return nil }
+            
+            guard let numOfSessions = Int(String(numOfSessionsValue)) else { return nil }
+            guard let loggedTotalTime = Double(String(loggedTotalTimeValue)) else { return nil }
+            
+            return TimiiFileContents(numOfSessions: numOfSessions, loggedTotalTime: loggedTotalTime)
+            
+        } catch {
+            print(error.localizedDescription)
+            
+            return nil
         }
     }
     
