@@ -55,7 +55,7 @@ class Timii: Firestoreable, Nameable, Ownable
         NotificationCenter.default.addObserver(self, selector: #selector(onWillEnterForeground), name: UIApplication.willEnterForegroundNotification, object: nil)
     
         /// The app needs to trigger from different VCs a stop timer function when a timer is running
-        NotificationCenter.default.addObserver(self, selector: #selector(stopTimerNotificationHandler), name: .stopTimer, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(stopTimerNotificationHandler), name: .stopTimerUserInput, object: nil)
     }
     
     deinit

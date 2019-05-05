@@ -31,7 +31,7 @@ class DashboardScreenViewController: UIViewController, Ownable, LayoutLoading
     {
         didSet
         {
-            // Set FS fields to "blank" so no errors show up waiting for data retrival
+            // Set FS fields to "blank" so no errors show up waiting for data retrieval
             // 11.4.18 - added isTimerRunning..... should not need to.
             DashboardScreenNode?.setState([
                 "userName": "",

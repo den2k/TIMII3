@@ -7,6 +7,10 @@
 //
 /*
 
+ TODO: 4.5.19 [DONE - 5.4.19] - Bug - Switching between settings and dashboard tab bar items causes the selected item to change which causes Switch timer alert failures.
+       4.16.19 - previous global, active global values started correctly. now just need to highlight and correct cell.... between reloaddata..
+ TODO: 12.24.18 - Feature - When NUMOFALLOWEDTIMERS is reached. Show $$$ Screen. (Ellie)
+ TODO: 12.13.18 - Feature - Delete timers with press and hold gesture to show delete dialog.
  TODO: 3.23.19 [DONE - 4.4.19] - Bug 1 - switch to new timer when current timer is active.
  TODO: 11.28.18 [DONE - 12.1.18] - Make this into a collection view. Created a temporary visual timer dashboard with a collection view.
  TODO: 12.1.18 [DONE 12.1.18] - Cleanup unnecessary code from previous collection layout.
@@ -15,16 +19,14 @@
  TODO: 12.5.18 [DONE 12.5.18] - Add a default image for each retrieved timer. We have 3 now.
  TODO: 12.1.18 [DONE 12.22.18] - Add 'Add Timer' functionality only to empty timer button
  TODO: 12.9.18 [DONE 12.13.18] - Limit timers to Max and fix reading more timers crashing
-       1.6.19 [DONE 1`.20.19] - Still crashing.
+       1.6.19 [DONE 1.20.19] - Still crashing.
  TODO: 12.11.18 [DONE 12.13.18] - After adding new timers, refresh screen. Added observer to reload data.
  TODO: 12.13.18 [DONE 12.16.18] - Add Number of Timers Stats to Member document
  TODO: 12.17.18 [DONE 12.17.18] - Clear timer views upon new member login
  TODO: 12.13.18 [DONE 12.22.18] - Updated so newTimerScreen only shows with an empty Timer slot in didSelectItemAt. Limit the showing of New Timer Screen if user exceeds the number of timers allowed. Need to add stats into FS to do this.
- TODO: 12.13.18 - Delete timers with press and hold gesture to show delete dialog.
         1.19.19 [DONE 1.20.19] - Delete timers from ActiveTimerVC Menu.
  TODO: 12.23.18 [DONE] - Highlighted background to show selected timer is messedup. Fix.
  TODO: 12.24.18 [DONE 12.24.18] - Show only 1 Add Timer at a time. (Ellie)
- TODO: 12.24.18 - When NUMOFALLOWEDTIMERS is reached. Show $$$ Screen. (Ellie)
  TODO: 1.13.19 [DONE 1.20.19] - Update an existing timer
  
  NOTE:
@@ -67,21 +69,11 @@ class TimerCollectionViewController: UIViewController, UICollectionViewDelegate,
     private var isAddButton: Bool = true
     private var isTimerRunning: Bool = false
     private var numOfTimers: Int = 0
-    private var previousSelectedTimerID: String = ""    // 4.4.19 - Works with shouldSelectItemAt
-    private var previousSelectedTimerIDIndexpath: IndexPath? = nil   // 4.4.19 - works with shouldselectedItemAt
-
-    // 3.30.19 - This property is not necessary if shouldSelectItemAt is not used.
-    // A way to update the collection view when this property changes.
-    var selectedTimerIndexPath: IndexPath? {
-        didSet {
-            var indexPaths: [IndexPath] = []
-            if let selectedTimerIndexPath = selectedTimerIndexPath {
-                indexPaths.append(selectedTimerIndexPath)
-                print(indexPaths)
-            }
-        }
-    }
+    private var activeTimerIndexPath: IndexPath? = nil   // 4.4.19 - works with shouldselectedItemAt
+    private var activeTimerID: String = ""
     
+//    private var localSavedActiveTimerID: String = ""
+//    private var localSavedPreviousTimerID: String = ""
     
     @IBOutlet var timerCollectionView: UICollectionView?
     {
@@ -103,21 +95,34 @@ class TimerCollectionViewController: UIViewController, UICollectionViewDelegate,
     override func viewDidLoad()
     {
         super.viewDidLoad()
+        
+        /// When a timer is either created, updated or deleted - make sure to read the timer table again.
         NotificationCenter.default.addObserver(self, selector: #selector(readTimers), name: .didCreateNewTimer, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(readTimers), name: .didUpdateExistingTimer, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(readTimers), name: .didDeleteExistingTimer, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(timerIsRunning), name: .didStartTimer, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(timerIsNotRunning), name: .didStopTimer, object: nil)
+        
+        /// When a timer is running - switchTimerAlert must be called. To trigger this function requires knowing the isTimerRunning state.
+        NotificationCenter.default.addObserver(self, selector: #selector(timerStartedRunning), name: .didStartTimer, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(timerStoppedRunning), name: .didStopTimer, object: nil)
+        
+        readTimers()    // 4.30.19 - delete? - put into viewWillAppear instead?
+
+        // Reading from file
+//        guard let localTimerCollectionViewStats = TimerCollectionViewStatsFileHandler.shared.fetchTimerCollectionViewStats() else { return }
+//        localSavedActiveTimerID = localTimerCollectionViewStats.savedActiveTimerID
+//        localSavedPreviousTimerID = localTimerCollectionViewStats.savedPreviousTimerID
+
+        // Reordering
+//        longPressGesture = UILongPressGestureRecognizer(target: self, action: #selector(self.handleLongGesture(gesture:)))
+//        timerCollectionView?.addGestureRecognizer(longPressGesture)
     }
     
     override func viewWillAppear(_ animated: Bool)
     {
         super.viewWillAppear(true)
-        
-        // Reset timer when it reappears.
-        readTimers()
     }
     
+    /// This function allows the user to create a new timer
     @objc func newTimerScreen()
     {
         let newTimerScreen = NewTimerScreen()
@@ -127,30 +132,27 @@ class TimerCollectionViewController: UIViewController, UICollectionViewDelegate,
         present(newTimerScreen, animated: true, completion: nil)
     }
     
-    @objc func timerIsRunning()     { isTimerRunning = true }
-    @objc func timerIsNotRunning()
-    {
-        isTimerRunning = false
-        self.timerCollectionView?.reloadData()
-    }
+    // TODO: 4.30.19 - Once the timer singleton/filemanager is created, reference the global value of isTimerRunning instead of the local class value of isTimerRunning.
+    @objc func timerStartedRunning()    { isTimerRunning = true }
+    @objc func timerStoppedRunning()    { isTimerRunning = false }
     
     
     /// This function shows a popup alert asking the user if they wish to switch to
     /// a new timer while the current timer is running.
-    func showConfirmationPopUp(indexPath: IndexPath)
+    func switchTimerAlert(indexPath: IndexPath)
     {
         let alert = UIAlertController(title: "Switch Timers?", message: "Save current timer and switch to new timer?", preferredStyle: UIAlertController.Style.alert)
         alert.addAction(UIAlertAction(title: "Yes", style: .default) { _ in
             
-            // Stop and save running timer.
-            print("-> .stopTimer")
+            // On user input of "Yes" - initiate stop timer action by triggering a notification post for .stopTimerUser Input.
+            print("-> Switch Timer -> Yes .stopTimerUserInput")
             let dict = [
-                "timerID": self.previousSelectedTimerID,
+                "timerID": self.activeTimerID,
                 ] as [String : Any]
-            NotificationCenter.default.post(name: .stopTimer, object: nil, userInfo: dict)
-
-            // Switch to selected new timer
-            self.timerCollectionView!.delegate?.collectionView!(self.timerCollectionView!, didDeselectItemAt: self.previousSelectedTimerIDIndexpath!)
+            NotificationCenter.default.post(name: .stopTimerUserInput, object: nil, userInfo: dict)
+            
+            // 5.4.19 - Must deselect first then select. Otherwise the ActiveTimerView would be hidden.
+            self.timerCollectionView!.delegate?.collectionView!(self.timerCollectionView!, didDeselectItemAt: self.activeTimerIndexPath!)
             self.timerCollectionView!.delegate?.collectionView!(self.timerCollectionView!, didSelectItemAt: indexPath)
         })
         alert.addAction(UIAlertAction(title: "Cancel", style: .default) { _ in })
@@ -188,7 +190,7 @@ class TimerCollectionViewController: UIViewController, UICollectionViewDelegate,
             isAddButton = false
         }
         
-//        let identifier = (indexPath.row % 2 == 0) ? "templateCell" : "standaloneCell"
+        // let identifier = (indexPath.row % 2 == 0) ? "templateCell" : "standaloneCell"
         let node = collectionView.dequeueReusableCellNode(withIdentifier: identifier, for: indexPath)
         
         node.setState([
@@ -207,9 +209,9 @@ class TimerCollectionViewController: UIViewController, UICollectionViewDelegate,
     /// https://www.raywenderlich.com/9477-uicollectionview-tutorial-reusable-views-selection-and-reordering
     func collectionView(_ collectionView: UICollectionView, shouldSelectItemAt indexPath: IndexPath) -> Bool
     {
-        print("-> TimerCollectionViewController/shouldSelectItemAt")    // can delete
+        print("-> TimerCollectionViewController/shouldSelectItemAt:", indexPath.row)    // can delete
         if isTimerRunning {
-            showConfirmationPopUp(indexPath: indexPath)
+            switchTimerAlert(indexPath: indexPath)
             return false
         } else {
             return true
@@ -219,42 +221,95 @@ class TimerCollectionViewController: UIViewController, UICollectionViewDelegate,
     /// This function handles the selection of a Timer within the Collection View.
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath)
     {
-        let cell : UICollectionViewCell = collectionView.cellForItem(at: indexPath as IndexPath)!
+        print("-> TimerCollectionViewController/didSelectItemAt:", indexPath.row)    // can delete
+        let cell = collectionView.cellForItem(at: indexPath)
+
+        // 5.4.19 This works in combination with shouldSelectedItemAt/switchTimerAlert to hold the running timer indexPath and timerID values.
+        // 5.4.19 Needs this extra didDeselectItemAt call because background not resetting after a switch timer during run.
+        if (activeTimerIndexPath != nil) { self.timerCollectionView!.delegate?.collectionView!(self.timerCollectionView!, didDeselectItemAt: self.activeTimerIndexPath!) }
+        activeTimerIndexPath = indexPath
+        activeTimerID = timerIDs[indexPath.row]
         
-        // 4.4.19 - used with shouldSelectItemAt
-        previousSelectedTimerIDIndexpath = indexPath
-        previousSelectedTimerID = timerIDs[indexPath.row]
-        
+        // An empty timer slot has been selected so show the newTimerScreen so a new timer can be created.
         if timerSlotIsEmpty[indexPath.row] == true {
-            // An empty timer slot has been selected so show the newTimerScreen so a new timer can be created
-            cell.backgroundColor = UIColor.transparent
+            cell?.backgroundColor = UIColor.transparent     // Unhighlight selected cell when Add Timer is selected.
             newTimerScreen()
         } else {
-            print("-post didSelectNewActiveTimer-") // delete
-            cell.backgroundColor = UIColor.white
+            cell?.backgroundColor = UIColor.white
             let dict = [
                 "index": indexPath.row,
                 "timerID": timerIDs[indexPath.row],
                 ] as [String : Any]
             NotificationCenter.default.post(name: .didSelectNewActiveTimer, object: nil, userInfo: dict)
+
+            // Save to disk - may not need
+//            localSavedActiveTimerID = timerIDs[indexPath.row]
+//            let g = TimerCollectionViewStats(
+//                savedActiveTimerID: localSavedActiveTimerID,
+//                savedPreviousTimerID: localSavedPreviousTimerID)
+//            TimerCollectionViewStatsFileHandler.shared.save(g)
+//            print("TimerCollectionViewController/didSelectItemAt:",g)
         }
-        print("Selected: \(indexPath.row)")     //delete
     }
     
     /// This function handles the deselection of a Timer within the Collection View.
     func collectionView(_ collectionView: UICollectionView, didDeselectItemAt indexPath: IndexPath)
     {
-        let cell : UICollectionViewCell = collectionView.cellForItem(at: indexPath as IndexPath)!
-        
-        cell.backgroundColor = UIColor.transparent
-        previousSelectedTimerID = timerIDs[indexPath.row]
-        previousSelectedTimerIDIndexpath = indexPath
-        print("previousSelectedTimerID: ", previousSelectedTimerID) // can delete
-        
-        // Sends a notification that the active timer is no longer being selected
+        print("-> TimerCollectionViewController/didDeselectItemAt:", indexPath.row)    // can delete
+        let cell = collectionView.cellForItem(at: indexPath)
+        cell?.backgroundColor = UIColor.transparent
         NotificationCenter.default.post(name: .didDeselectActiveTimer, object: nil)
+
+        /// Save to disk
+//        activeTimerIndexPath = indexPath
+//        localSavedPreviousTimerID = timerIDs[indexPath.row]
+//        print("TimerCollectionViewController/didDeselectItemAt/localSavedPreviousTimerID: ", localSavedPreviousTimerID) // can delete
+
+        // may not need saving of active/previous timerID
+//        let g = TimerCollectionViewStats(
+//            savedActiveTimerID: localSavedActiveTimerID,
+//            savedPreviousTimerID: localSavedPreviousTimerID)
+//        TimerCollectionViewStatsFileHandler.shared.save(g)
+//        print("-> TimerCollectionViewController/didDeselectItemAt:",g)
     }
     
+    // Reorder Collection View Items
+        // https://developer.apple.com/documentation/uikit/uicollectionview
+        // https://hackernoon.com/swift-reorder-cells-in-uicollectionview-using-drag-drop-ff7eb5131052
+    // Drag and Drop - https://developer.apple.com/videos/play/wwdc2017/223/
+//    func collectionView(_ collectionView: UICollectionView, canMoveItemAt indexPath: IndexPath) -> Bool { return true }
+//    func collectionView(_ collectionView: UICollectionView, moveItemAt sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) {
+//        print("Starting Index: \(sourceIndexPath.item)")
+//        print("Ending Index: \(destinationIndexPath.item)")
+//
+//        let item = timerIDs.remove(at: sourceIndexPath.item)
+//        timerIDs.insert(item, at: destinationIndexPath.item)
+//    }
+//
+//    // default: true - https://developer.apple.com/documentation/uikit/uicollectionviewcontroller/1623979-installsstandardgestureforintera
+//    var installsStandardGestureForInteractiveMovement: Bool = true
+//
+//    fileprivate var longPressGesture: UILongPressGestureRecognizer!
+//
+//    @objc func handleLongGesture(gesture: UILongPressGestureRecognizer) {
+//        switch(gesture.state) {
+//
+//        case .began:
+//            guard let selectedIndexPath = timerCollectionView?.indexPathForItem(at: gesture.location(in: timerCollectionView)) else {
+//                break
+//            }
+//            timerCollectionView?.beginInteractiveMovementForItem(at: selectedIndexPath)
+//        case .changed:
+//            timerCollectionView?.updateInteractiveMovementTargetPosition(gesture.location(in: gesture.view!))
+//        case .ended:
+//            timerCollectionView?.endInteractiveMovement()
+//        default:
+//            timerCollectionView?.cancelInteractiveMovement()
+//        }
+//    }
+    
+    
+
 }
 
 
@@ -269,10 +324,8 @@ extension TimerCollectionViewController
     /// This function reads a specific set of fields from a member's list of created Timers directly from Firestore.
     @objc func readTimers()
     {
-//        var timerCount: Int = 0
-        
+        print("--> TimerCollectionViewController/readTimers()")   // can delete
         let db = Firestore.firestore()
-        
         db.collection("Members").document(memberID).collection("Timers").getDocuments() { (querySnapshot, error) in
             if let err = error {
                 print("Error getting document: \(err)")
@@ -308,9 +361,15 @@ extension TimerCollectionViewController
                         self.timerSlotIsEmpty[index] = true
                     }
                 }
-                    
+                
                 DispatchQueue.main.async { self.timerCollectionView?.reloadData() }
-                print(self.timerTitles)  // delete
+                
+                /// 5.3.19 - Resets the any selections made
+                self.timerCollectionView?.indexPathsForSelectedItems?
+                    .forEach {
+                        self.timerCollectionView?.deselectItem(at: $0, animated: false)
+                        self.timerCollectionView?.backgroundColor = UIColor.transparent
+                }
             }
         }
     }

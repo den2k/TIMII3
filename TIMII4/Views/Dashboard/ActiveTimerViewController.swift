@@ -48,7 +48,7 @@ class ActiveTimerViewController: UIViewController, Ownable
     var sec = ""
 
     // Animation Play / Pause button
-    var playButton = LOTAnimationView(name: "play-button")
+    var playButton = AnimationView(name: "play-button")
 
     // This is to initialize FS fields to a value so no errors show up waiting for data retrival
     // 10.30.18 - Outlets must be passed to Layout using UIViewControllers. Cannot use class defined UIViews.
@@ -57,15 +57,15 @@ class ActiveTimerViewController: UIViewController, Ownable
         didSet { updateView() }
     }
     
+    
+    /// This function receives user input to Play or Stop the selected timer.
     @IBAction func toggleTimerButton()
     {
         print("-> ActiveTimerViewController/toggleTimerButton()")
         timer.toggleTimer(timerID: timerID)
         
         // Animated play button
-//        if self.timer.isTimerRunning == true { playButton.isHidden = false }
-//        else { playButton.isHidden = true }
-        if self.timer.isTimerRunning == true {
+       if self.timer.isTimerRunning == true {
             playButton.isHidden = true
             playButton.stop()
         } else {
@@ -92,7 +92,9 @@ class ActiveTimerViewController: UIViewController, Ownable
         }
     }
     
-    @objc func updateView()
+    
+    /// This function is called repeatedly as a timer is running so displayed time values are updated to the user.
+    @objc private func updateView()
     {
         // Calling setState() on a LayoutNode after it has been created will trigger an update. The update causes all expressions in
         // that node and its children to be re-evaluated.

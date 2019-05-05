@@ -39,6 +39,14 @@ class Main: UIViewController, LayoutLoading, UITabBarControllerDelegate
             // go to dashboard....??
             
         }
+        
+        /// Initiatizing TimerCollectionViewStats Properties
+//        let g = TimerCollectionViewStats(
+//            savedActiveTimerID: "",
+//            savedPreviousTimerID: "")
+//        TimerCollectionViewStatsFileHandler.shared.save(g)
+//        print("main:",g)
+        
         // 10.14.18 - Borrowed from TIMII/Firebase implementation. Is this needed?
         // 8.7.18 - Add this to MainVC and just do this once after reseting the database to Zero Node
         // then comment out. These setup the Countable Global variables.

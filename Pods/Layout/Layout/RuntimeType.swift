@@ -238,7 +238,7 @@ public class RuntimeType: NSObject {
         self.init(.class(`class`))
     }
 
-    @nonobjc public convenience init<T>(array type: Array<T>.Type) {
+    @nonobjc public convenience init<T>(array type: [T].Type) {
         self.init(.array(RuntimeType(type)))
     }
 
@@ -559,7 +559,7 @@ func sanitizedTypeName(_ typeName: String) -> String {
             head.append(char)
             break
         }
-        head.append(char.lowercased())
+        head += String(char.lowercased())
     }
     return String(head + tail).replacingOccurrences(of: ".", with: "_")
 }

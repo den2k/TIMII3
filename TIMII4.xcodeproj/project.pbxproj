@@ -21,6 +21,7 @@
 		954468AA22067B4E000F108C /* Intents.intentdefinition in Sources */ = {isa = PBXBuildFile; fileRef = 957F26DD2204132700FD03D1 /* Intents.intentdefinition */; };
 		954468AB22067B4F000F108C /* Intents.intentdefinition in Sources */ = {isa = PBXBuildFile; fileRef = 957F26DD2204132700FD03D1 /* Intents.intentdefinition */; };
 		9547754721862F7400D7972A /* Ownable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9547754621862F7400D7972A /* Ownable.swift */; };
+		95508C3B2264300B00B21908 /* TimerCollectionViewStats.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95508C3A2264300B00B21908 /* TimerCollectionViewStats.swift */; };
 		95533F6F21705AA2004391AF /* Firestoreable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95533F6E21705AA2004391AF /* Firestoreable.swift */; };
 		95533F712170E298004391AF /* Member.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95533F702170E298004391AF /* Member.swift */; };
 		955A2403224B2AA700CCDFAD /* UIImage+Gif.swift in Sources */ = {isa = PBXBuildFile; fileRef = 955A2402224B2AA700CCDFAD /* UIImage+Gif.swift */; };
@@ -134,6 +135,7 @@
 		9544689A22067A69000F108C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/MainInterface.storyboard; sourceTree = "<group>"; };
 		9544689C22067A69000F108C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		9547754621862F7400D7972A /* Ownable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Ownable.swift; sourceTree = "<group>"; };
+		95508C3A2264300B00B21908 /* TimerCollectionViewStats.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerCollectionViewStats.swift; sourceTree = "<group>"; };
 		95533F6E21705AA2004391AF /* Firestoreable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Firestoreable.swift; sourceTree = "<group>"; };
 		95533F702170E298004391AF /* Member.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Member.swift; sourceTree = "<group>"; };
 		955A2402224B2AA700CCDFAD /* UIImage+Gif.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIImage+Gif.swift"; sourceTree = "<group>"; };
@@ -399,6 +401,7 @@
 				9512E3B221C8AABD001E6453 /* NotificationHelper.swift */,
 				959A8F0F21EC34C4001BB08C /* UIHelper.swift */,
 				955A2402224B2AA700CCDFAD /* UIImage+Gif.swift */,
+				95508C3A2264300B00B21908 /* TimerCollectionViewStats.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -794,6 +797,7 @@
 				9512E3B321C8AABD001E6453 /* NotificationHelper.swift in Sources */,
 				952165A221AD8E260094B8AB /* TimerCollectionViewController.swift in Sources */,
 				9563D5E82172AD7100708913 /* AuthenticationMethod.swift in Sources */,
+				95508C3B2264300B00B21908 /* TimerCollectionViewStats.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

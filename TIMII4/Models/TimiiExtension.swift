@@ -27,16 +27,35 @@ extension Timii
 // MARK: ---------- TIMII FUNCTIONS ----------
 // This section handles user interactions with the timer.
     
+    /// This function handles user triggered inputs from the UI.
     @objc func toggleTimer(timerID: String)
     {
         if isTimerRunning {
-            stopTimer(timerID: timerID)
-            resetTimer()
+            let dict = [
+                "timerID": timerID,
+                ] as [String : Any]
+            NotificationCenter.default.post(name: .stopTimerUserInput, object: nil, userInfo: dict)
+//            stopTimer(timerID: timerID)
+//            saveTimer(timerID: <#T##String#>)
+//            resetTimer()
         } else {
             startTimer(dateInterval: 0)
         }
     }
     
+    
+    /// This public notification handler is triggered on .stopTimerUserInput and performs stopping a timer related activities.
+    @objc func stopTimerNotificationHandler(_ notification: Notification)
+    {
+        print("-> TimiiExtension:stopTimerNotificationHandler: ", notification.userInfo?["timerID"] as Any)   // can delete
+        let timerID = notification.userInfo?["timerID"] as? String ?? ""
+        stopTimer(timerID: timerID)
+        saveTimer(timerID: timerID)
+        resetTimer()
+    }
+
+    
+    /// This private function starts a timer and performs other start timer related setup.
     private func startTimer(dateInterval: Double)
     {
         print(">>> Starting timer <<<")
@@ -49,35 +68,36 @@ extension Timii
         self.startTime = Date(timeIntervalSinceNow: -dateInterval)
     }
     
+
+    /// This private function stops a timer and performs other stop timer related setup (ie; save value to Firestore)
     private func stopTimer(timerID: String)
     {
         print(">>> Pausing timer <<<")
         NotificationCenter.default.post(name: .didStopTimer, object: nil, userInfo: nil)
-        
         tempTimer.invalidate()
         self.isTimerRunning = false
         self.endTimeInterval = DateInterval(start: self.startTime, end: Date())
-        
+    }
+    
+    
+    /// This private function saves timer values to Firestore.
+    private func saveTimer(timerID: String)
+    {
+        print(">>> Saving timer <<<")
         /*
          11.23.18
          I may need to move both of these 'saves' to Firebase given how slow
          Firestore is for writes.
          */
         
-//        print("Timii/timerID: \(timerID)")
+        //        print("Timii/timerID: \(timerID)")
         FSSaveSelectedTimerLog(timerID: timerID)            // Just saves the Log session
         FSUpdateSelectedTimerStats(timerID: timerID)        // Update aggregate stats for the Timer
     }
     
-    @objc func stopTimerNotificationHandler(_ notification: Notification)
-    {
-        print("-> TimiiExtension:stopTimerNotificationHandler: ", notification.userInfo?["timerID"] as Any)   // can delete
-        let timerID = notification.userInfo?["timerID"] as? String ?? ""
-        stopTimer(timerID: timerID)
-        resetTimer()
-    }
     
-    func resetTimer()
+    /// This private function resets the localized values of a timer.
+    private func resetTimer()
     {
         self.tempTimer.invalidate()
         self.timerCount = 0
@@ -87,6 +107,7 @@ extension Timii
     }
     
 
+    /// This private function increments the timer values as it runs.
     @objc private func updateTimer()
     {
         self.timerCount += 1
