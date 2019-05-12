@@ -49,20 +49,20 @@ class TimerCollectionViewController: UIViewController, UICollectionViewDelegate,
      Place common view controller properties here.
      
  */
-    private let add = UIImage(named: "Add")
+    private let add = UIImage(named: "menu-plus")
     private let images = [
-        UIImage(named: "One"),
-        UIImage(named: "Two"),
-        UIImage(named: "Three"),
-        UIImage(named: "Four"),
-        UIImage(named: "Five"),
-        UIImage(named: "Six"),
-        UIImage(named: "Seven"),
-        UIImage(named: "Eight"),
-        UIImage(named: "Nine"),
-        UIImage(named: "Ten")
+        UIImage(named: "lifestyle-bike"),
+        UIImage(named: "lifestyle-boating"),
+        UIImage(named: "lifestyle-boxing"),
+        UIImage(named: "lifestyle-cardio"),
+        UIImage(named: "lifestyle-dumbbell"),
+        UIImage(named: "lifestyle-jumprope"),
+        UIImage(named: "lifestyle-running"),
+        UIImage(named: "lifestyle-skiing"),
+        UIImage(named: "lifestyle-soccer"),
+        UIImage(named: "lifestyle-tennis")
     ]
-    private var timerTitles: [String] = [String](repeating: "Add Timer", count: NUMOFALLOWEDTIMERS)
+    private var timerNames: [String] = [String](repeating: "Add Timer", count: NUMOFALLOWEDTIMERS)
     private var timerIDs: [String] = [String](repeating: "", count: NUMOFALLOWEDTIMERS)
     private var timerSlotIsEmpty: [Bool] = [Bool](repeating: true, count: NUMOFALLOWEDTIMERS)
     private var timerButtonText: String = ""        // The text shown on a collection button.
@@ -179,13 +179,13 @@ class TimerCollectionViewController: UIViewController, UICollectionViewDelegate,
         let identifier: String = "timerCollectionCell"
         
         // Sets default timer image when a timer is loaded
-        let image: UIImage
+        let timerIcon: UIImage
         if timerSlotIsEmpty[indexPath.row] == true {
-            image = add!
+            timerIcon = add!
             timerButtonText = "+"
             isAddButton = true
         } else {
-            image = images[(indexPath.row) % 10]!
+            timerIcon = images[(indexPath.row) % 10]!
             timerButtonText = String(indexPath.row+1)
             isAddButton = false
         }
@@ -195,10 +195,10 @@ class TimerCollectionViewController: UIViewController, UICollectionViewDelegate,
         
         node.setState([
             "row": indexPath.row,
-            "title": timerTitles[indexPath.row],
-            "image": image,
+            "timerName": timerNames[indexPath.row],             // User generated timer name
+            "timerIcon": timerIcon,                             // Timer icon image
             "timerIsEmpty": timerSlotIsEmpty[indexPath.row],
-            "timerButtonText":  timerButtonText,
+            "timerButtonText":  timerButtonText,                // 1 to n button count displayed on timer icon
             "isAddButton": isAddButton,
             ])
         
@@ -336,7 +336,7 @@ extension TimerCollectionViewController
                     let timerDoc = document.data()
                     if index < NUMOFALLOWEDTIMERS {
                         
-                        self.timerTitles[index] = timerDoc["name"] as? String ?? ""
+                        self.timerNames[index] = timerDoc["name"] as? String ?? ""
                         self.timerIDs[index] = document.documentID
                         self.timerSlotIsEmpty[index] = false
                         self.numOfTimers = index + 1    // For looping through timerCount
@@ -356,7 +356,7 @@ extension TimerCollectionViewController
                     for index in self.numOfTimers...NUMOFALLOWEDTIMERS-1
                     {
                         print(index)
-                        self.timerTitles[index] = "Add Timer"
+                        self.timerNames[index] = "Add Timer"
                         self.timerIDs[index] = ""
                         self.timerSlotIsEmpty[index] = true
                     }

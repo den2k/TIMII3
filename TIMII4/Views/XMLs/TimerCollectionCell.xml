@@ -2,17 +2,7 @@
     reuseIdentifier="timerCollectionCell"
     clipsToBounds="true">
 
-<!--
-    <UIImageView
-        image="{image}"
-        contentMode="scaleAspectFit"
-        top="10"
-        left="50% - width/2"
-        height="65%"
-        width="65%"
-        />
- -->
-
+    <!-- Timer background - colored circle -->
     <UIView
         top="10"
         left="50% - width/2"
@@ -21,20 +11,20 @@
         layer.cornerRadius="height/2"
         backgroundColor="{isAddButton ? gray : brightOrange  //background color for timer circle}"
         >
-    <!--
-        <UIView
-            isHidden="{isSelectedTimer}"
-            top="-5"
-            left="50% - width/2"
-            height="80"
-            width="80"
-            layer.cornerRadius="height/2"
-            backgroundColor="halfTransparent"
-            />
--->
-            <!--            backgroundColor="{isSelectedTimer ? white : transparent  //background color for timer circle}" -->
 
-        <UILabel
+        <!-- Timer icon image -->
+         <UIImageView
+             image="{timerIcon}"
+             contentMode="scaleAspectFit"
+             top="10"
+             left="50% - width/2"
+             height="65%"
+             width="65%"
+         />
+
+         <!-- 1 .. n button count displayed on timer icon -->
+         <!--
+         <UILabel
             text="{timerButtonText}"
             top="50% - height/2"
             left="50% - width/2"
@@ -42,11 +32,13 @@
             textColor="white"
             textAlignment="center"
             />
-    
+          -->
+         
     </UIView>
     
+    <!-- User generated timer name -->
     <UILabel
-        text="{title}"
+        text="{timerName}"
         top="previous.bottom + 5"
         left="50% - width/2"
         height="auto"
@@ -56,23 +48,4 @@
         textColor="gray"
         />
  
-<!-- A button to trigger Delete. But changed Delete function to show under ActiveTimerView
-    <UIButton
-        touchUpInside="onDidPressDeleteButton"
-        isHidden="{timerIsEmpty}">
-        
-        <UILabel
-        text="X"
-        top="10"
-        left="5"
-        height="auto"
-        width="auto"
-        backgroundColor="// text label background color"
-        font="Avenir Next 16"
-        textColor="red"
-        />
-        
-    </UIButton>
- -->
-
 </UICollectionViewCell>
