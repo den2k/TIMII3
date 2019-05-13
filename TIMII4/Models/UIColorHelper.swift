@@ -48,6 +48,9 @@ extension UIColor
     @objc static let lightTan   = UIColor(red: 212.0/255.0, green: 204.0/255.0, blue: 191.0/255.0, alpha: 1.0)  // #D4CCBF
     @objc static let camo       = UIColor(red: 95.0/255.0, green: 158.0/255.0, blue: 92.0/255.0, alpha: 1.0)    // #5F9E5C
     
+    //Eaton Colors
+    @objc static let lighterGreen  = UIColor(red: 198.0/255.0, green: 217.0/255.0, blue: 180.0/255.0, alpha: 1.0)  // 198, 217, 180 #C6D9B4
+    
     // ORIGINAL
     @objc static let black        = UIColor(red: 0.0/255.0, green: 0.0/255.0, blue: 0.0/255.0, alpha: 1.0)      // #000000
     @objc static let red          = UIColor(red: 255.0/255.0, green: 115.0/255.0, blue: 115.0/255.0, alpha: 1.0)

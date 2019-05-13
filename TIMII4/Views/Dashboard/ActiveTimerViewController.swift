@@ -142,7 +142,7 @@ extension ActiveTimerViewController
             "second"            : timer.seconds,
             "isTimerRunning"    : timer.isTimerRunning,
             "numOfSessions"     : timer.numOfSessions,
-            "loggedTotalTime"   : "\(hrs):\(min):\(sec)",
+            "loggedTotalTime"   : "\(hrs):\(min)",
             ])
         
         print("-")   // delete
@@ -265,7 +265,7 @@ extension ActiveTimerViewController
                     "hour":             self.timer.hours,           // reset to 0? after didSelectNewActiveTimer
                     "minute":           self.timer.minutes,         // reset to 0? after didSelectNewActiveTimer
                     "second":           self.timer.seconds,         // reset to 0? after didSelectNewActiveTimer
-                    "loggedTotalTime": "\(self.hrs):\(self.min):\(self.sec)"
+                    "loggedTotalTime": "\(self.hrs):\(self.min)"
                     ])
             }
         }
@@ -308,7 +308,7 @@ extension ActiveTimerViewController
             "hour":             "00",
             "minute":           "00",
             "second":           "00",
-            "loggedTotalTime": "\(self.hrs):\(self.min):\(self.sec)"
+            "loggedTotalTime": "\(self.hrs):\(self.min)"
             ])
         
         saveToTimiiFile(value: "numOfSessions: \(timerNumOfSessions), loggedTotalTime: \(timerLoggedTotalTime)")

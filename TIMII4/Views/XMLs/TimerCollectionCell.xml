@@ -9,7 +9,7 @@
         height="70"
         width="70"
         layer.cornerRadius="height/2"
-        backgroundColor="{isAddButton ? gray : brightOrange  //background color for timer circle}"
+        backgroundColor="{isAddButton ? summerGreen : lighterGreen //background color for timer circle}"
         >
 
         <!-- Timer icon image -->
@@ -44,7 +44,7 @@
         height="auto"
         width="auto"
         backgroundColor="// text label background color"
-        font="Avenir Next 16"
+        font="Avenir Next 14"
         textColor="gray"
         />
  

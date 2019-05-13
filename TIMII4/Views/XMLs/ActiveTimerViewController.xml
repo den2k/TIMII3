@@ -1,10 +1,6 @@
-<!--
- TODO: 10.31.18 - Blink the Second text. Don't show actual seconds counted
- -->
- 
  <ActiveTimerViewController
     outlet="ActiveTimerNode"
-    view.backgroundColor="halfTransparent   // Active Timer Section"
+    view.backgroundColor="lighterGreen   // Active Timer Section"
     top="previous.bottom"
     left="0"
     height="220"
